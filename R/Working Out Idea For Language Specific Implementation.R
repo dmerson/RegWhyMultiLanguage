@@ -171,12 +171,8 @@ RegWhy.do.replaceAll <- function ( statementToSearch,regWhyStatement, regWhyStat
   return (str_replace_all(statementToSearch,regWhyStatement, regWhyStatementReplacement))
   
 }
-RegWhy.do.split <- function ( statementToSearch,regWhyStatement){
+RegWhy.do.splitList <- function ( listOfStrings,regWhyStatement){
   return (str_split(statementToSearch,regWhyStatement ))
-  
-}
-RegWhy.do.splitAll <- function ( statementToSearch,regWhyStatement){
-  return (str_split_all(statementToSearch,regWhyStatement ))
   
 }
 
@@ -200,5 +196,5 @@ tester <-RegWhy.make.statement(
 )
 print(tester)
 RegWhy.do.detect("test",tester)
-RegWhy.do.split("test Two three",RegWhy.wordBoundary())
+splits=RegWhy.do.splitAll("test Two three",RegWhy.space())
  

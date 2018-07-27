@@ -1,13 +1,11 @@
+library(stringr)
 RegWhy.literal <- function(valueToSearch){
   return (valueToSearch);
 }
 RegWhy.statement <- function (arrayOfRegWhy){
   paste(arrayOfRegWhy,collapse ="")
 }
-RegWhy.hasValue <- function (regWhyStatement, statementToSearch){
-  return (grep(regWhyStatement,statementToSearch)==1)
-  
-}
+
 # Special Characters
 
 RegWhy.period =function(){return ("\\.")}
@@ -56,7 +54,35 @@ RegWhy.upperCaseASCII=function (){return ("[A-Z")};
 RegWhy.dontMatch=function (regWhyStatement){return (paste("^",regWhyStatement,sep=""))};
 
 #POSIx 
+RegWhy.alphaNumeric=function (){return ("[[:alnum:]]")};
 RegWhy.anyCharacter=function (){return (".")};
+RegWhy.controlCharacter=function (){return ("[[:control:]]")};
+RegWhy.punctuation=function (){return ("[[:alnum:]]")};
+RegWhy.hexadecial=function (){return ("[[:xdigit:]]")};
+RegWhy.space=function (){return ("[[:space:]]")}; #tab, newline, vertical tab, form feed,carriage return, and space
+RegWhy.printable=function (){return ("[[:print:]]")}; #alpha punct and space
+RegWhy.graphical=function (){return ("[[:graph:]]")}; #alpha punct and space
+RegWhy.blankSpace=function (){return ("[[:blank:]]")}; #space and tab
+
+#Quantifiers 
+RegWhy.optionalCharacter=function (character){return (paste(character,"?",sep=""))}; 
+RegWhy.optionalStatement=function (regWhyStatement){return (paste("(",regWhyStatement,")","?",sep=""))}; 
+RegWhy.matchZeroOrMoreCharacter=function (character){return (paste(character,"*",sep=""))}; 
+RegWhy.matchZeroOrMoreStatement=function (regWhyStatement){return (paste("(",regWhyStatement,")","*",sep=""))};
+RegWhy.matchOneOrMoreCharacter=function (character){return (paste(character,"+",sep=""))}; 
+RegWhy.matchOneOrMoreStatement=function (regWhyStatement){return (paste("(",regWhyStatement,")","+",sep=""))};
+RegWhy.matchExactNumberOfCharacter=function (character, number){return (paste(character,"{",number,"}",sep=""))}; 
+RegWhy.matchExactNumberOfStatement=function (regWhyStatement, number){return (paste("(",regWhyStatement,"{",number,"}",sep=""))};
+RegWhy.matchNumberOrAboveOfCharacter=function (character, number){return (paste(character,"{",number,",}",sep=""))}; 
+RegWhy.matchNumberOrAboveOfStatement=function (regWhyStatement, number){return (paste("(",regWhyStatement,"{",number,",}",sep=""))};
+RegWhy.matchNumberRangeOfCharacter=function (character, bottomrange,toprange){return (paste(character,"{",bottomrange,",",toprange,"}",sep=""))}; 
+RegWhy.matchNumberRangeOfStatement=function (regWhyStatement, bottomrange,toprange){return (paste("(",regWhyStatement,"{",bottomrange,",",toprange,"}",sep=""))};
+
+#Reg Why Functions
+RegWhy.do.detect <- function ( statementToSearch,regWhyStatement){
+  return (str_detect(statementToSearch,regWhyStatement))
+  
+}
 
 
 literal_statement=RegWhy.statement(
@@ -67,8 +93,5 @@ literal_statement=RegWhy.statement(
               )
 )
 range_statement=RegWhy.matchRange("A","Z")
-literal_statement                   
-RegWhy.hasValue( literal_statement, "Hello World")
-RegWhy.hasValue("hello",literal_statement)
-RegWhy.hasValue(range_statement,"caLm")
+RegWhy.do.detect("Hello World", literal_statement)
  

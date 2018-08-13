@@ -43,6 +43,7 @@ RegWhy.upperCaseVowel=function (){return ("[AEIOU]")};
 RegWhy.anyCaseVowel=function (){return ("[aeiouAEIOU]")};
 RegWhy.lowerCaseASCII=function (){return ("[a-z]")};
 RegWhy.upperCaseASCII=function (){return ("[A-Z]")};
+RegWhy.upperCaseASCIIAndSpace=function (){return ("[A-Z ]")};
 RegWhy.dontMatch=function (regWhyStatement){return (paste("^",regWhyStatement,sep=""))};
 
 #POSIx 
@@ -61,61 +62,57 @@ RegWhy.unicode=function (unicodeNumber){return (paste("\x{",unicodeNumber, "}",s
 
 #Section parts
 
-RegWhy.make.literal <- function(valueToSearch){
+RegWhy.literal <- function(valueToSearch){
   return (valueToSearch);
 }
-RegWhy.make.statement <- function (arrayOfRegWhy){
+RegWhy.statement <- function (arrayOfRegWhy){
   paste(arrayOfRegWhy,collapse ="", sep="")
 }
 
 
+Regwhy.group.start.capturing=function(){return ("(")}
+Regwhy.group.start.nonCapturing=function(){return ("(?:")}
+Regwhy.group.start.named=function(nameOfGroup){return (paste("(?<",nameOfGroup,">", sep=""))};
+RegWhy.group.start.range=function(){return ("[")}
+RegWhy.group.start.range.none=function(){return ("^[")}
+RegWhy.group.end.range=function(){return ("]")}
+RegWhy.group.range=function (bottom,top){return (paste("[",bottom,"-",top,"]", sep=""))};
+RegWhy.group.range.customCharacters=function (range){return (paste("[",range,"]", sep=""))};
 
-
-
-
-Regwhy.make.group.start.capturing=function(){return ("(")}
-Regwhy.make.group.start.nonCapturing=function(){return ("(?:")}
-Regwhy.make.group.start.named=function(nameOfGroup){return (paste("(?<",nameOfGroup,">", sep=""))};
-RegWhy.make.group.start.range=function(){return ("[")}
-RegWhy.make.group.start.range.none=function(){return ("^[")}
-RegWhy.make.group.end.range=function(){return ("]")}
-RegWhy.make.group.range=function (bottom,top){return (paste("[",bottom,"-",top,"]", sep=""))};
-RegWhy.make.group.range.customCharacters=function (range){return (paste("[",range,"]", sep=""))};
-
-Regwhy.make.group.or=function(){return ("|")}
-Regwhy.make.group.list=function(listOfWords){
+Regwhy.group.or=function(){return ("|")}
+Regwhy.group.list=function(listOfWords){
   return (paste(listOfWords,collapse="|"))
 }
-Regwhy.make.group.end=function(){return (")")}
-Regwhy.make.group.end.optional=function(){return (")?")}
-Regwhy.make.group.end.zeroOrMore=function(){return (")*")}
-Regwhy.make.group.end.exactNumber=function(number){return (paste("){",number,"}",sep=""))}
-Regwhy.make.group.end.exactNumberOrAbove=function(number){return (paste("){",number,",}",sep=""))}
-Regwhy.make.group.end.range=function(bottomNumber, topNumber){return (paste("){",bottomNumber,",",topNumber,"}",sep=""))}
+Regwhy.group.end=function(){return (")")}
+Regwhy.group.end.optional=function(){return (")?")}
+Regwhy.group.end.zeroOrMore=function(){return (")*")}
+Regwhy.group.end.exactNumber=function(number){return (paste("){",number,"}",sep=""))}
+Regwhy.group.end.exactNumberOrAbove=function(number){return (paste("){",number,",}",sep=""))}
+Regwhy.group.end.range=function(bottomNumber, topNumber){return (paste("){",bottomNumber,",",topNumber,"}",sep=""))}
 
 #Quantifiers 
-RegWhy.make.previous.optional=function (){return ("?")}; 
-RegWhy.make.previous.zeroOrMore=function (){return ("*")};
-RegWhy.make.previous.oneOrMore=function (){return ("+")};
-RegWhy.make.previous.exactNumber=function (number){return (paste("{",number,"}",sep=""))};
-RegWhy.make.previous.exactNumberOrMore=function (number){return (paste("{",number,",}",sep=""))};
-RegWhy.make.previous.rangeOfTimes=function (bottomNumber,topNumber){return (paste("{",bottomNumber,",",topNumber,"}",sep=""))};
+RegWhy.count.optional=function (){return ("?")}; 
+RegWhy.count.zeroOrMore=function (){return ("*")};
+RegWhy.count.oneOrMore=function (){return ("+")};
+RegWhy.count.exactNumber=function (number){return (paste("{",number,"}",sep=""))};
+RegWhy.count.exactNumberOrMore=function (number){return (paste("{",number,",}",sep=""))};
+RegWhy.count.rangeOfTimes=function (bottomNumber,topNumber){return (paste("{",bottomNumber,",",topNumber,"}",sep=""))};
 
 Regewhy.match.startOfString=function(){return ("^")}
 Regewhy.match.endOfString=function(){return ("$")}
 Regewhy.match.endOfStringOrLineBreak=function(){return ("\Z")}
 Regewhy.match.startOfMatchAttempt=function(){return ("\G")}
 
-RegWhy.match.ZeroOrMoreCharacter=function (character){return (paste(character,"*",sep=""))}; 
-RegWhy.match.ZeroOrMoreStatement=function (regWhyStatement){return (paste("(",regWhyStatement,")","*",sep=""))};
-RegWhy.match.OneOrMoreCharacter=function (character){return (paste(character,"+",sep=""))}; 
-RegWhy.match.OneOrMoreStatement=function (regWhyStatement){return (paste("(",regWhyStatement,")","+",sep=""))};
-RegWhy.match.ExactNumberOfCharacter=function (character, number){return (paste(character,"{",number,"}",sep=""))}; 
-RegWhy.match.ExactNumberOfStatement=function (regWhyStatement, number){return (paste("(",regWhyStatement,"{",number,"}",sep=""))};
-RegWhy.match.NumberOrAboveOfCharacter=function (character, number){return (paste(character,"{",number,",}",sep=""))}; 
-RegWhy.match.NumberOrAboveOfStatement=function (regWhyStatement, number){return (paste("(",regWhyStatement,"{",number,",}",sep=""))};
-RegWhy.match.NumberRangeOfCharacter=function (character, bottomrange,toprange){return (paste(character,"{",bottomrange,",",toprange,"}",sep=""))}; 
-RegWhy.match.NumberRangeOfStatement=function (regWhyStatement, bottomrange,toprange){return (paste("(",regWhyStatement,"{",bottomrange,",",toprange,"}",sep=""))};
+# RegWhy.match.ZeroOrMoreCharacter=function (character){return (paste(character,"*",sep=""))}; 
+# RegWhy.match.ZeroOrMoreStatement=function (regWhyStatement){return (paste("(",regWhyStatement,")","*",sep=""))};
+# RegWhy.match.OneOrMoreCharacter=function (character){return (paste(character,"+",sep=""))}; 
+# RegWhy.match.OneOrMoreStatement=function (regWhyStatement){return (paste("(",regWhyStatement,")","+",sep=""))};
+# RegWhy.match.ExactNumberOfCharacter=function (character, number){return (paste(character,"{",number,"}",sep=""))}; 
+# RegWhy.match.ExactNumberOfStatement=function (regWhyStatement, number){return (paste("(",regWhyStatement,"{",number,"}",sep=""))};
+# RegWhy.match.NumberOrAboveOfCharacter=function (character, number){return (paste(character,"{",number,",}",sep=""))}; 
+# RegWhy.match.NumberOrAboveOfStatement=function (regWhyStatement, number){return (paste("(",regWhyStatement,"{",number,",}",sep=""))};
+# RegWhy.match.NumberRangeOfCharacter=function (character, bottomrange,toprange){return (paste(character,"{",bottomrange,",",toprange,"}",sep=""))}; 
+# RegWhy.match.NumberRangeOfStatement=function (regWhyStatement, bottomrange,toprange){return (paste("(",regWhyStatement,"{",bottomrange,",",toprange,"}",sep=""))};
 
 
 Regwhy.presets.screenplay.character= RegWhy.make.statement(  c(

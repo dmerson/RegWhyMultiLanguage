@@ -36,18 +36,25 @@ len_of_script <-length(script_lines)
 start_of_script=FALSE
 FADE_IN_SCRIPT =RegWhy.statement(c(
                       RegWhy.anyCharacter(),
-                      RegWhy.make.previous.zeroOrMore(),
+                      RegWhy.count.zeroOrMore(),
                       RegWhy.make.literal("FADE IN"),
                       RegWhy.anyCharacter(),
-                      RegWhy.make.previous.zeroOrMore())
+                      RegWhy.count.zeroOrMore())
                       )
 
 SCENE =RegWhy.make.statement(c(
-        RegWhy.make.group.start.range(),
-        RegWhy.make.literal("I"),
-        RegWhy.make
+                RegWhy.group.optionalLiterals.noncapturing(c("INT","EXT")),
+                RegWhy.period(),
+                RegWhy.count.zeroOrMore(),
+                RegWhy.space(),
+                RegWhy.count.oneOrMore(),
+                Regwhy.group.start.capturing(),
+                RegWhy.alphaNumeric(),
+                RegWhy.count.oneOrMore(),
+                Regwhy.group.end()
+                
 ))
-
+SCENE
 
 last_line_type=""
 for (i in 1:len_of_script){

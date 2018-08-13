@@ -3,7 +3,7 @@ library(stringr)
 
 # Special Characters
 
-RegWhy.period =function(){return ("\\.")}
+RegWhy.period =function(){return (paste(intToUtf8(92),".", sep=""))}
 RegWhy.backslash =function(){return ("\\")}
 RegWhy.bar=function(){return ("\\|")}
 RegWhy.leftParenthesis =function(){return ("\\(")}
@@ -78,6 +78,14 @@ RegWhy.group.start.range.none=function(){return ("^[")}
 RegWhy.group.end.range=function(){return ("]")}
 RegWhy.group.range=function (bottom,top){return (paste("[",bottom,"-",top,"]", sep=""))};
 RegWhy.group.range.customCharacters=function (range){return (paste("[",range,"]", sep=""))};
+RegWhy.group.optionalLiterals.capturing=function(listOfWords){
+  words <-paste(listOfWords,collapse ="|", sep="")
+  return (paste("(", words,")",sep=""));
+}
+RegWhy.group.optionalLiterals.noncapturing=function(listOfWords){
+  words <-paste(listOfWords,collapse ="|", sep="")
+  return (paste(Regwhy.group.start.nonCapturing(), words,")",sep=""));
+}
 
 Regwhy.group.or=function(){return ("|")}
 Regwhy.group.list=function(listOfWords){
@@ -146,6 +154,11 @@ RegWhy.do.extractAll <- function ( statementToSearch,regWhyStatement){
 
 RegWhy.do.match <- function ( statementToSearch,regWhyStatement){
   return (str_match(statementToSearch,regWhyStatement))
+  
+}
+RegWhy.do.match.capturedNumber <- function ( statementToSearch,regWhyStatement, groupNumber){
+  groupNumber =groupNumber + 1;
+  return (str_match(statementToSearch,regWhyStatement)[groupNumber])
   
 }
 RegWhy.do.matchAll <- function ( statementToSearch,regWhyStatement){

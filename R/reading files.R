@@ -70,6 +70,18 @@ CHARACTER <- RegWhy.make.statement(c(
           
   
 ))
+PARENTHETICAL <- RegWhy.make.statement(c(
+  RegWhy.match.startOfString(),
+  RegWhy.leftParenthesis(),
+  RegWhy.anyCharacter(),
+  RegWhy.count.oneOrMore(),
+  RegWhy.rightParenthesis(),
+  RegWhy.match.endOfString()
+  
+))
+#PARENTHETICAL
+#RegWhy.do.detect("(says to JIM)", PARENTHETICAL)
+#RegWhy.do.detect("(says to JIM", PARENTHETICAL)
 # CHARACTER
 # trimws(RegWhy.do.match.capturedNumber("HANDY ",CHARACTER,1))
 # RegWhy.do.extractAll("HANDY (V.O.)",CHARACTER)
@@ -108,24 +120,32 @@ for (i in 1:len_of_script){
           last_line_type="CHARACTER"
         }
         else{
-          if (last_line_type=="CHARACTER"){
-            print("DIALOGUE")
-            last_line_type="DIALOGUE"
+          
+          if (RegWhy.do.detect(current_line,PARENTHETICAL)==TRUE){
+            print("PARENTHETICAL")
+            last_line_type="PARENTHETICAL"
           }
-          else
-          {
-            if (last_line_type=="DIALOGUE"){
-              print("MORE DIALOGUE")
+          else{
+            if (last_line_type=="CHARACTER" || last_line_type=="PARENTHETICAL"){
+              print("DIALOGUE")
               last_line_type="DIALOGUE"
             }
             else
             {
-              if (last_line_type=="BLANK_LINE"){
-                print("STAGE DIRECTION")
-                last_line_type="STAGE_DIRECTION"
+              if (last_line_type=="DIALOGUE"){
+                print("MORE DIALOGUE")
+                last_line_type="DIALOGUE"
+              }
+              else
+              {
+                if (last_line_type=="BLANK_LINE"){
+                  print("STAGE DIRECTION")
+                  last_line_type="STAGE_DIRECTION"
+                }
               }
             }
           }
+          
           print(current_line)
         }
       }

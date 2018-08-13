@@ -66,6 +66,10 @@ CHARACTER <- RegWhy.make.statement(c(
           RegWhy.literal("(V.O.)"),
           
           RegWhy.group.end.optional(),
+          Regwhy.group.start.nonCapturing(),
+          RegWhy.literal("(O.S.)"),
+          
+          RegWhy.group.end.optional(),
           RegWhy.match.endOfString()
           
   
@@ -79,6 +83,15 @@ PARENTHETICAL <- RegWhy.make.statement(c(
   RegWhy.match.endOfString()
   
 ))
+CUTS <- RegWhy.make.statement(c(
+  RegWhy.match.startOfString(),
+  RegWhy.literal("CUT TO"),
+  RegWhy.anyCharacter(),
+  RegWhy.count.oneOrMore(),
+  RegWhy.match.endOfString()
+  
+))
+RegWhy.do.detect("CUT TO:",CUTS)
 #PARENTHETICAL
 #RegWhy.do.detect("(says to JIM)", PARENTHETICAL)
 #RegWhy.do.detect("(says to JIM", PARENTHETICAL)
@@ -106,6 +119,14 @@ for (i in 1:len_of_script){
       
     }
     else{
+      
+      if (RegWhy.do.detect(current_line,CUTS)){
+        print("CUTS")
+        print(current_line)
+      }
+      else{
+        
+      
       #look for SCENE
       if (RegWhy.do.detect(current_line,SCENE)){
         print("SCENE")
@@ -148,6 +169,7 @@ for (i in 1:len_of_script){
           
           print(current_line)
         }
+      }
       }
       
     }

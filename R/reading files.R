@@ -90,7 +90,7 @@ for (i in 1:len_of_script){
     
     #look for Blank line
     if (current_line==BLANK_LINE){
-      last_line_type=""
+      last_line_type="BLANK_LINE"
       
     }
     else{
@@ -112,7 +112,20 @@ for (i in 1:len_of_script){
             print("DIALOGUE")
             last_line_type="DIALOGUE"
           }
-          
+          else
+          {
+            if (last_line_type=="DIALOGUE"){
+              print("MORE DIALOGUE")
+              last_line_type="DIALOGUE"
+            }
+            else
+            {
+              if (last_line_type=="BLANK_LINE"){
+                print("STAGE DIRECTION")
+                last_line_type="STAGE_DIRECTION"
+              }
+            }
+          }
           print(current_line)
         }
       }

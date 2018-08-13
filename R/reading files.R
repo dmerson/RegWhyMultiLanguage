@@ -91,7 +91,23 @@ CUTS <- RegWhy.make.statement(c(
   RegWhy.match.endOfString()
   
 ))
-RegWhy.do.detect("CUT TO:",CUTS)
+CAMERADIRECTION <- RegWhy.make.statement(c(
+  RegWhy.match.startOfString(),
+  RegWhy.literal("CROSSFADE TO"),
+  RegWhy.anyCharacter(),
+  RegWhy.count.oneOrMore(),
+  RegWhy.match.endOfString()
+  
+))
+TRANSISTION <- RegWhy.make.statement(c(
+  RegWhy.match.startOfString(),
+  RegWhy.literal("TRANSISTION "),
+  RegWhy.anyCharacter(),
+  RegWhy.count.oneOrMore(),
+  RegWhy.match.endOfString()
+  
+))
+#RegWhy.do.detect("CUT TO:",CUTS)
 #PARENTHETICAL
 #RegWhy.do.detect("(says to JIM)", PARENTHETICAL)
 #RegWhy.do.detect("(says to JIM", PARENTHETICAL)
@@ -120,13 +136,13 @@ for (i in 1:len_of_script){
     }
     else{
       
-      if (RegWhy.do.detect(current_line,CUTS)){
-        print("CUTS")
+      if (RegWhy.do.detect(current_line,CUTS) ||
+          RegWhy.do.detect(current_line,CAMERADIRECTION) || 
+          RegWhy.do.detect(current_line,TRANSISTION)){
+        print("Camera")
         print(current_line)
       }
       else{
-        
-      
       #look for SCENE
       if (RegWhy.do.detect(current_line,SCENE)){
         print("SCENE")

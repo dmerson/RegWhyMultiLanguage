@@ -56,6 +56,25 @@ SCENE =RegWhy.make.statement(c(
 ))
 SCENE
 
+CHARACTER <- RegWhy.make.statement(c(
+          RegWhy.match.startOfString(),
+          Regwhy.group.start.capturing(),
+          RegWhy.group.range.customCharacters("A-Z0-9 ."),
+          RegWhy.group.end(),
+          RegWhy.count.oneOrMore(),
+          Regwhy.group.start.nonCapturing(),
+          RegWhy.literal("(V.O.)"),
+          
+          RegWhy.group.end.optional(),
+          RegWhy.match.endOfString()
+          
+  
+))
+CHARACTER
+trimws(RegWhy.do.match.capturedNumber("HANDY ",CHARACTER,1))
+RegWhy.do.extractAll("HANDY (V.O.)",CHARACTER)
+RegWhy.do.extract("HANDY (V.O.)",CHARACTER)
+
 last_line_type=""
 for (i in 1:len_of_script){
   #print(script_lines[i])

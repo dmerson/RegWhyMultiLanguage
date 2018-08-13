@@ -3,25 +3,47 @@ library(stringr)
 
 # Special Characters
 
-RegWhy.period =function(){return (paste(intToUtf8(92),".", sep=""))}
+RegWhy.period =function(){return ("\\.")}
 RegWhy.backslash =function(){return ("\\")}
 RegWhy.bar=function(){return ("\\|")}
 RegWhy.leftParenthesis =function(){return ("\\(")}
 RegWhy.rightParenthesis =function(){return ("\\)")}
 RegWhy.leftBracket =function(){return ("\\[")}
-RegWhy.leftBracket =function(){return ("]")}
+RegWhy.rightBracket =function(){return ("]")}
 RegWhy.leftBrace =function(){return ("\\{")}
 RegWhy.rightBrace =function(){return ("\\}")}
 RegWhy.dollarSign =function(){return ("\\$")}
 RegWhy.asterisk =function(){return ("\\*")}
 RegWhy.plusSign =function(){return ("\\+")}
-RegWhy.minusSign =function(){return ("-")}
 RegWhy.questionMark =function(){return ("\\?")}
 RegWhy.leftAngle =function(){return ("<")}
 RegWhy.rightAngle =function(){return (">")}
-RegWhy.period =function(){return ("\\.")}
 RegWhy.caret =function(){return ("\\^")}
+#Section parts
 
+RegWhy.literal <- function(valueToSearch){
+  valueToSearch =str_replace_all(valueToSearch,"\\.","\\\\.")
+  valueToSearch=str_replace_all(valueToSearch,"\\\\", "\\\\\\")
+  valueToSearch=str_replace_all(valueToSearch,"\\|", "\\\\|")
+  valueToSearch=str_replace_all(valueToSearch,"\\(", "\\\\(")
+  valueToSearch=str_replace_all(valueToSearch,"\\)", "\\\\)")
+  valueToSearch=str_replace_all(valueToSearch,"\\[", "\\\\[")
+  valueToSearch=str_replace_all(valueToSearch,"\\]", "\\\\]")
+  valueToSearch=str_replace_all(valueToSearch,"\\{", "\\\\{")
+  valueToSearch=str_replace_all(valueToSearch,"\\}", "\\\\}")
+  valueToSearch=str_replace_all(valueToSearch,"\\$", "\\\\$")
+  valueToSearch=str_replace_all(valueToSearch,"\\*", "\\\\*")
+  valueToSearch=str_replace_all(valueToSearch,"\\+", "\\\\+")
+  valueToSearch=str_replace_all(valueToSearch,"\\?", "\\\\?")
+  valueToSearch=str_replace_all(valueToSearch,"\\<", "\\\\<")
+  valueToSearch=str_replace_all(valueToSearch,"\\>", "\\\\>")
+  valueToSearch=str_replace_all(valueToSearch,"\\^", "\\\\^")
+  return (valueToSearch);
+}
+
+RegWhy.statement <- function (arrayOfRegWhy){
+  paste(arrayOfRegWhy,collapse ="", sep="")
+}
 #Anchor Sequences
 RegWhy.digit =function(){return ("\d")}
 RegWhy.nonDigit =function(){return ("\D")}
@@ -60,14 +82,7 @@ RegWhy.blankSpace=function (){return ("[[:blank:]]")}; #space and tab
 #Unicode
 RegWhy.unicode=function (unicodeNumber){return (paste("\x{",unicodeNumber, "}",sep=""))};
 
-#Section parts
 
-RegWhy.literal <- function(valueToSearch){
-  return (valueToSearch);
-}
-RegWhy.statement <- function (arrayOfRegWhy){
-  paste(arrayOfRegWhy,collapse ="", sep="")
-}
 
 
 Regwhy.group.start.capturing=function(){return ("(")}
@@ -87,16 +102,17 @@ RegWhy.group.optionalLiterals.noncapturing=function(listOfWords){
   return (paste(Regwhy.group.start.nonCapturing(), words,")",sep=""));
 }
 
-Regwhy.group.or=function(){return ("|")}
-Regwhy.group.list=function(listOfWords){
+RegWhy.group.or=function(){return ("|")}
+RegWhy.group.list=function(listOfWords){
   return (paste(listOfWords,collapse="|"))
 }
-Regwhy.group.end=function(){return (")")}
-Regwhy.group.end.optional=function(){return (")?")}
-Regwhy.group.end.zeroOrMore=function(){return (")*")}
-Regwhy.group.end.exactNumber=function(number){return (paste("){",number,"}",sep=""))}
-Regwhy.group.end.exactNumberOrAbove=function(number){return (paste("){",number,",}",sep=""))}
-Regwhy.group.end.range=function(bottomNumber, topNumber){return (paste("){",bottomNumber,",",topNumber,"}",sep=""))}
+RegWhy.group.end=function(){return (")")}
+RegWhy.group.end.optional=function(){return (")?")}
+RegWhy.group.end.zeroOrMore=function(){return (")*")}
+RegWhy.group.end.oneOrMore=function(){return (")+")}
+RegWhy.group.end.exactNumber=function(number){return (paste("){",number,"}",sep=""))}
+RegWhy.group.end.exactNumberOrAbove=function(number){return (paste("){",number,",}",sep=""))}
+RegWhy.group.end.range=function(bottomNumber, topNumber){return (paste("){",bottomNumber,",",topNumber,"}",sep=""))}
 
 #Quantifiers 
 RegWhy.count.optional=function (){return ("?")}; 
@@ -106,10 +122,10 @@ RegWhy.count.exactNumber=function (number){return (paste("{",number,"}",sep=""))
 RegWhy.count.exactNumberOrMore=function (number){return (paste("{",number,",}",sep=""))};
 RegWhy.count.rangeOfTimes=function (bottomNumber,topNumber){return (paste("{",bottomNumber,",",topNumber,"}",sep=""))};
 
-Regewhy.match.startOfString=function(){return ("^")}
-Regewhy.match.endOfString=function(){return ("$")}
-Regewhy.match.endOfStringOrLineBreak=function(){return ("\Z")}
-Regewhy.match.startOfMatchAttempt=function(){return ("\G")}
+RegWhy.match.startOfString=function(){return ("^")}
+RegWhy.match.endOfString=function(){return ("$")}
+RegWhy.match.endOfStringOrLineBreak=function(){return ("\\Z")}
+RegWhy.match.startOfMatchAttempt=function(){return ("\\G")}
 
 # RegWhy.match.ZeroOrMoreCharacter=function (character){return (paste(character,"*",sep=""))}; 
 # RegWhy.match.ZeroOrMoreStatement=function (regWhyStatement){return (paste("(",regWhyStatement,")","*",sep=""))};
@@ -121,14 +137,6 @@ Regewhy.match.startOfMatchAttempt=function(){return ("\G")}
 # RegWhy.match.NumberOrAboveOfStatement=function (regWhyStatement, number){return (paste("(",regWhyStatement,"{",number,",}",sep=""))};
 # RegWhy.match.NumberRangeOfCharacter=function (character, bottomrange,toprange){return (paste(character,"{",bottomrange,",",toprange,"}",sep=""))}; 
 # RegWhy.match.NumberRangeOfStatement=function (regWhyStatement, bottomrange,toprange){return (paste("(",regWhyStatement,"{",bottomrange,",",toprange,"}",sep=""))};
-
-
-Regwhy.presets.screenplay.character= RegWhy.make.statement(  c(
-  Regewhy.match.startOfString(),
-  RegWhy.make.group.range.customCharacters("A-Z0-9 "),
-  RegWhy.make.previous.oneOrMore(),
-  Regewhy.match.endOfString()
-  ))
 
 
 
@@ -157,7 +165,7 @@ RegWhy.do.match <- function ( statementToSearch,regWhyStatement){
   
 }
 RegWhy.do.match.capturedNumber <- function ( statementToSearch,regWhyStatement, groupNumber){
-  groupNumber =groupNumber + 1;
+   
   return (str_match(statementToSearch,regWhyStatement)[groupNumber])
   
 }

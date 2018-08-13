@@ -64,11 +64,12 @@ CHARACTER <- RegWhy.make.statement(c(
           RegWhy.count.oneOrMore(),
           Regwhy.group.start.nonCapturing(),
           RegWhy.literal("(V.O.)"),
-          
           RegWhy.group.end.optional(),
           Regwhy.group.start.nonCapturing(),
           RegWhy.literal("(O.S.)"),
-          
+          RegWhy.group.end.optional(),
+          Regwhy.group.start.nonCapturing(),
+          RegWhy.literal("(CONT'D)"),
           RegWhy.group.end.optional(),
           RegWhy.match.endOfString()
           

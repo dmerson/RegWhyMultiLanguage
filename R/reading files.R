@@ -54,8 +54,8 @@ SCENE =RegWhy.make.statement(c(
                 Regwhy.group.end()
                 
 ))
-SCENE
-
+# SCENE
+BLANK_LINE=""
 CHARACTER <- RegWhy.make.statement(c(
           RegWhy.match.startOfString(),
           Regwhy.group.start.capturing(),
@@ -70,19 +70,55 @@ CHARACTER <- RegWhy.make.statement(c(
           
   
 ))
-CHARACTER
-trimws(RegWhy.do.match.capturedNumber("HANDY ",CHARACTER,1))
-RegWhy.do.extractAll("HANDY (V.O.)",CHARACTER)
-RegWhy.do.extract("HANDY (V.O.)",CHARACTER)
+# CHARACTER
+# trimws(RegWhy.do.match.capturedNumber("HANDY ",CHARACTER,1))
+# RegWhy.do.extractAll("HANDY (V.O.)",CHARACTER)
+# RegWhy.do.extract("HANDY (V.O.)",CHARACTER)
 
 last_line_type=""
+ 
 for (i in 1:len_of_script){
   #print(script_lines[i])
   if (RegWhy.do.detect(script_lines[i], FADE_IN_SCRIPT)==TRUE){
     start_of_script=TRUE
+    last_line_type="START"
     print("Start!")
   }
+  #if script is started
   if ((start_of_script==TRUE) && (RegWhy.do.detect(script_lines[i], FADE_IN_SCRIPT) ==FALSE)){
-    print(script_lines[i])
+    current_line <-script_lines[i]
+    
+    #look for Blank line
+    if (current_line==BLANK_LINE){
+      last_line_type=""
+      
+    }
+    else{
+      #look for SCENE
+      if (RegWhy.do.detect(current_line,SCENE)){
+        print("SCENE")
+        print(current_line)
+        last_line_type="SCENE"
+      }
+      else{
+        #Look for Character
+        if (RegWhy.do.detect(current_line,CHARACTER)){
+          print("CHARACTER")
+          print(RegWhy.do.match.capturedNumber(current_line,CHARACTER,1))
+          last_line_type="CHARACTER"
+        }
+        else{
+          if (last_line_type=="CHARACTER"){
+            print("DIALOGUE")
+            last_line_type="DIALOGUE"
+          }
+          
+          print(current_line)
+        }
+      }
+      
+    }
+    
+    
   }
 }

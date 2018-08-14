@@ -19,6 +19,9 @@ RegWhy.questionMark =function(){return ("\\?")}
 RegWhy.leftAngle =function(){return ("<")}
 RegWhy.rightAngle =function(){return (">")}
 RegWhy.caret =function(){return ("\\^")}
+RegWhy.tab =function(){return ("\t")};
+RegWhy.return =function(){return ("\r")};
+RegWhy.newLine =function(){return ("\n")};
 #Section parts
 
 RegWhy.literal <- function(valueToSearch){
@@ -45,18 +48,18 @@ RegWhy.statement <- function (arrayOfRegWhy){
   paste(arrayOfRegWhy,collapse ="", sep="")
 }
 #Anchor Sequences
-RegWhy.digit =function(){return ("\d")}
-RegWhy.nonDigit =function(){return ("\D")}
-RegWhy.space =function(){return ("\s")}
-RegWhy.nonSpace =function(){return ("\S")}
-RegWhy.wordCharacter =function(){return ("\w")}
-RegWhy.nonWordCharacter =function(){return ("\W")}
-RegWhy.wordBoundary =function(){return ("\b")}
-RegWhy.nonWordBoundary =function(){return ("\B")}
-RegWhy.horizontalSpace=function (){return ("\h")};
-RegWhy.nonHorizontalSpace=function (){return ("\H")};
-RegWhy.verticalSpace=function (){return ("\v")};
-RegWhy.nonVerticalSpace=function (){return ("\V")};
+RegWhy.characterType.digit =function(){return ("\\d")}
+RegWhy.characterType.nonDigit =function(){return ("\\D")}
+RegWhy.characterType.whitespace =function(){return ("\\s")}
+RegWhy.characterType.nonWhiteSpace =function(){return ("\\S")}
+RegWhy.characterType.wordCharacter =function(){return ("\\w")}
+RegWhy.characterType.nonWordCharacter =function(){return ("\\W")}
+RegWhy.characterType.wordBoundary =function(){return ("\\b")}
+RegWhy.characterType.nonWordBoundary =function(){return ("\\B")}
+RegWhy.characterType.horizontalSpace=function (){return ("\\h")};
+RegWhy.characterType.nonHorizontalSpace=function (){return ("\\H")};
+RegWhy.characterType.verticalSpace=function (){return ("\\v")};
+RegWhy.characterType.nonVerticalSpace=function (){return ("\\V")};
 
 #Character Classes
 

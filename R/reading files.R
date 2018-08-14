@@ -38,6 +38,25 @@ len_of_script <-length(script_lines)
 library(stringi)
 pdf_lines <- stri_split_lines1(pdf_text)
 start_of_script=FALSE
+HAS_A_TAB =RegWhy.statement(c(
+  RegWhy.match.startOfString(),
+  RegWhy.tab(),
+  RegWhy.count.oneOrMore(),
+  RegWhy.alphaNumeric(),
+  RegWhy.count.oneOrMore(),
+  RegWhy.match.endOfString()
+))
+SIX_SPACES =RegWhy.statement(c(
+  RegWhy.match.startOfString(),
+  RegWhy.space(),
+  RegWhy.count.exactNumber(6),
+  RegWhy.anyCharacter(),
+  RegWhy.count.oneOrMore(),
+  RegWhy.match.endOfString()
+  
+))
+#RegWhy.do.detect("      WILL",SIX_SPACES)
+
 FADE_IN_SCRIPT =RegWhy.statement(c(
                       RegWhy.anyCharacter(),
                       RegWhy.count.zeroOrMore(),

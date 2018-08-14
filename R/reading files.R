@@ -32,7 +32,11 @@ library(readr)
 Big_Fish_fountain <- read_delim("C:/Repos/RegWhyMultiLanguage/Documents/Screenplays/Big-Fish.fountain.txt", 
                                 "~", escape_double = FALSE, col_names = FALSE)
 script_lines <-readLines("../Documents/Screenplays/Big-Fish.fountain.txt")
+pdf_file <- readtext("../Documents/Screenplays/Big Fish.pdf")
+pdf_text <- (pdf_file$text)
 len_of_script <-length(script_lines)
+library(stringi)
+pdf_lines <- stri_split_lines1(pdf_text)
 start_of_script=FALSE
 FADE_IN_SCRIPT =RegWhy.statement(c(
                       RegWhy.anyCharacter(),

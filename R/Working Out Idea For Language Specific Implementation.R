@@ -125,10 +125,10 @@ RegWhy.count.exactNumber=function (number){return (paste("{",number,"}",sep=""))
 RegWhy.count.exactNumberOrMore=function (number){return (paste("{",number,",}",sep=""))};
 RegWhy.count.rangeOfTimes=function (bottomNumber,topNumber){return (paste("{",bottomNumber,",",topNumber,"}",sep=""))};
 
-RegWhy.match.startOfString=function(){return ("^")}
-RegWhy.match.endOfString=function(){return ("$")}
-RegWhy.match.endOfStringOrLineBreak=function(){return ("\\Z")}
-RegWhy.match.startOfMatchAttempt=function(){return ("\\G")}
+RegWhy.Where.startOfString=function(){return ("^")}
+RegWhy.Where.endOfString=function(){return ("$")}
+RegWhy.Where.endOfStringOrLineBreak=function(){return ("\\Z")}
+RegWhy.Where.startOfMatchAttempt=function(){return ("\\G")}
 
 # RegWhy.match.ZeroOrMoreCharacter=function (character){return (paste(character,"*",sep=""))}; 
 # RegWhy.match.ZeroOrMoreStatement=function (regWhyStatement){return (paste("(",regWhyStatement,")","*",sep=""))};

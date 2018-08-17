@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegWhyClassLibarary", "RegWhyClassLibarary\RegWhyClassLibarary.csproj", "{103FD405-62E0-4569-AFE5-CCC37D9F8452}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegWhyTEst", "RegWhyTEst\RegWhyTEst.csproj", "{A0F9DBD3-EE92-4732-9B80-D0DB43ABBB2D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{103FD405-62E0-4569-AFE5-CCC37D9F8452}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{103FD405-62E0-4569-AFE5-CCC37D9F8452}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{103FD405-62E0-4569-AFE5-CCC37D9F8452}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0F9DBD3-EE92-4732-9B80-D0DB43ABBB2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0F9DBD3-EE92-4732-9B80-D0DB43ABBB2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0F9DBD3-EE92-4732-9B80-D0DB43ABBB2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0F9DBD3-EE92-4732-9B80-D0DB43ABBB2D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

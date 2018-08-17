@@ -7,7 +7,7 @@ abstract class RegWhy {
     public static bar ="\|";
     public static leftParenthesis="\(";
     public static rightParenthesis="\)";
-    public static null="\0";
+    public static nullString="\0";
     public static leftBracket="\[";
     public static rightBracket="\]";
     public static leftBrace="\{";
@@ -19,7 +19,7 @@ abstract class RegWhy {
     public static rightAngle="\>";
     public static caret="\^";
     public static tab="\t";
-    public static return="\r";
+    public static returnString="\r";
     public static newLine="\n";
     public static formFeed="\f";
 
@@ -69,8 +69,8 @@ class CharacterType{
     nonWordBoundary="\B";
     lowerCaseASCI="[a-z]";
     upperCaseASCII="[A-Z]";
-    anyASCII='[ -~]'
-    endOfFile="^Z"
+    anyASCII='[ -~]';
+    endOfFile="^Z";
      
     
     public unicode(fourDigitUniCodeNumber:string):string{
@@ -80,10 +80,10 @@ class CharacterType{
         return ("\\" +"x" + twoDigitalCode) ; 
     }
     public characterRange(listOfCharacters){
-        return "[" + listOfCharacters;
+        return "[" + listOfCharacters + "]";
     }
     public notInCharacterRange(listOfCharacters){
-        return "[^" + listOfCharacters;
+        return "[^" + listOfCharacters + "]";
     }
     
      
@@ -96,17 +96,17 @@ class Group{
     public Start(){
         return new Start();
     }
-    or="|"
+    or="|";
     end=")";
     endOptional=")?";
     endZeroOrMore=")*";
     endOneOfMore=")+";
     smallestMatch="?";
     largestMatch="";
-    endOptionSmallestMatch=")??"
-    endZeroOrMoreSmallestMatch=")*?"
-    endOneOrMoreSmallestMatch=")+?"
-    endOfNumberedSmallestMatch="?"
+    endOptionSmallestMatch=")??";
+    endZeroOrMoreSmallestMatch=")*?";
+    endOneOrMoreSmallestMatch=")+?";
+    endOfNumberedSmallestMatch="?";
 
     public backReference(whichReference:number):string{
         if (whichReference > 9 || whichReference < 1){
@@ -116,7 +116,7 @@ class Group{
     }
     public lastMatch="$&";
     public lastParen="$+";
-    public precedingMatch ="%`"
+    public precedingMatch ="%`";
 
 
     public matchOnlyIfThisIsNext(whatsNext){

@@ -57,10 +57,10 @@ RegWhy.characterType.wordCharacter =function(){return ("\\w")}
 RegWhy.characterType.nonWordCharacter =function(){return ("\\W")}
 RegWhy.characterType.wordBoundary =function(){return ("\\b")}
 RegWhy.characterType.nonWordBoundary =function(){return ("\\B")}
-#RegWhy.characterType.horizontalSpace=function (){return ("\\h")};
-#RegWhy.characterType.nonHorizontalSpace=function (){return ("\\H")};
-#RegWhy.characterType.verticalSpace=function (){return ("\\v")};
-#RegWhy.characterType.nonVerticalSpace=function (){return ("\\V")};
+RegWhy.characterType.horizontalSpace=function (){return ("\\h")};
+RegWhy.characterType.nonHorizontalSpace=function (){return ("\\H")};
+RegWhy.characterType.verticalSpace=function (){return ("\\v")};
+RegWhy.characterType.nonVerticalSpace=function (){return ("\\V")};
 
 #Character Classes
 
@@ -82,8 +82,8 @@ RegWhy.characterType.space=function (){return ("[[:space:]]")}; #tab, newline, v
 RegWhy.characterType.printable=function (){return ("[[:print:]]")}; #alpha punct and space
 RegWhy.characterType.graphical=function (){return ("[[:graph:]]")}; #alpha punct and space
 RegWhy.characterType.blankSpace=function (){return ("[[:blank:]]")}; #space and tab
-RegWhy.characterType.characterRange=function (listOfCharacters){return (paste("[",bottom,"]", sep=""))};
-RegWhy.characterType.notInCharacterRange=function (listOfCharacters){return (paste("[^",bottom,"]", sep=""))};
+RegWhy.characterType.characterRange=function (listOfCharacters){return (paste("[",listOfCharacters,"]", sep=""))};
+RegWhy.characterType.notInCharacterRange=function (listOfCharacters){return (paste("[^",listOfCharacters,"]", sep=""))};
 
 
 #Unicode
@@ -167,19 +167,19 @@ RegWhy.do.extractAll <- function ( statementToSearch,regWhyStatement){
   
 }
 
-RegWhy.do.match <- function ( statementToSearch,regWhyStatement){
-  return (str_match(statementToSearch,regWhyStatement))
-  
-}
-RegWhy.do.match.capturedNumber <- function ( statementToSearch,regWhyStatement, groupNumber){
+# RegWhy.do.match <- function ( statementToSearch,regWhyStatement){
+#   return (str_match(statementToSearch,regWhyStatement))
+#   
+# }
+RegWhy.do.extractCapturedGroup <- function ( statementToSearch,regWhyStatement, groupNumber){
    
   return (str_match(statementToSearch,regWhyStatement)[groupNumber])
   
 }
-RegWhy.do.matchAll <- function ( statementToSearch,regWhyStatement){
-  return (str_match_all(statementToSearch,regWhyStatement))
-  
-}
+# RegWhy.do.matchAll <- function ( statementToSearch,regWhyStatement){
+#   return (str_match_all(statementToSearch,regWhyStatement))
+#   
+# }
 RegWhy.do.locate <- function ( statementToSearch,regWhyStatement){
   return (str_locate(statementToSearch,regWhyStatement))
   

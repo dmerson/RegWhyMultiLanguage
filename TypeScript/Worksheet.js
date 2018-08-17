@@ -32,6 +32,7 @@ var RegWhy = /** @class */ (function () {
     RegWhy.bar = "\|";
     RegWhy.leftParenthesis = "\(";
     RegWhy.rightParenthesis = "\)";
+    RegWhy["null"] = "\0";
     RegWhy.leftBracket = "\[";
     RegWhy.rightBracket = "\]";
     RegWhy.leftBrace = "\{";
@@ -73,6 +74,9 @@ var CharacterType = /** @class */ (function () {
     CharacterType.prototype.unicode = function (fourDigitUniCodeNumber) {
         return ("\\" + "u" + fourDigitUniCodeNumber);
     };
+    CharacterType.prototype.hexidecimal = function (twoDigitalCode) {
+        return ("\\" + "x" + twoDigitalCode);
+    };
     CharacterType.prototype.characterRange = function (listOfCharacters) {
         return "[" + listOfCharacters;
     };
@@ -88,9 +92,30 @@ var Group = /** @class */ (function () {
         this.endOptional = ")?";
         this.endZeroOrMore = ")*";
         this.endOneOfMore = ")+";
+        this.smallestMatch = "?";
+        this.largestMatch = "";
+        this.endOptionSmallestMatch = ")??";
+        this.endZeroOrMoreSmallestMatch = ")*?";
+        this.endOneOrMoreSmallestMatch = ")+?";
+        this.endOfNumberedSmallestMatch = "?";
+        this.lastMatch = "$&";
+        this.lastParen = "$+";
+        this.precedingMatch = "%`";
     }
     Group.prototype.Start = function () {
         return new Start();
+    };
+    Group.prototype.backReference = function (whichReference) {
+        if (whichReference > 9 || whichReference < 1) {
+            throw new Error("Backreferences must be between 1 and 9");
+        }
+        return "$" + whichReference;
+    };
+    Group.prototype.matchOnlyIfThisIsNext = function (whatsNext) {
+        return "(?=" + whatsNext;
+    };
+    Group.prototype.matchOnlyIfThisIsNotNext = function (whatsNext) {
+        return "(?|" + whatsNext;
     };
     Group.prototype.endExactNumber = function (countOfTimes) {
         return "){" + countOfTimes + "}";
@@ -199,7 +224,7 @@ var Do = /** @class */ (function () {
         var match;
         var pattern = new RegExp(valueToFind, Do.SetRegExOptions(true, caseInsensitive, multilineMatching));
         while (match = pattern.exec(stringToSearch)) {
-            matches.push(match);
+            matches.push(match[0]);
         }
         return matches[groupToCapture];
     };
@@ -267,6 +292,9 @@ var Count = /** @class */ (function () {
 console.log(RegWhy.Statement(["test", "test"]));
 console.log(RegWhy.Do().ExtractAll("test", 't'));
 console.log(RegWhy.Do().ExtractFirst("test", 't'));
+console.log(RegWhy.Do().LocateFirst("test", 't'));
+console.log(RegWhy.Do().LocateAll("test", 't'));
 console.log(RegWhy.Literal("hello world"));
 console.log(RegWhy.Do().Dectect("test", "t"));
 console.log(RegWhy.Do().Dectect("test", "x"));
+console.log(RegWhy.Do().Dectect("test", RegWhy.CharacterType().alphaNumeric));

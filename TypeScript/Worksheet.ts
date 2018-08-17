@@ -7,6 +7,7 @@ abstract class RegWhy {
     public static bar ="\|";
     public static leftParenthesis="\(";
     public static rightParenthesis="\)";
+    public static null="\0";
     public static leftBracket="\[";
     public static rightBracket="\]";
     public static leftBrace="\{";
@@ -68,19 +69,16 @@ class CharacterType{
     nonWordBoundary="\B";
     lowerCaseASCI="[a-z]";
     upperCaseASCII="[A-Z]";
+    anyASCII='[ -~]'
+    endOfFile="^Z"
      
-    //POSIX COMMANDS
-    alphaNumeric="[[almum:]]";
-    punctuation="[[:almum:]]";
-    hexadecial="[[:xdigit:]]";
-    space="[[:space:]]"; //tab, newline, vertical tab, form feed,carriage return, and space
-    printable="[[:print:]]"
-    graphical="[[:graph:]]"
-    blankSpace="[[:blank:]]" //space and tab
+    
     public unicode(fourDigitUniCodeNumber:string):string{
         return ("\\" +"u" + fourDigitUniCodeNumber) ; 
     }
-     
+    public hexidecimal(twoDigitalCode:string):string{
+        return ("\\" +"x" + twoDigitalCode) ; 
+    }
     public characterRange(listOfCharacters){
         return "[" + listOfCharacters;
     }
@@ -103,6 +101,30 @@ class Group{
     endOptional=")?";
     endZeroOrMore=")*";
     endOneOfMore=")+";
+    smallestMatch="?";
+    largestMatch="";
+    endOptionSmallestMatch=")??"
+    endZeroOrMoreSmallestMatch=")*?"
+    endOneOrMoreSmallestMatch=")+?"
+    endOfNumberedSmallestMatch="?"
+
+    public backReference(whichReference:number):string{
+        if (whichReference > 9 || whichReference < 1){
+            throw new Error("Backreferences must be between 1 and 9")
+        }
+        return "$" + whichReference;
+    }
+    public lastMatch="$&";
+    public lastParen="$+";
+    public precedingMatch ="%`"
+
+
+    public matchOnlyIfThisIsNext(whatsNext){
+        return "(?=" + whatsNext
+    }
+    public matchOnlyIfThisIsNotNext(whatsNext){
+        return "(?|" + whatsNext
+    }
     public endExactNumber(countOfTimes){
         return "){" + countOfTimes + "}";
     }
@@ -210,7 +232,7 @@ class Do{
         var match;
         var pattern =new RegExp(valueToFind,Do.SetRegExOptions(true,caseInsensitive,multilineMatching))
         while (match = pattern.exec(stringToSearch)) {
-        matches.push(match);
+        matches.push(match[0]);
         }
         return matches[groupToCapture];
          
@@ -271,7 +293,10 @@ class Count{
 console.log(RegWhy.Statement(["test","test"]))
 console.log(RegWhy.Do().ExtractAll("test", 't'));
 console.log(RegWhy.Do().ExtractFirst("test", 't'));
+console.log(RegWhy.Do().LocateFirst("test", 't'));
+console.log(RegWhy.Do().LocateAll("test", 't'));
 console.log(RegWhy.Literal("hello world"));
 console.log(RegWhy.Do().Dectect("test","t"))
 console.log(RegWhy.Do().Dectect("test","x"))
+ 
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -225,13 +226,53 @@ namespace RegWhyClassLibarary
                 return pattern.IsMatch(stringToSearch);
                 
             }
-            //public static bool Detect(string stringToSearch, string valueToFind )
-            //{
-            //    var pattern = new System.Text.RegularExpressions.Regex(valueToFind);
-            //    return pattern.IsMatch(stringToSearch);
 
-            //}
+            public static string ExtractFirst(string stringToSearch, string valueToFind, bool caseInsensitive = false,
+                bool multilineMode = false)
+            {
+                return "";
+            }
+            public static List<string> ExtractAll(string stringToSearch, string valueToFind, bool caseInsensitive = false,
+                bool multilineMode = false)
+            {
+                var resultList=new List<string>();
+                return resultList;
+            }
 
+            public static List<string> ExtractCapturedGroup(string stringToSearch, string valueToFind, int GroupToCapture, bool caseInsensitive = false,
+                bool multilineMode = false)
+            {
+                var resultList = new List<string>();
+                return resultList;
+            }
+            public static int LocateFirst(string stringToSearch, string valueToFind, bool caseInsensitive = false,
+                bool multilineMode = false)
+            {
+                return -1;
+            }
+            public static List<int> LocateAll(string stringToSearch, string valueToFind, bool caseInsensitive = false,
+                bool multilineMode = false)
+            {
+                var resultList=new List<int>();
+                return resultList ;
+            }
+
+            public static string ReplaceFirst(string stringToSearch, string valueToFind, bool caseInsensitive = false,
+                bool multilineMode = false)
+            {
+                return "";
+            }
+            public static List<string> ReplaceAll(string stringToSearch, string valueToFind, bool caseInsensitive = false,
+                bool multilineMode = false)
+            {
+                var resultList = new List<string>();
+                return resultList;
+            }
+            public static string SplitList(string stringToSearch, string valueToFind, bool caseInsensitive = false,
+                bool multilineMode = false)
+            {
+                return "";
+            }
         }
 
     }

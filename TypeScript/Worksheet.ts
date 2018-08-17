@@ -1,6 +1,26 @@
 abstract class RegWhy {
     constructor() {
+        
     }
+    public static period="\.";
+    public static backSlash="\\";
+    public static bar ="\|";
+    public static leftParenthesis="\(";
+    public static rightParenthesis="\)";
+    public static leftBracket="\[";
+    public static rightBracket="\]";
+    public static leftBrace="\{";
+    public static rightBrace="\}";
+    public static dollarSign="\$";
+    public static asterik="\*";
+    public static questionMark="\?";
+    public static leftAngle="\<";
+    public static rightAngle="\>";
+    public static caret="\^";
+    public static tab="\t";
+    public static return="\r";
+    public static newLine="\n";
+
     public static Statement(listOfStatements: Array<string>) {
         let finalStatement="";
         for ( let statement of listOfStatements){
@@ -53,7 +73,8 @@ class Do{
         
     }
     public Dectect(stringToSearch:string, valueToFind:string){
-        return "detect is not implement";
+        var pattern =new RegExp(valueToFind)
+        return (pattern.exec(stringToSearch)!=null)
     }
     public ExtractFirst(stringToSearch:string, valueToFind:string){
         return "extract first  is not implement";
@@ -95,4 +116,6 @@ class Count{
 console.log(RegWhy.Statement(["test","test"]))
 console.log(RegWhy.Do().ExtractAll("test", 't'));
 console.log(RegWhy.Literal("hello world"));
+console.log(RegWhy.Do().Dectect("test","t"))
+console.log(RegWhy.Do().Dectect("test","x"))
 

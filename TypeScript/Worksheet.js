@@ -24,6 +24,24 @@ var RegWhy = /** @class */ (function () {
     RegWhy.Where = function () {
         return new Where();
     };
+    RegWhy.period = "\.";
+    RegWhy.backSlash = "\\";
+    RegWhy.bar = "\|";
+    RegWhy.leftParenthesis = "\(";
+    RegWhy.rightParenthesis = "\)";
+    RegWhy.leftBracket = "\[";
+    RegWhy.rightBracket = "\]";
+    RegWhy.leftBrace = "\{";
+    RegWhy.rightBrace = "\}";
+    RegWhy.dollarSign = "\$";
+    RegWhy.asterik = "\*";
+    RegWhy.questionMark = "\?";
+    RegWhy.leftAngle = "\<";
+    RegWhy.rightAngle = "\>";
+    RegWhy.caret = "\^";
+    RegWhy.tab = "\t";
+    RegWhy.return = "\r";
+    RegWhy.newLine = "\n";
     return RegWhy;
 }());
 var CharacterType = /** @class */ (function () {
@@ -45,7 +63,8 @@ var Do = /** @class */ (function () {
     function Do() {
     }
     Do.prototype.Dectect = function (stringToSearch, valueToFind) {
-        return "detect is not implement";
+        var pattern = new RegExp(valueToFind);
+        return (pattern.exec(stringToSearch) != null);
     };
     Do.prototype.ExtractFirst = function (stringToSearch, valueToFind) {
         return "extract first  is not implement";
@@ -87,4 +106,6 @@ var Count = /** @class */ (function () {
 console.log(RegWhy.Statement(["test", "test"]));
 console.log(RegWhy.Do().ExtractAll("test", 't'));
 console.log(RegWhy.Literal("hello world"));
+console.log(RegWhy.Do().Dectect("test", "t"));
+console.log(RegWhy.Do().Dectect("test", "x"));
 //# sourceMappingURL=Worksheet.js.map

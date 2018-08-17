@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace RegWhyClassLibarary
 {
@@ -193,6 +194,45 @@ namespace RegWhyClassLibarary
 
         public static class Do
         {
+            public static RegexOptions? GetRegexOptions(bool caseInsensitve, bool matchInMultipleLines)
+            {
+                if (caseInsensitve && !matchInMultipleLines)
+                {
+                    return RegexOptions.IgnoreCase;
+                }
+                if (caseInsensitve && matchInMultipleLines)
+                {
+                    return RegexOptions.IgnoreCase|RegexOptions.Multiline;
+                }
+                if (!caseInsensitve && matchInMultipleLines)
+                {
+                    return RegexOptions.Multiline;
+                    
+                }
+                return null;
+            }
+            public static bool Detect(string stringToSearch, string valueToFind, bool caseInsensitive=false, bool multiLineMode=false)
+            {
+                var options = RegWhy.Do.GetRegexOptions(caseInsensitive, multiLineMode);
+
+                var pattern = options!=null? new System.Text.RegularExpressions.Regex(valueToFind, (RegexOptions)options):new Regex(valueToFind);
+                return pattern.IsMatch(stringToSearch);
+
+            }
+            public static bool Detect(string stringToSearch, string valueToFind, RegexOptions options)
+            {
+                var pattern = new System.Text.RegularExpressions.Regex(valueToFind,options );
+                return pattern.IsMatch(stringToSearch);
+                
+            }
+            //public static bool Detect(string stringToSearch, string valueToFind )
+            //{
+            //    var pattern = new System.Text.RegularExpressions.Regex(valueToFind);
+            //    return pattern.IsMatch(stringToSearch);
+
+            //}
+
         }
+
     }
 }

@@ -199,7 +199,7 @@ class Do{
         return returnString;
 
     }
-    public Dectect(stringToSearch:string, valueToFind:string, caseInsensitive=false, multilineMatching=false){
+    public Detect(stringToSearch:string, valueToFind:string, caseInsensitive=false, multilineMatching=false){
         var pattern =new RegExp(valueToFind,Do.SetRegExOptions(false,caseInsensitive,multilineMatching))
         return (pattern.test(stringToSearch))
     }
@@ -296,7 +296,7 @@ console.log(RegWhy.Do().ExtractFirst("test", 't'));
 console.log(RegWhy.Do().LocateFirst("test", 't'));
 console.log(RegWhy.Do().LocateAll("test", 't'));
 console.log(RegWhy.Literal("hello world"));
-console.log(RegWhy.Do().Dectect("test","t"))
-console.log(RegWhy.Do().Dectect("test","x"))
+console.log(RegWhy.Do().Detect("test","t"))
+console.log(RegWhy.Do().Detect("test","x"))
  
 

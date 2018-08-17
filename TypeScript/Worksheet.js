@@ -32,7 +32,7 @@ var RegWhy = /** @class */ (function () {
     RegWhy.bar = "\|";
     RegWhy.leftParenthesis = "\(";
     RegWhy.rightParenthesis = "\)";
-    RegWhy["null"] = "\0";
+    RegWhy.nullString = "\0";
     RegWhy.leftBracket = "\[";
     RegWhy.rightBracket = "\]";
     RegWhy.leftBrace = "\{";
@@ -44,7 +44,7 @@ var RegWhy = /** @class */ (function () {
     RegWhy.rightAngle = "\>";
     RegWhy.caret = "\^";
     RegWhy.tab = "\t";
-    RegWhy["return"] = "\r";
+    RegWhy.returnString = "\r";
     RegWhy.newLine = "\n";
     RegWhy.formFeed = "\f";
     return RegWhy;
@@ -62,14 +62,8 @@ var CharacterType = /** @class */ (function () {
         this.nonWordBoundary = "\B";
         this.lowerCaseASCI = "[a-z]";
         this.upperCaseASCII = "[A-Z]";
-        //POSIX COMMANDS
-        this.alphaNumeric = "[[almum:]]";
-        this.punctuation = "[[:almum:]]";
-        this.hexadecial = "[[:xdigit:]]";
-        this.space = "[[:space:]]"; //tab, newline, vertical tab, form feed,carriage return, and space
-        this.printable = "[[:print:]]";
-        this.graphical = "[[:graph:]]";
-        this.blankSpace = "[[:blank:]]"; //space and tab
+        this.anyASCII = '[ -~]';
+        this.endOfFile = "^Z";
     }
     CharacterType.prototype.unicode = function (fourDigitUniCodeNumber) {
         return ("\\" + "u" + fourDigitUniCodeNumber);
@@ -78,10 +72,10 @@ var CharacterType = /** @class */ (function () {
         return ("\\" + "x" + twoDigitalCode);
     };
     CharacterType.prototype.characterRange = function (listOfCharacters) {
-        return "[" + listOfCharacters;
+        return "[" + listOfCharacters + "]";
     };
     CharacterType.prototype.notInCharacterRange = function (listOfCharacters) {
-        return "[^" + listOfCharacters;
+        return "[^" + listOfCharacters + "]";
     };
     return CharacterType;
 }());
@@ -183,7 +177,7 @@ var Do = /** @class */ (function () {
         }
         return returnString;
     };
-    Do.prototype.Dectect = function (stringToSearch, valueToFind, caseInsensitive, multilineMatching) {
+    Do.prototype.Detect = function (stringToSearch, valueToFind, caseInsensitive, multilineMatching) {
         if (caseInsensitive === void 0) { caseInsensitive = false; }
         if (multilineMatching === void 0) { multilineMatching = false; }
         var pattern = new RegExp(valueToFind, Do.SetRegExOptions(false, caseInsensitive, multilineMatching));
@@ -295,6 +289,5 @@ console.log(RegWhy.Do().ExtractFirst("test", 't'));
 console.log(RegWhy.Do().LocateFirst("test", 't'));
 console.log(RegWhy.Do().LocateAll("test", 't'));
 console.log(RegWhy.Literal("hello world"));
-console.log(RegWhy.Do().Dectect("test", "t"));
-console.log(RegWhy.Do().Dectect("test", "x"));
-console.log(RegWhy.Do().Dectect("test", RegWhy.CharacterType().alphaNumeric));
+console.log(RegWhy.Do().Detect("test", "t"));
+console.log(RegWhy.Do().Detect("test", "x"));

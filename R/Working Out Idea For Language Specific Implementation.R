@@ -48,6 +48,7 @@ RegWhy.statement <- function (arrayOfRegWhy){
   paste(arrayOfRegWhy,collapse ="", sep="")
 }
 #Anchor Sequences
+RegWhy.characterType.anyCharacter=function (){return (".")};
 RegWhy.characterType.digit =function(){return ("\\d")}
 RegWhy.characterType.nonDigit =function(){return ("\\D")}
 RegWhy.characterType.whitespace =function(){return ("\\s")}
@@ -56,24 +57,24 @@ RegWhy.characterType.wordCharacter =function(){return ("\\w")}
 RegWhy.characterType.nonWordCharacter =function(){return ("\\W")}
 RegWhy.characterType.wordBoundary =function(){return ("\\b")}
 RegWhy.characterType.nonWordBoundary =function(){return ("\\B")}
-RegWhy.characterType.horizontalSpace=function (){return ("\\h")};
-RegWhy.characterType.nonHorizontalSpace=function (){return ("\\H")};
-RegWhy.characterType.verticalSpace=function (){return ("\\v")};
-RegWhy.characterType.nonVerticalSpace=function (){return ("\\V")};
+#RegWhy.characterType.horizontalSpace=function (){return ("\\h")};
+#RegWhy.characterType.nonHorizontalSpace=function (){return ("\\H")};
+#RegWhy.characterType.verticalSpace=function (){return ("\\v")};
+#RegWhy.characterType.nonVerticalSpace=function (){return ("\\V")};
 
 #Character Classes
 
-RegWhy.characterType.lowerCaseVowel=function (){return ("[aeiouy]")};
-RegWhy.characterType.upperCaseVowel=function (){return ("[AEIOUY]")};
-RegWhy.characterType.anyCaseVowel=function (){return ("[aeiouyAEIOUY]")};
+#RegWhy.characterType.lowerCaseVowel=function (){return ("[aeiouy]")};
+#RegWhy.characterType.upperCaseVowel=function (){return ("[AEIOUY]")};
+#RegWhy.characterType.anyCaseVowel=function (){return ("[aeiouyAEIOUY]")};
 RegWhy.characterType.lowerCaseASCII=function (){return ("[a-z]")};
 RegWhy.characterType.upperCaseASCII=function (){return ("[A-Z]")};
-RegWhy.characterType.upperCaseASCIIAndSpace=function (){return ("[A-Z ]")};
-RegWhy.characterType.dontMatch=function (regWhyStatement){return (paste("^",regWhyStatement,sep=""))};
+#RegWhy.characterType.upperCaseASCIIAndSpace=function (){return ("[A-Z ]")};
+RegWhy.characterType.dontMatchCharacter=function (regWhyStatement){return (paste("^",regWhyStatement,sep=""))};
 
 #POSIx 
 RegWhy.characterType.alphaNumeric=function (){return ("[[:alnum:]]")};
-RegWhy.characterType.anyCharacter=function (){return (".")};
+
 RegWhy.characterType.controlCharacter=function (){return ("[[:control:]]")};
 RegWhy.characterType.punctuation=function (){return ("[[:alnum:]]")};
 RegWhy.characterType.hexadecial=function (){return ("[[:xdigit:]]")};
@@ -81,6 +82,9 @@ RegWhy.characterType.space=function (){return ("[[:space:]]")}; #tab, newline, v
 RegWhy.characterType.printable=function (){return ("[[:print:]]")}; #alpha punct and space
 RegWhy.characterType.graphical=function (){return ("[[:graph:]]")}; #alpha punct and space
 RegWhy.characterType.blankSpace=function (){return ("[[:blank:]]")}; #space and tab
+RegWhy.characterType.characterRange=function (listOfCharacters){return (paste("[",bottom,"]", sep=""))};
+RegWhy.characterType.notInCharacterRange=function (listOfCharacters){return (paste("[^",bottom,"]", sep=""))};
+
 
 #Unicode
 RegWhy.unicode=function (unicodeNumber){return (paste("\x{",unicodeNumber, "}",sep=""))};
@@ -91,18 +95,18 @@ RegWhy.unicode=function (unicodeNumber){return (paste("\x{",unicodeNumber, "}",s
 Regwhy.group.start.capturing=function(){return ("(")}
 Regwhy.group.start.nonCapturing=function(){return ("(?:")}
 Regwhy.group.start.named=function(nameOfGroup){return (paste("(?<",nameOfGroup,">", sep=""))};
-RegWhy.group.start.range=function(){return ("[")}
-RegWhy.group.start.range.none=function(){return ("^[")}
-RegWhy.group.end.range=function(){return ("]")}
-RegWhy.group.range=function (bottom,top){return (paste("[",bottom,"-",top,"]", sep=""))};
-RegWhy.group.range.customCharacters=function (range){return (paste("[",range,"]", sep=""))};
-RegWhy.group.optionalLiterals.capturing=function(listOfWords){
+#RegWhy.group.start.range=function(){return ("[")}
+#RegWhy.group.start.notInRange=function(){return ("^[")}
+#RegWhy.group.end.range=function(){return ("]")}
+#RegWhy.group.range=function (bottom,top){return (paste("[",bottom,"-",top,"]", sep=""))};
+#RegWhy.group.range.customCharacters=function (range){return (paste("[",range,"]", sep=""))};
+RegWhy.group.optionalCapturingList=function(listOfWords){
   words <-paste(listOfWords,collapse ="|", sep="")
   return (paste("(", words,")",sep=""));
 }
-RegWhy.group.optionalLiterals.noncapturing=function(listOfWords){
+RegWhy.group.optionalNoncapturingList=function(listOfWords){
   words <-paste(listOfWords,collapse ="|", sep="")
-  return (paste(Regwhy.group.start.nonCapturing(), words,")",sep=""));
+  return (paste("(?",Regwhy.group.start.nonCapturing(), words,")",sep=""));
 }
 
 RegWhy.group.or=function(){return ("|")}
@@ -127,8 +131,8 @@ RegWhy.count.rangeOfTimes=function (bottomNumber,topNumber){return (paste("{",bo
 
 RegWhy.Where.startOfString=function(){return ("^")}
 RegWhy.Where.endOfString=function(){return ("$")}
-RegWhy.Where.endOfStringOrLineBreak=function(){return ("\\Z")}
-RegWhy.Where.startOfMatchAttempt=function(){return ("\\G")}
+#RegWhy.Where.endOfStringOrLineBreak=function(){return ("\\Z")}
+#RegWhy.Where.startOfMatchAttempt=function(){return ("\\G")}
 
 # RegWhy.match.ZeroOrMoreCharacter=function (character){return (paste(character,"*",sep=""))}; 
 # RegWhy.match.ZeroOrMoreStatement=function (regWhyStatement){return (paste("(",regWhyStatement,")","*",sep=""))};

@@ -24,6 +24,9 @@ var RegWhy = /** @class */ (function () {
     RegWhy.Where = function () {
         return new Where();
     };
+    RegWhy.Count = function () {
+        return new Count();
+    };
     RegWhy.period = "\.";
     RegWhy.backSlash = "\\";
     RegWhy.bar = "\|";
@@ -40,64 +43,269 @@ var RegWhy = /** @class */ (function () {
     RegWhy.rightAngle = "\>";
     RegWhy.caret = "\^";
     RegWhy.tab = "\t";
-    RegWhy.return = "\r";
+    RegWhy["return"] = "\r";
     RegWhy.newLine = "\n";
+    RegWhy.formFeed = "\f";
     return RegWhy;
 }());
 var CharacterType = /** @class */ (function () {
     function CharacterType() {
+        this.anyCharacter = ".";
+        this.digit = "\d";
+        this.nonDigit = "\D";
+        this.whiteSpace = "\s";
+        this.nonWhiteSpace = "\S";
+        this.wordCharacter = "\w";
+        this.nonWordCharacter = "\W";
+        this.wordBounday = "\b";
+        this.nonWordBoundary = "\B";
+        this.lowerCaseASCI = "[a-z]";
+        this.upperCaseASCII = "[A-Z]";
+        //POSIX COMMANDS
+        this.alphaNumeric = "[[almum:]]";
+        this.punctuation = "[[:almum:]]";
+        this.hexadecial = "[[:xdigit:]]";
+        this.space = "[[:space:]]"; //tab, newline, vertical tab, form feed,carriage return, and space
+        this.printable = "[[:print:]]";
+        this.graphical = "[[:graph:]]";
+        this.blankSpace = "[[:blank:]]"; //space and tab
     }
+    CharacterType.prototype.unicode = function (fourDigitUniCodeNumber) {
+        return ("\\" + "u" + fourDigitUniCodeNumber);
+    };
+    CharacterType.prototype.characterRange = function (listOfCharacters) {
+        return "[" + listOfCharacters;
+    };
+    CharacterType.prototype.notInCharacterRange = function (listOfCharacters) {
+        return "[^" + listOfCharacters;
+    };
     return CharacterType;
 }());
 var Group = /** @class */ (function () {
     function Group() {
+        this.or = "|";
+        this.end = ")";
+        this.endOptional = ")?";
+        this.endZeroOrMore = ")*";
+        this.endOneOfMore = ")+";
     }
+    Group.prototype.Start = function () {
+        return new Start();
+    };
+    Group.prototype.endExactNumber = function (countOfTimes) {
+        return "){" + countOfTimes + "}";
+    };
+    Group.prototype.endExactNumberOrAbove = function (countOfTimes) {
+        return "){" + countOfTimes + ",}";
+    };
+    Group.prototype.endRange = function (bottomNumber, topNumber) {
+        return "){" + bottomNumber + "," + topNumber + "}";
+    };
     return Group;
+}());
+var Start = /** @class */ (function () {
+    function Start() {
+        this.capturing = "(";
+        this.nonCapturing = "(?:";
+    }
+    Start.prototype.named = function (nameOfGroup) {
+        return "(<" + nameOfGroup + ">";
+    };
+    Start.prototype.optionalCapturingList = function (listOfWords) {
+        var finalStatement = "(";
+        for (var _i = 0, listOfWords_1 = listOfWords; _i < listOfWords_1.length; _i++) {
+            var statement = listOfWords_1[_i];
+            if (finalStatement.length > 1) {
+                finalStatement = finalStatement + "|";
+            }
+            finalStatement = finalStatement + statement;
+        }
+        return finalStatement;
+    };
+    Start.prototype.optionalNonCapturingList = function (listOfWords) {
+        var finalStatement = "(?:";
+        for (var _i = 0, listOfWords_2 = listOfWords; _i < listOfWords_2.length; _i++) {
+            var statement = listOfWords_2[_i];
+            if (finalStatement.length > 2) {
+                finalStatement = finalStatement + "|";
+            }
+            finalStatement = finalStatement + statement;
+        }
+        return finalStatement;
+    };
+    return Start;
 }());
 var Where = /** @class */ (function () {
     function Where() {
+        this.startOfString = "^";
+        this.endOfString = "$";
     }
     return Where;
 }());
 var Do = /** @class */ (function () {
     function Do() {
     }
-    Do.prototype.Dectect = function (stringToSearch, valueToFind) {
+    Do.prototype.Dectect = function (stringToSearch, valueToFind, caseInsensitive, multilineMatching) {
+        if (caseInsensitive === void 0) { caseInsensitive = false; }
+        if (multilineMatching === void 0) { multilineMatching = false; }
+        var newValue = "/" + valueToFind + "/";
+        if (caseInsensitive) {
+            newValue = newValue + "i";
+        }
+        if (multilineMatching) {
+            newValue = newValue + "m";
+        }
         var pattern = new RegExp(valueToFind);
-        return (pattern.exec(stringToSearch) != null);
+        return (pattern.test(stringToSearch));
     };
-    Do.prototype.ExtractFirst = function (stringToSearch, valueToFind) {
-        return "extract first  is not implement";
+    Do.prototype.ExtractFirst = function (stringToSearch, valueToFind, caseInsensitive, multilineMatching) {
+        if (caseInsensitive === void 0) { caseInsensitive = false; }
+        if (multilineMatching === void 0) { multilineMatching = false; }
+        var newValue = "/" + valueToFind + "/";
+        if (caseInsensitive) {
+            newValue = newValue + "i";
+        }
+        if (multilineMatching) {
+            newValue = newValue + "m";
+        }
+        var pattern = new RegExp(valueToFind);
+        var result = (pattern.exec(stringToSearch));
+        if (result == null) {
+            return null;
+        }
+        return result[0];
     };
-    Do.prototype.ExtractAll = function (stringToSearch, valueToFind) {
-        return "extract all  is not implement";
+    Do.prototype.ExtractAll = function (stringToSearch, valueToFind, caseInsensitive, multilineMatching) {
+        if (caseInsensitive === void 0) { caseInsensitive = false; }
+        if (multilineMatching === void 0) { multilineMatching = false; }
+        var matches = [];
+        var match;
+        var newValue = "/" + valueToFind + "/g";
+        if (caseInsensitive) {
+            newValue = newValue + "i";
+        }
+        if (multilineMatching) {
+            newValue = newValue + "m";
+        }
+        var pattern = new RegExp(newValue);
+        while (match = pattern.exec(stringToSearch)) {
+            matches.push(match);
+        }
+        return matches;
     };
-    Do.prototype.MatchFirst = function (stringToSearch, valueToFind) {
-        return "match first is  is not implement";
+    // public MatchFirst(stringToSearch:string, valueToFind:string, caseInsensitive=false, multilineMatching=false){
+    //     return "match first is  is not implement";
+    // }
+    // public MatchAll(stringToSearch:string, valueToFind:string, caseInsensitive=false, multilineMatching=false){
+    //     return "match all is not implemented";
+    // }
+    Do.prototype.ExtractCapturedGroup = function (stringToSearch, valueToFind, groupToCapture, caseInsensitive, multilineMatching) {
+        if (caseInsensitive === void 0) { caseInsensitive = false; }
+        if (multilineMatching === void 0) { multilineMatching = false; }
+        groupToCapture || (groupToCapture = 1); // default to the first capturing group
+        var matches = [];
+        var match;
+        var newValue = "/" + valueToFind + "/g";
+        if (caseInsensitive) {
+            newValue = newValue + "i";
+        }
+        if (multilineMatching) {
+            newValue = newValue + "m";
+        }
+        var pattern = new RegExp(newValue);
+        while (match = pattern.exec(stringToSearch)) {
+            matches.push(match);
+        }
+        return matches[groupToCapture];
     };
-    Do.prototype.MatchAll = function (stringToSearch, valueToFind) {
-        return "match all is not implemented";
+    Do.prototype.LocateFirst = function (stringToSearch, valueToFind, caseInsensitive, multilineMatching) {
+        if (caseInsensitive === void 0) { caseInsensitive = false; }
+        if (multilineMatching === void 0) { multilineMatching = false; }
+        var newValue = "/" + valueToFind + "/";
+        if (caseInsensitive) {
+            newValue = newValue + "i";
+        }
+        if (multilineMatching) {
+            newValue = newValue + "m";
+        }
+        var pattern = new RegExp(newValue);
+        var result = (pattern.exec(stringToSearch));
+        if (result == null) {
+            return -1;
+        }
+        return result.index;
     };
-    Do.prototype.MatchCapturedGroup = function (stringToSearch, valueToFind) {
-        return "match captured group is not implemented";
+    Do.prototype.LocateAll = function (stringToSearch, valueToFind, caseInsensitive, multilineMatching) {
+        if (caseInsensitive === void 0) { caseInsensitive = false; }
+        if (multilineMatching === void 0) { multilineMatching = false; }
+        var matches = [];
+        var match;
+        var newValue = "/" + valueToFind + "/g";
+        if (caseInsensitive) {
+            newValue = newValue + "i";
+        }
+        if (multilineMatching) {
+            newValue = newValue + "m";
+        }
+        var pattern = new RegExp(newValue);
+        while (match = pattern.exec(stringToSearch)) {
+            matches.push(match.index);
+        }
+        return matches;
     };
-    Do.prototype.LocateFirst = function (stringToSearch, valueToFind) {
-        return "locate first is not implemented";
+    Do.prototype.ReplaceFirst = function (stringToSearch, valueToFind, valueToReplaceWith, caseInsensitive, multilineMatching) {
+        if (caseInsensitive === void 0) { caseInsensitive = false; }
+        if (multilineMatching === void 0) { multilineMatching = false; }
+        var newValue = "/" + valueToFind + "/";
+        if (caseInsensitive) {
+            newValue = newValue + "i";
+        }
+        if (multilineMatching) {
+            newValue = newValue + "m";
+        }
+        return stringToSearch.replace(valueToFind, valueToReplaceWith);
     };
-    Do.prototype.LocateAll = function (stringToSearch, valueToFind) {
-        return "locate all  is not implement";
+    Do.prototype.ReplaceAll = function (stringToSearch, valueToFind, valueToReplaceWith, caseInsensitive, multilineMatching) {
+        if (caseInsensitive === void 0) { caseInsensitive = false; }
+        if (multilineMatching === void 0) { multilineMatching = false; }
+        var newValue = "/" + valueToFind + "/g";
+        if (caseInsensitive) {
+            newValue = newValue + "i";
+        }
+        if (multilineMatching) {
+            newValue = newValue + "m";
+        }
+        return stringToSearch.split(newValue).join(valueToReplaceWith);
     };
-    Do.prototype.ReaplaceAll = function (stringToSearch, valueToFind) {
-        return "replace all  is not implemented";
-    };
-    Do.prototype.SplitList = function (stringToSearch, valueToFind) {
-        return "split list  is not implemented";
+    Do.prototype.SplitList = function (stringToSearch, valueToSplitWith, caseInsensitive, multilineMatching) {
+        if (caseInsensitive === void 0) { caseInsensitive = false; }
+        if (multilineMatching === void 0) { multilineMatching = false; }
+        var newValue = "/" + valueToSplitWith + "/";
+        if (caseInsensitive) {
+            newValue = newValue + "i";
+        }
+        if (multilineMatching) {
+            newValue = newValue + "m";
+        }
+        return stringToSearch.split(newValue);
     };
     return Do;
 }());
 var Count = /** @class */ (function () {
     function Count() {
+        this.optional = "?";
+        this.zeroOrMore = "*";
+        this.oneOrMore = "+";
     }
+    Count.prototype.exactNumber = function (numberOfDigits) {
+        return "{" + numberOfDigits + "}";
+    };
+    Count.prototype.exactNumberOrMore = function (numberOfDigits) {
+        return "{" + numberOfDigits + ",}";
+    };
+    Count.prototype.rangeOfTimes = function (bottomNumber, topNUmber) {
+        return "{" + bottomNumber + "," + topNUmber + "}";
+    };
     return Count;
 }());
 // var regWhy = new RegWhy();
@@ -108,4 +316,3 @@ console.log(RegWhy.Do().ExtractAll("test", 't'));
 console.log(RegWhy.Literal("hello world"));
 console.log(RegWhy.Do().Dectect("test", "t"));
 console.log(RegWhy.Do().Dectect("test", "x"));
-//# sourceMappingURL=Worksheet.js.map

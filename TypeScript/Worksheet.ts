@@ -20,6 +20,7 @@ abstract class RegWhy {
     public static tab="\t";
     public static return="\r";
     public static newLine="\n";
+    public static formFeed="\f";
 
     public static Statement(listOfStatements: Array<string>) {
         let finalStatement="";
@@ -67,7 +68,7 @@ class CharacterType{
     nonWordBoundary="\B";
     lowerCaseASCI="[a-z]";
     upperCaseASCII="[A-Z]";
-    dontMatchCharacter="\^"
+     
     //POSIX COMMANDS
     alphaNumeric="[[almum:]]";
     punctuation="[[:almum:]]";
@@ -97,14 +98,28 @@ class Group{
     public Start(){
         return new Start();
     }
+    or="|"
     end=")";
+    endOptional=")?";
+    endZeroOrMore=")*";
+    endOneOfMore=")+";
+    public endExactNumber(countOfTimes){
+        return "){" + countOfTimes + "}";
+    }
+    public endExactNumberOrAbove(countOfTimes){
+        return "){" + countOfTimes + ",}";
+    }
+    public endRange(bottomNumber, topNumber){
+        return "){" + bottomNumber + "," + topNumber +  "}";
+    }
+
 
      
 }
 
 class Start{
     capturing="("
-    nonCapturing="(?"
+    nonCapturing="(?:"
     
     public named(nameOfGroup){
         return "(<" + nameOfGroup + ">";
@@ -120,7 +135,7 @@ class Start{
         return finalStatement;
     }
     public optionalNonCapturingList(listOfWords:Array<string>):string{
-        let finalStatement="(?";
+        let finalStatement="(?:";
         for ( let statement of listOfWords){
              if (finalStatement.length > 2){
                 finalStatement=finalStatement + "|"
@@ -148,37 +163,153 @@ class Do{
     constructor() {
         
     }
-    public Dectect(stringToSearch:string, valueToFind:string){
+    public Dectect(stringToSearch:string, valueToFind:string, caseInsensitive=false, multilineMatching=false){
+        var newValue ="/" + valueToFind + "/";
+        if (caseInsensitive)
+        {
+            newValue=newValue + "i"
+        }
+        if (multilineMatching)
+        {
+            newValue=newValue + "m"
+        }
         var pattern =new RegExp(valueToFind)
-        return (pattern.exec(stringToSearch)!=null)
+        
+        
+        return (pattern.test(stringToSearch))
     }
-    public ExtractFirst(stringToSearch:string, valueToFind:string){
-        return "extract first  is not implement";
+    public ExtractFirst(stringToSearch:string, valueToFind:string, caseInsensitive=false, multilineMatching=false){
+        var newValue ="/" + valueToFind + "/";
+        if (caseInsensitive)
+        {
+            newValue=newValue + "i"
+        }
+        if (multilineMatching)
+        {
+            newValue=newValue + "m"
+        }
+        var pattern =new RegExp(valueToFind)
+        var result= (pattern.exec(stringToSearch))
+        if (result==null){return null}
+        return result[0];
     }
-    public ExtractAll(stringToSearch:string, valueToFind:string){
-        return "extract all  is not implement";
+    public ExtractAll(stringToSearch:string, valueToFind:string, caseInsensitive=false, multilineMatching=false){
+        var matches = [];
+        var match;
+        var newValue ="/" + valueToFind + "/g";
+        if (caseInsensitive)
+        {
+            newValue=newValue + "i"
+        }
+        if (multilineMatching)
+        {
+            newValue=newValue + "m"
+        }
+        var pattern =new RegExp(newValue)
+        while (match = pattern.exec(stringToSearch)) {
+        matches.push(match);
+        }
+        return matches;
     }
-    public MatchFirst(stringToSearch:string, valueToFind:string){
-        return "match first is  is not implement";
+    // public MatchFirst(stringToSearch:string, valueToFind:string, caseInsensitive=false, multilineMatching=false){
+    //     return "match first is  is not implement";
+    // }
+    // public MatchAll(stringToSearch:string, valueToFind:string, caseInsensitive=false, multilineMatching=false){
+    //     return "match all is not implemented";
+    // }
+    public ExtractCapturedGroup(stringToSearch:string, valueToFind:string, groupToCapture:number, caseInsensitive=false, multilineMatching=false){
+        groupToCapture || (groupToCapture = 1); // default to the first capturing group
+        var matches = [];
+        var match;
+        var newValue ="/" + valueToFind + "/g";
+        if (caseInsensitive)
+        {
+            newValue=newValue + "i"
+        }
+        if (multilineMatching)
+        {
+            newValue=newValue + "m"
+        }
+        var pattern =new RegExp(newValue)
+        while (match = pattern.exec(stringToSearch)) {
+        matches.push(match);
+        }
+        return matches[groupToCapture];
+         
     }
-    public MatchAll(stringToSearch:string, valueToFind:string){
-        return "match all is not implemented";
+    public LocateFirst(stringToSearch:string, valueToFind:string, caseInsensitive=false, multilineMatching=false){
+        var newValue ="/" + valueToFind + "/";
+        if (caseInsensitive)
+        {
+            newValue=newValue + "i"
+        }
+        if (multilineMatching)
+        {
+            newValue=newValue + "m"
+        }
+        var pattern =new RegExp(newValue)
+        
+        var result= (pattern.exec(stringToSearch))
+        if (result==null){return -1}
+        return result.index;
     }
-    public MatchCapturedGroup(stringToSearch:string, valueToFind:string){
-        return "match captured group is not implemented";
+    public LocateAll(stringToSearch:string, valueToFind:string, caseInsensitive=false, multilineMatching=false){
+        var matches = [];
+        var match;
+        var newValue ="/" + valueToFind + "/g";
+        if (caseInsensitive)
+        {
+            newValue=newValue + "i"
+        }
+        if (multilineMatching)
+        {
+            newValue=newValue + "m"
+        }
+        var pattern =new RegExp(newValue)
+         
+        while (match = pattern.exec(stringToSearch)) {
+            matches.push(match.index);
+            }
+         
+        return matches;
     }
-    public LocateFirst(stringToSearch:string, valueToFind:string){
-        return "locate first is not implemented";
+    public ReplaceFirst(stringToSearch:string, valueToFind:string, valueToReplaceWith:string, caseInsensitive=false, multilineMatching=false):string{
+        var newValue ="/" + valueToFind + "/";
+        if (caseInsensitive)
+        {
+            newValue=newValue + "i"
+        }
+        if (multilineMatching)
+        {
+            newValue=newValue + "m"
+        }
+        return stringToSearch.replace(valueToFind,valueToReplaceWith);
     }
-    public LocateAll(stringToSearch:string, valueToFind:string){
-        return "locate all  is not implement";
+    public ReplaceAll(stringToSearch:string, valueToFind:string,valueToReplaceWith:string, caseInsensitive=false, multilineMatching=false){
+        var newValue ="/" + valueToFind + "/g";
+        if (caseInsensitive)
+        {
+            newValue=newValue + "i"
+        }
+        if (multilineMatching)
+        {
+            newValue=newValue + "m"
+        }
+        return stringToSearch.split(newValue).join(valueToReplaceWith)
     }
-    public ReaplaceAll(stringToSearch:string, valueToFind:string){
-        return "replace all  is not implemented";
+    public SplitList(stringToSearch:string, valueToSplitWith:string, caseInsensitive=false, multilineMatching=false){
+        var newValue ="/" + valueToSplitWith + "/";
+        if (caseInsensitive)
+        {
+            newValue=newValue + "i"
+        }
+        if (multilineMatching)
+        {
+            newValue=newValue + "m"
+        }
+        return stringToSearch.split(newValue);
     }
-    public SplitList(stringToSearch:string, valueToFind:string){
-        return "split list  is not implemented";
-    }
+   
 }
 class Count{
     constructor(){

@@ -91,7 +91,7 @@ RegWhy.unicode=function (unicodeNumber){return (paste("\x{",unicodeNumber, "}",s
 
 
 
-
+RegWhy.group.or="|"
 Regwhy.group.start.capturing=function(){return ("(")}
 Regwhy.group.start.nonCapturing=function(){return ("(?:")}
 Regwhy.group.start.named=function(nameOfGroup){return (paste("(?<",nameOfGroup,">", sep=""))};
@@ -106,20 +106,20 @@ RegWhy.group.optionalCapturingList=function(listOfWords){
 }
 RegWhy.group.optionalNoncapturingList=function(listOfWords){
   words <-paste(listOfWords,collapse ="|", sep="")
-  return (paste("(?",Regwhy.group.start.nonCapturing(), words,")",sep=""));
+  return (paste("(?:",Regwhy.group.start.nonCapturing(), words,")",sep=""));
 }
 
-RegWhy.group.or=function(){return ("|")}
-RegWhy.group.list=function(listOfWords){
-  return (paste(listOfWords,collapse="|"))
-}
+# RegWhy.group.or=function(){return ("|")}
+# RegWhy.group.list=function(listOfWords){
+#   return (paste(listOfWords,collapse="|"))
+#}
 RegWhy.group.end=function(){return (")")}
-RegWhy.group.end.optional=function(){return (")?")}
-RegWhy.group.end.zeroOrMore=function(){return (")*")}
-RegWhy.group.end.oneOrMore=function(){return (")+")}
-RegWhy.group.end.exactNumber=function(number){return (paste("){",number,"}",sep=""))}
-RegWhy.group.end.exactNumberOrAbove=function(number){return (paste("){",number,",}",sep=""))}
-RegWhy.group.end.range=function(bottomNumber, topNumber){return (paste("){",bottomNumber,",",topNumber,"}",sep=""))}
+RegWhy.group.endOptional=function(){return (")?")}
+RegWhy.group.endZeroOrMore=function(){return (")*")}
+RegWhy.group.endOneOrMore=function(){return (")+")}
+RegWhy.group.endExactNumber=function(number){return (paste("){",number,"}",sep=""))}
+RegWhy.group.endEexactNumberOrAbove=function(number){return (paste("){",number,",}",sep=""))}
+RegWhy.group.endRange=function(bottomNumber, topNumber){return (paste("){",bottomNumber,",",topNumber,"}",sep=""))}
 
 #Quantifiers 
 RegWhy.count.optional=function (){return ("?")}; 

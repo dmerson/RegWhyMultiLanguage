@@ -1,0 +1,101 @@
+
+<!-- saved from url=(0144)http://usweb.dotomi.com/renderer/delPublishersCookies.html?pid=243&u=AAADRs-xfkfGXwADrpwkAADwFwA&ug=AAADRs%2BxfkfGXwADrpwkAADwFwA%3D&p=243&n=243 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Opt-Out</title>
+
+    
+    <meta http-equiv="expires" content="0">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache, must-revalidate">
+
+</head>
+<body bottommargin="0" rightmargin="0" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" class="vsc-initialized">
+<script type="text/javascript">
+    var p_cg = '';
+    var p_c = '';
+    var p_o = '';
+    var p_a = '';
+    var p_i = '';
+    var p_m = '';
+    var p_mi = '';
+    var p_ci = '';
+    var p_p = '';
+    var p_mpc = '';
+    var p_pcg = '';
+    var p_rurl = 'about:blank';
+    var optout = '';
+    var p_u = '';
+    var p_n = '';
+    var p_ug ='';
+
+    var qs = location.search.substring(1, location.search.length);
+
+    var key, value, elem, sep, i, parts;
+
+    if (qs != '') {
+        parts = qs.split('&');
+
+        for (i = 0; i < parts.length; ++i) {
+            key = '';
+            value = '';
+
+            elem = parts[i];
+            sep = elem.lastIndexOf('=');
+            if ( sep < 0 ) {
+                key = elem;
+            }
+            else {
+                key = elem.substring(0, sep);
+                value = elem.substring(sep + 1, elem.length);
+            }
+
+            if (key === 'o') p_o = 'o='+value;
+            else if (key === 'c') p_c = '&c='+value;
+            else if (key === 'a') p_a = '&a='+value;
+            else if (key === 'i') p_i = '&i='+value;
+            else if (key === 'm') p_m = '&m='+value;
+            else if (key === 'mi') p_mi = '&mi='+value;
+            else if (key === 'ci') p_ci = '&ci='+value;
+            else if (key === 'p') p_p = '&p=' + value;
+            else if (key === 'mpc') p_mpc = '&mpc=' + value;
+            else if (key === 'pcg') p_pcg = '&pcg=' + value;
+            else if (key === 'rurl') p_rurl = unescape(value);
+            else if (key === 'cg') p_cg = value;
+            else if (key === 'u') p_u = '&u=' + value;
+            else if (key === 'ug') p_ug = '&ug=' + value;
+            else if (key === 'n') { p_n = '&n=' + value; }
+        }
+    }
+
+    try {
+        // Block call to house ad or to non-secure rurl when called securely.
+        // All calls are hardcoded in biddy (currently) to go to "ads.dotomi.com/ads.php" when this url is created.
+        if (p_rurl.indexOf('ads.dotomi.com/ads.php?') !== -1 || // Make sure this does not exist in the p_rurl param OR
+                (
+                    // make sure the p_rurl url will never call a http:// non-secure destination when it's secure
+                    document.referrer.indexOf('https://') === 0 && // if the referring url is secure, fully qualify this condition
+                    p_rurl.indexOf('https://') !== 0 // start of string check
+                )
+            ) {
+            p_rurl = 'about:blank';
+        }
+    } catch (ex) { // if something should go wrong with this code (for instance, the document.referrer does not exist for some reason) catch the error and safely ignore this behavior
+        p_rurl = 'about:blank';
+    }
+
+    if(p_a !== '' || p_c !== '' || p_i !== '') {
+        optout = 'oio.js?' + p_o + p_c + p_a + p_i + p_m + p_mi + p_ci + p_p + p_mpc + p_pcg + p_u + p_ug + p_n;
+    } else {
+        optout = 'oio.js?' + 'o=' + (p_cg != '' ? p_cg : '0') + p_p + p_mpc + p_pcg + p_u + p_ug + p_n;
+    }
+
+    if(p_rurl !== 'about:blank') {
+        document.write('<iframe width="100%" height="100%" allowtransparency="true" frameborder="0" scrolling="no" src="' + p_rurl + '"></iframe>');
+    }
+    document.write('<div style="display:none"><scr' + 'ipt language="JavaScript" type="text/javascript" id="oio" src="' + optout + '"></scr' + 'ipt></div>');
+</script><div style="display:none"><script language="JavaScript" type="text/javascript" id="oio" src="./oio.js.download"></script><script src="./optoutx_0.js.download" type="text/javascript"></script></div>
+
+
+
+
+</body></html>

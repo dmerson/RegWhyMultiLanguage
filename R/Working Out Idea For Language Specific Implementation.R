@@ -63,24 +63,24 @@ RegWhy.characterType.nonVerticalSpace=function (){return ("\\V")};
 
 #Character Classes
 
-RegWhy.lowerCaseVowel=function (){return ("[aeiou]")};
-RegWhy.upperCaseVowel=function (){return ("[AEIOU]")};
-RegWhy.anyCaseVowel=function (){return ("[aeiouAEIOU]")};
-RegWhy.lowerCaseASCII=function (){return ("[a-z]")};
-RegWhy.upperCaseASCII=function (){return ("[A-Z]")};
-RegWhy.upperCaseASCIIAndSpace=function (){return ("[A-Z ]")};
-RegWhy.dontMatch=function (regWhyStatement){return (paste("^",regWhyStatement,sep=""))};
+RegWhy.characterType.lowerCaseVowel=function (){return ("[aeiouy]")};
+RegWhy.characterType.upperCaseVowel=function (){return ("[AEIOUY]")};
+RegWhy.characterType.anyCaseVowel=function (){return ("[aeiouyAEIOUY]")};
+RegWhy.characterType.lowerCaseASCII=function (){return ("[a-z]")};
+RegWhy.characterType.upperCaseASCII=function (){return ("[A-Z]")};
+RegWhy.characterType.upperCaseASCIIAndSpace=function (){return ("[A-Z ]")};
+RegWhy.characterType.dontMatch=function (regWhyStatement){return (paste("^",regWhyStatement,sep=""))};
 
 #POSIx 
-RegWhy.alphaNumeric=function (){return ("[[:alnum:]]")};
-RegWhy.anyCharacter=function (){return (".")};
-RegWhy.controlCharacter=function (){return ("[[:control:]]")};
-RegWhy.punctuation=function (){return ("[[:alnum:]]")};
-RegWhy.hexadecial=function (){return ("[[:xdigit:]]")};
-RegWhy.space=function (){return ("[[:space:]]")}; #tab, newline, vertical tab, form feed,carriage return, and space
-RegWhy.printable=function (){return ("[[:print:]]")}; #alpha punct and space
-RegWhy.graphical=function (){return ("[[:graph:]]")}; #alpha punct and space
-RegWhy.blankSpace=function (){return ("[[:blank:]]")}; #space and tab
+RegWhy.characterType.alphaNumeric=function (){return ("[[:alnum:]]")};
+RegWhy.characterType.anyCharacter=function (){return (".")};
+RegWhy.characterType.controlCharacter=function (){return ("[[:control:]]")};
+RegWhy.characterType.punctuation=function (){return ("[[:alnum:]]")};
+RegWhy.characterType.hexadecial=function (){return ("[[:xdigit:]]")};
+RegWhy.characterType.space=function (){return ("[[:space:]]")}; #tab, newline, vertical tab, form feed,carriage return, and space
+RegWhy.characterType.printable=function (){return ("[[:print:]]")}; #alpha punct and space
+RegWhy.characterType.graphical=function (){return ("[[:graph:]]")}; #alpha punct and space
+RegWhy.characterType.blankSpace=function (){return ("[[:blank:]]")}; #space and tab
 
 #Unicode
 RegWhy.unicode=function (unicodeNumber){return (paste("\x{",unicodeNumber, "}",sep=""))};

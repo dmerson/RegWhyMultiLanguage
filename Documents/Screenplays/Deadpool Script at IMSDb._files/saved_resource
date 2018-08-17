@@ -1,0 +1,32 @@
+
+var ftGUID_3272995="3771B312FD1E39";
+var ftConfID_3272995="10212942";
+var ftParams_3272995="ftx=&fty=&ftadz=&ftscw=&ft_custom=1781800_21513264_225867464&ft_section=general&ftOBA=1&ft_ifb=1&ft_domain=www.imsdb.com&ft_agentEnv=0&ft_referrer=http%3A%2F%2Fwww.imsdb.com%2Fa%2Fa_imsdb_lea_val.html&ft_keyword=general&cachebuster=148534.0785117133";
+var ftKeyword_3272995="general";
+var ftCustom_3272995="1781800_21513264_225867464";
+var ftSection_3272995="general";
+var ftSegment_3272995="uio";
+var ftSegmentList_3272995=[{s:'uio'}];
+var ftRuleMatch_3272995="00010000";
+var ftTimestamp_3272995="1534256752";
+var ftGeoC2_3272995="us";
+var ftGeoState_3272995="az";
+var ftGeoCity_3272995="vail";
+var ftISP_3272995="cox communications inc.";
+var ftSpeed_3272995="cable";
+var ftDMA_3272995="789";
+var ftLong_3272995="-110.689";
+var ftLat_3272995="31.984";
+var ftPostal_3272995="85641";
+var ftTimeZone_3272995="-700";
+var ftMobileCarrier_3272995="";
+var ftImp3272995 = {};
+ftImp3272995.privacy = "x";
+ftImp3272995.guidAge = "107";
+ftImp3272995.impID = "DFF59913-F085-E083-142F-629AFFFA4528";
+
+ftImp3272995.ft_tpplid = "";
+ftImp3272995.ft_c = {};
+
+document.write('<scr'+'ipt src="https://cdn.flashtalking.com/xre/327/3272995/2225756/js/j-3272995-2225756.js" id="ftscript_m3272995" name="ftscript_m3272995"></scr'+'ipt>');
+                    

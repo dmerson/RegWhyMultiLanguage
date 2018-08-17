@@ -1,0 +1,106 @@
+// JavaScript Document
+function makeNewWindow() {
+settings='width=180,height=270,scrollbars=no,status=no';
+//newWindow = window.open(dest, name, settings);
+newWindow = window.open('', 'smileys', settings);
+newWindow.opener = self;
+
+newWindow.document.open("text/html");
+newWindow.document.write('<html><head><title>Smile</title>');
+
+newWindow.document.write('<script language="JavaScript">\n');
+newWindow.document.write('function insertsmiley(smiley)\n');
+newWindow.document.write('{\n');
+newWindow.document.write(' if(window.opener.document.yellform!=window.undef)\n');
+newWindow.document.write(' {\n');
+newWindow.document.write('  if(window.opener.document.yellform.sub_message.value == "Message")window.opener.document.yellform.sub_message.value =" "+smiley+" ";\n');
+newWindow.document.write('   else window.opener.document.yellform.sub_message.value+=" "+smiley+" ";\n');
+newWindow.document.write('  window.opener.document.yellform.sub_message.focus();\n');
+newWindow.document.write('  window.close();\n');
+newWindow.document.write(' }\n');
+newWindow.document.write('};\n');
+newWindow.document.write('</script>\n');
+
+newWindow.document.write('</head>');
+
+newWindow.document.write('<table align=center><tr>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(smile)]\');\"><img src=\"https://www.yellbox.com/images/smileys/smile.gif\" border=0></a>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(sad)]\');\"><img src=\"https://www.yellbox.com/images/smileys/sad.gif\" border=0></a>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(wink)]\');\"><img src=\"https://www.yellbox.com/images/smileys/wink.gif\" border=0></a>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(biggrin)]\');\"><img src=\"https://www.yellbox.com/images/smileys/biggrin.gif\" border=0></a>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(confused)]\');\"><img src=\"https://www.yellbox.com/images/smileys/confused.gif\" border=0></a>');
+newWindow.document.write('<tr>');
+
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(cool)]\');\"><img src=\"https://www.yellbox.com/images/smileys/cool.gif\" border=0></a>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(cry)]\');\"><img src=\"https://www.yellbox.com/images/smileys/cry.gif\" border=0></a>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(eek)]\');\"><img src=\"https://www.yellbox.com/images/smileys/eek.gif\" border=0></a>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(mad)]\');\"><img src=\"https://www.yellbox.com/images/smileys/mad.gif\" border=0></a>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(neutral)]\');\"><img src=\"https://www.yellbox.com/images/smileys/neutral.gif\" border=0></a>');
+newWindow.document.write('<tr>');
+
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(razz)]\');\"><img src=\"https://www.yellbox.com/images/smileys/razz.gif\" border=0></a>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(shame)]\');\"><img src=\"https://www.yellbox.com/images/smileys/shame.gif\" border=0></a>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(rolleyes)]\');\"><img src=\"https://www.yellbox.com/images/smileys/rolleyes.gif\" border=0></a>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(surprised)]\');\"><img src=\"https://www.yellbox.com/images/smileys/surprised.gif\" border=0></a>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(evil)]\');\"><img src=\"https://www.yellbox.com/images/smileys/evil.gif\" border=0></a>');
+
+newWindow.document.write('</table><br><table align=center><tr>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(anger)]\');\"><img src=\"https://www.yellbox.com/images/smileys/anger.gif\" border=0></a>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(borg)]\');\"><img src=\"https://www.yellbox.com/images/smileys/borg.gif\" border=0></a>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(cheeky)]\');\"><img src=\"https://www.yellbox.com/images/smileys/cheeky.gif\" border=0></a>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(determined)]\');\"><img src=\"https://www.yellbox.com/images/smileys/determined.gif\" border=0></a>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(flame)]\');\"><img src=\"https://www.yellbox.com/images/smileys/flame.gif\" border=0></a>');
+
+newWindow.document.write('<tr>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(flashy)]\');\"><img src=\"https://www.yellbox.com/images/smileys/flashy.gif\" border=0></a>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(greengrin)]\');\"><img src=\"https://www.yellbox.com/images/smileys/greengrin.gif\" border=0></a>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(irritated)]\');\"><img src=\"https://www.yellbox.com/images/smileys/irritated.gif\" border=0></a>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(king)]\');\"><img src=\"https://www.yellbox.com/images/smileys/king.gif\" border=0></a>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(loopy)]\');\"><img src=\"https://www.yellbox.com/images/smileys/loopy.gif\" border=0></a>');
+
+newWindow.document.write('<tr>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(maul)]\');\"><img src=\"https://www.yellbox.com/images/smileys/maul.gif\" border=0></a>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(mean)]\');\"><img src=\"https://www.yellbox.com/images/smileys/mean.gif\" border=0></a>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(loveheart)]\');\"><img src=\"https://www.yellbox.com/images/smileys/loveheart.gif\" border=0></a>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(mischief)]\');\"><img src=\"https://www.yellbox.com/images/smileys/mischief.gif\" border=0></a>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(peeved)]\');\"><img src=\"https://www.yellbox.com/images/smileys/peeved.gif\" border=0></a>');
+
+newWindow.document.write('<tr>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(rainbow)]\');\"><img src=\"https://www.yellbox.com/images/smileys/rainbow.gif\" border=0></a>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(skull)]\');\"><img src=\"https://www.yellbox.com/images/smileys/skull.gif\" border=0></a>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(sneeze)]\');\"><img src=\"https://www.yellbox.com/images/smileys/sneeze.gif\" border=0></a>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(sour)]\');\"><img src=\"https://www.yellbox.com/images/smileys/sour.gif\" border=0></a>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(spidey)]\');\"><img src=\"https://www.yellbox.com/images/smileys/spidey.gif\" border=0></a>');
+
+newWindow.document.write('<tr>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(super)]\');\"><img src=\"https://www.yellbox.com/images/smileys/super.gif\" border=0></a>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(ugh)]\');\"><img src=\"https://www.yellbox.com/images/smileys/ugh.gif\" border=0></a>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(winking)]\');\"><img src=\"https://www.yellbox.com/images/smileys/winking.gif\" border=0></a>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(xmen)]\');\"><img src=\"https://www.yellbox.com/images/smileys/xmen.gif\" border=0></a>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(yikes)]\');\"><img src=\"https://www.yellbox.com/images/smileys/yikes.gif\" border=0></a>');
+
+newWindow.document.write('<tr>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(inlove)]\');\"><img src=\"https://www.yellbox.com/images/smileys/inlove.gif\" border=0></a>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(twitch)]\');\"><img src=\"https://www.yellbox.com/images/smileys/twitch.gif\" border=0></a>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(grrr)]\');\"><img src=\"https://www.yellbox.com/images/smileys/grrr.gif\" border=0></a>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(rasp)]\');\"><img src=\"https://www.yellbox.com/images/smileys/rasp.gif\" border=0></a>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(winker)]\');\"><img src=\"https://www.yellbox.com/images/smileys/winker.gif\" border=0></a>');
+
+newWindow.document.write('<tr>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(shamed)]\');\"><img src=\"https://www.yellbox.com/images/smileys/shamed.gif\" border=0></a>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(sadness)]\');\"><img src=\"https://www.yellbox.com/images/smileys/sadness.gif\" border=0></a>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(ghosty)]\');\"><img src=\"https://www.yellbox.com/images/smileys/ghosty.gif\" border=0></a>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(disguise)]\');\"><img src=\"https://www.yellbox.com/images/smileys/disguise.gif\" border=0></a>');
+newWindow.document.write('<td><a href=\"javascript:insertsmiley(\'[(spawn)]\');\"><img src=\"https://www.yellbox.com/images/smileys/spawn.gif\" border=0></a>');
+
+newWindow.document.write('</table></body></html>');
+newWindow.document.close();
+newWindow.focus();
+}
+
+function clear_message2() { document.yellform.sub_message.value=""; document.yellform.sub_message.focus(); }
+
+function clearMessageBox() {
+document.yellform.submit(); 
+setTimeout("clear_message2()",200); return false;
+}

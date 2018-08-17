@@ -1,0 +1,107 @@
+td { font-family: Arial, Helvetica, sans-serif; font-size: 12px }
+td.white { font-family: Verdana; font-size: 10px; color: #FFFFFF; text-decoration: none}
+.smalltxt { font-family: Arial, Helvetica, sans-serif; font-size: 10px }
+a { color: #0000FF; text-decoration: underline }
+a.title { font-family: Arial, Helvetica, sans-serif; font-size: 14px }
+a.white { font-family: Verdana; font-size: 10px; color: #FFFFFF; text-decoration: none }
+a:hover.white { color: #FFFFFF; text-decoration: underline }
+
+h1, h2, h3 {
+	font-family: tahoma, Verdana, Arial;
+	font-size: 1.5em;
+	font-weight: bold;
+	display: inline;
+}
+h3 { font-size: 1.1em; } 
+
+body, textarea, tag, iframe, table {
+	font-family: tahoma, Verdana, Arial;
+	font-size: 1em;
+	text-decoration: none;
+}
+
+.welcome, .latest-scripts, .newest-releases, .script-details, .script-comments, .movie-avatars, .movie-wallpapers, .dvd-prices {
+width: 98%;
+border: 1px solid black;
+}
+
+.body {
+	font-family: tahoma, Verdana, Arial;
+	font-size: 1em;
+	text-decoration: none;
+}
+
+#mobile-nav { margin: auto; text-align: center; background-color: #eee; padding: 0.2em; margin-top: 1em; }
+
+pre {
+
+ word-wrap: break-word; 
+}
+
+.scrtext {
+	font-family: times new roman, courier new;
+	font-size: 1.2em;
+	text-decoration: none;
+}
+
+.heading {
+	font-family: Arial, tahoma, Verdana;
+	font-size: 1em;
+	font-weight: bold;
+	color: #000000;
+	text-decoration: underline;
+	background-color: #CCFFCC;
+}
+
+.headingb {
+	font-family: tahoma, Verdana, Arial;
+	font-size: 1em;
+	font-weight: bold;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+.subtitle {
+	font-family: tahoma, Verdana, Arial;
+	font-size: 1em;
+	font-weight: bold;
+	text-decoration: none;
+}
+.txtfield {
+	font-family: tahoma, Verdana, Arial;
+	font-size: 1em;
+	text-decoration: none;
+	border: 1px solid #999999;
+}
+.btn {
+	font-family: tahoma, Verdana, Arial;
+	font-size: 1em;
+	font-weight: bold;
+	text-decoration: none;
+	border: 1px solid #666666;
+	cursor: hand;
+}
+
+.img { 
+border-color: #000000; 
+}
+
+.avimg, .wpimg { 
+ border-color: #000000; 
+ border: 1px solid black;
+}
+
+/* YellBox */
+.yellbox { width: 100%; border: 1px #7F9DB9 solid; }
+form.yellbox { margin: 0px; padding: 0px; border: 0px; }
+iframe.yellbox { margin-bottom: 1px; }
+
+.adHeadline {font: bold 10pt Arial; text-decoration: underline; color: blue; text-align:center;}
+.adText {font: normal 10pt Arial; text-decoration: none; color: black; text-align:left;}
+
+.software { width: 700px; margin-bottom: 100px; }
+.software a { text-decoration: none; }
+.software ul { list-style: none; }
+.software li { padding: 4px; }
+
+lh { font-weight: bold; }

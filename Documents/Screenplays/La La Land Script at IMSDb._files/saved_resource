@@ -1,0 +1,85 @@
+// version: 12.7.0
+
+                var strScriptTag;
+                if (document.currentScript) {
+                    strScriptTag = document.currentScript;
+                } else {
+                    var arrScripts = document.getElementsByTagName('script');
+                    
+                    for (var i = arrScripts.length - 1; i >= 0; i--) {
+                        if (arrScripts[i].parentNode.tagName == 'SPAN') {
+                            strScriptTag = arrScripts[i];
+                            break;
+                        }
+                    }             
+                }
+				
+				var id = '';
+				var adinfoSpan;
+				var base = '';
+				if (strScriptTag) {
+					adinfoSpan = strScriptTag.parentNode;
+					base = strScriptTag.getAttribute("src").split('/?')[0] + '/';
+					id = strScriptTag.parentNode.getAttribute("id").split('-').join('_');
+				}
+				
+				window['adinfoOver_' + id] = function (id) {
+					if (document.getElementById('adInfo-' + id)) {
+						document.getElementById('adInfo-' + id).style.visibility = 'hidden';
+					}
+				
+					if (document.getElementById('adInfo-over-' + id)) {
+						document.getElementById('adInfo-over-' + id).style.visibility = 'visible';
+					}
+				}
+				
+				window['adinfoOut_' + id] = function (id) {
+					if (document.getElementById('adInfo-' + id)) {
+						document.getElementById('adInfo-' + id).style.visibility = 'visible';
+					}
+				
+					if (document.getElementById('adInfo-over-' + id)) {
+						document.getElementById('adInfo-over-' + id).style.visibility = 'hidden';
+					}
+				}
+				
+				window['adinfoClick_' + id] = function(id)
+                {
+                    var url = "http://usweb.dotomi.com/adinfo/choice/prod/?type=general&cid=61463&cname=PurePoint%20Financial&cmagic=b3037e&clogo=61463.png&purl=https%3A%2F%2Fwww.purepoint.com%2Fonline-banking%2Fprivacy.jsp&lang=en-us&loc=us&optout_options=";
+                    var wf = "status=0,toolbar=0,location=0,menubar=0,directories=0,scrollbars=1,width=921,height=758";
+                    var w = window.MRAID || window;
+                    w.open(url,"_blank",wf);
+                }
+				
+				window['adinfoInit_' + id] = function (adinfoSpan) {
+					if (adinfoSpan instanceof Element) {
+					    // Get trid from the span id
+						var id = adinfoSpan.getAttribute('id');
+                        var divArr = document.getElementsByTagName('div');
+   
+                        // UBR creates a div container for the bid's admarkup. The container is created with an id in the form 'cnvr-{TRID}'              
+                        var ubrContainer = document.getElementById('cnvr-' + id);
+                        if (!ubrContainer) {
+                            ubrContainer = adinfoSpan.parentNode;
+                        }
+						
+                        var adinfoMarkup = document.createElement('span');
+                        adinfoMarkup.id = 'menu-' + id;
+                        adinfoMarkup.style.display = 'block';
+                        adinfoMarkup.style.textAlign = 'left';
+            
+                        if (window.dmo) {
+                            adinfoMarkup.innerHTML = '<img style="position: absolute; z-index: 9999998; left: 728px; top:0px; margin-left: -20px; margin-top: 0px; padding: 0px; visibility: visible; cursor: pointer;" id="adInfo-' + id + '" alt="" src="' + base + 'public/img/icon-tr.png" onmouseover="adinfoOver_' + id + '(\'' + id + '\');" onmouseout="adinfoOut_' + id + '(\'' + id + '\');" onmouseup="adinfoClick_' + id + '();" />' +
+                                '<img style="position: absolute; z-index: 9999999; left: 728px; top:0px; margin-left: -80px; margin-top: 0px; padding: 0px; visibility: hidden; cursor: pointer;" id="adInfo-over-' + id + '" alt="" src="' + base + 'public/img/en-us/icon-tr-full.png" onmouseover="adinfoOver_' + id + '(\'' + id + '\');" onmouseout="adinfoOut_' + id + '(\'' + id + '\');" onmouseup="adinfoClick_' + id + '();" />';
+            
+                        } else {                      
+                            adinfoMarkup.innerHTML = '<img style="position: absolute; z-index: 9999998; margin-left: 708px; margin-top: 0px; padding: 0px; visibility: visible; cursor: pointer;" id="adInfo-' + id + '" alt="" src="' + base + 'public/img/icon-tr.png" onmouseover="adinfoOver_' + id + '(\'' + id + '\');" onmouseout="adinfoOut_' + id + '(\'' + id + '\');" onmouseup="adinfoClick_' + id + '();" />' +
+                                '<img style="position: absolute; z-index: 9999999; margin-left: 648px; margin-top: 0px; padding: 0px; visibility: hidden; cursor: pointer;" id="adInfo-over-' + id + '" alt="" src="' + base + 'public/img/en-us/icon-tr-full.png" onmouseover="adinfoOver_' + id + '(\'' + id + '\');" onmouseout="adinfoOut_' + id + '(\'' + id + '\');" onmouseup="adinfoClick_' + id + '();" />';
+                       }
+                        		
+					    // Append as the UBR container's first child. 
+                        ubrContainer.insertBefore(adinfoMarkup, ubrContainer.firstChild);
+					}
+				}
+				
+				window['adinfoInit_' + id](adinfoSpan);	  

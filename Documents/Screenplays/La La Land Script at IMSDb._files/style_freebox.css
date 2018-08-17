@@ -1,0 +1,8 @@
+a { text-decoration: none; font-weight: bold; }
+.yb_message1, .yb_message2, #footnav, #modbar { border: 1px outset; padding: 1px; margin: 0px; }
+#footnav, #modbar { min-height: 4px; }
+.avatar { border: 1px solid #333333; margin: 4px 4px 2px 2px; }
+.yb_message1 p, .yb_message2 p, #footnav p, #modbar p { padding: 1px; margin: 0px; }
+body { margin: 0px; background-color: transparent; }
+#modbar input { font-weight: bold; }
+.avatar { max-height: 30px; max-width: 30px; }

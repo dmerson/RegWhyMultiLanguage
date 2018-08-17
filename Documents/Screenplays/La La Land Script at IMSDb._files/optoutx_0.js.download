@@ -1,0 +1,32 @@
+try {
+     var rtc =  new Array();
+rtc[0] = [14000, 'http://cm.g.doubleclick.net/pixel?dtm_ghm&google_nid=dotomi&google_sc&google_ula=17128&google_redir=http%3A%2F%2Fdclk-match.dotomi.com%2Fmatch%2Fpixel%3FnetworkId%3D14000%26version%3D1&google_hm=USERTOKEN', 7];	// 
+rtc[1] = [60, 'http://pixel.advertising.com/ups/55853/sync?uid=$UID&_origin=1', 7];	// 
+rtc[2] = [15900, 'http://us-u.openx.net/w/1.0/sd?id=537072954&val=USERTOKEN', 7];	// 
+rtc[3] = [44410, 'http://match.sharethrough.com/sync/v1?source_id=XXFNqX2gk1rVb6Jw3xJ26afL&source_user_id=USERTOKEN', 7];	// 
+rtc[4] = [19998, 'http://r.casalemedia.com/rum?cm_dsp_id=65&external_user_id=USERTOKEN', 7];	// 
+rtc[5] = [1982, 'http://ib.adnxs.com/setuid?entity=34&code=USERTOKEN', 7];	// 
+rtc[6] = [12783, 'http://pixel.rubiconproject.com/tap.php?v=5364|1|90&nid=2046&expires=90&put=USERTOKEN', 7];	// 
+rtc[7] = [14200, 'http://bh.contextweb.com/bh/rtset?do=add&pid=530912&ev=USERTOKEN', 7];	// 
+rtc[8] = [5010, 'http://ads.yahoo.com/pixel?id=2217983&t=2&piggyback=http%3A%2F%2Fads.yahoo.com%2Fcms%2Fv1%3Fesig%3D1~4151a35556a52d081b3f866339189142d9cbceda%26nwid%3D10000780685%26sigv%3D1', 7];	// 
+rtc[9] = [3387, 'http://sync.adaptv.advertising.com/sync?type=gif&key=valueclickinc&uid=USERTOKEN', 7];	// 
+rtc[10] = [26832, 'http://idsync.rlcdn.com/449046.gif?', 7];	// 
+rtc[11] = [57734, 'http://contextual.media.net/cksync.php?type=con&ovsid=USERTOKEN', 7];	// 
+rtc[12] = [93086, 'http://adfarm.mediaplex.com/ad/tr/550-229078-1801-0?mpt=', 7];	// 
+rtc[13] = [80426, 'http://sync.search.spotxchange.com/partner?adv_id=7183&img=1&uid=USERTOKEN', 7];	// 
+rtc[14] = [1103, 'http://partners.tremorhub.com/sync?UIDT=USERTOKEN', 7];	// 
+
+    CB(
+            1,
+        10846,
+        0,
+            0,
+            [
+                
+            ],
+
+       rtc
+
+            );
+} catch(e) {
+}

@@ -33,6 +33,8 @@ Big_Fish_fountain <- read_delim("C:/Repos/RegWhyMultiLanguage/Documents/Screenpl
                                 "~", escape_double = FALSE, col_names = FALSE)
 script_lines <-readLines("../Documents/Screenplays/Big-Fish.fountain.txt")
 pdf_file <- readtext("../Documents/Screenplays/Big Fish.pdf")
+three_kings_shooting <- readtext("../Documents/Screenplays/threekings_shootingdraft.pdf")
+three_kings_shooting_lines <- stri_split_lines(three_kings_shooting)
 pdf_text <- (pdf_file$text)
 len_of_script <-length(script_lines)
 library(stringi)

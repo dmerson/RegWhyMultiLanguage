@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)https://s0.2mdn.net/2276943/1516977963620/index.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+       
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="ad.size" content="width=300,height=250"><!--REMEMBER TO UPDATE AD SIZE HERE-->
+    
+    <link rel="StyleSheet" href="./styles.min.css" type="text/css">
+        
+    
+    <script type="text/javascript">
+        var clickTag = "https://finishyourdiploma.org/free-classes"; 
+    </script>
+<script type="text/javascript">
+    
+      (function() {
+        var relegateNavigation = '';
+        var handleClickTagMessage = function(e) {
+          try {
+            var eventData = JSON.parse(e.data);
+          } catch (err) {
+            return;
+          }
+          if (eventData.isInitClickTag) {
+            if (eventData.clickTags) {
+              for (var i = 0; i < eventData.clickTags.length; i++) {
+                var clkTag = eventData.clickTags[i];
+                window[clkTag.name] = clkTag.url;
+              }
+            } else if (eventData.clickTag) {
+              window.clickTag = eventData.clickTag;
+            }
+            relegateNavigation = eventData.relegateNavigation;
+          }
+        };
+
+        if (open.call) {
+          window.open = function(open) {
+            return function(url, name, features) {
+              if (relegateNavigation === 'parent') {
+                var message = {'clickTag': url, 'isPostClickTag': true};
+                parent.postMessage(JSON.stringify(message), '*');
+              } else {
+                var args = [url, name];
+                if (features) {
+                  args.push(features);
+                }
+                open.apply(window, args);
+              }
+            };
+          }(window.open);
+        }
+
+        if (window.addEventListener) {
+          window.addEventListener(
+              'message', handleClickTagMessage, false);
+        } else {
+          window.attachEvent('onmessage', handleClickTagMessage);
+        }
+      })();
+    
+  </script></head>
+
+<body onload="init()" class="vsc-initialized"><!-- Call JS Initial Function when below has loaded in -->
+	<div id="container_dc" style="display: block;">
+        <div id="content_dc">
+            <!--Banner content here-->
+            <div id="bg"><img src="./bg_300x250_tassel.png"></div>
+            <div id="tassel_holder">
+                <div id="tassel_01" class="tassel" style="opacity: 0;"><img src="./tassel_01.png"></div>
+                <div id="tassel_02" class="tassel" style="opacity: 0;"><img src="./tassel_02.png"></div>
+                <div id="tassel_03" class="tassel" style="opacity: 0;"><img src="./tassel_03.png"></div>
+                <div id="tassel_04" class="tassel" style="opacity: 1;"><img src="./tassel_04.png"></div>
+            </div>
+            <div id="logos"><img src="./logos.svg"></div>
+            <div id="text1" style="opacity: 0; transform: matrix(1, 0, 0, 1, 0, 0);"><img src="./text1.svg"></div>
+            <div id="text2" style="opacity: 1; transform: matrix(1, 0, 0, 1, 0, 0);"><img src="./text2.svg"></div>
+            <div id="text3" style="opacity: 1; transform: matrix(1, 0, 0, 1, 0, 0);"><img src="./text3.svg"></div>
+            
+            <a id="clickTagBtn" href="javascript:void(window.open(window.clickTag))"></a>
+            
+            <a id="ctaBtn" href="javascript:void(window.open(window.clickTag))" style="transform: matrix(1, 0, 0, 1, 0, 0);"><img src="./cta.svg"></a>
+            
+                        
+            <div id="replay" style="top: 2px; opacity: 1;">
+                <!--?xml version="1.0" standalone="no" ?-->
+                <!--?xml-stylesheet type="text/css" href="styles.css" ?-->
+                <svg version="1.1" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 25 25" enable-background="new 0 0 25 25" xml:space="preserve">
+                    
+                <g id="Layer_1">
+                    <path id="replay-circle" stroke-miterlimit="10" d="M19.1,14.3c0.2-0.6,0.3-1.2,0.3-1.8
+                        c0-3.8-3.1-6.8-6.8-6.8s-6.8,3.1-6.8,6.8s3.1,6.8,6.8,6.8c1,0,2-0.2,2.9-0.7"></path>
+                </g>
+                <g id="Layer_2">
+                    <polygon id="replay-arrow" points="23.5,12.4 18.5,15.7 15.1,10.7"></polygon>
+                </g>
+                </svg>
+            </div>
+        </div>
+    </div>
+    <!--CDN links for the Google Approved Libraries(https://support.google.com/richmedia/answer/6307288) TweenLite, CSSPlugin, and EasePack-->
+    <script src="./cssplugin_1.18.0_71489205621d46cbe88348eeb8fe493f_min.js.download"></script>
+    <script src="./easepack_1.18.0_ed5816e732515f56d96a67f6a2a15ccb_min.js.download"></script>
+    <script src="./tweenmax_1.18.5_23b0de6da0ee295131e32a500470610c_min.js.download"></script>
+    
+    <script src="./scripts.min.js.download" type="text/javascript"></script>	
+
+
+</body></html>

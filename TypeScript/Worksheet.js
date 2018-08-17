@@ -145,30 +145,29 @@ var Where = /** @class */ (function () {
 var Do = /** @class */ (function () {
     function Do() {
     }
+    Do.SetRegExOptions = function (global, caseInsensitive, multilineMatching) {
+        var returnString = "";
+        if (global) {
+            returnString = "g";
+        }
+        if (caseInsensitive) {
+            returnString = returnString + 'i';
+        }
+        if (multilineMatching) {
+            returnString = returnString + "m";
+        }
+        return returnString;
+    };
     Do.prototype.Dectect = function (stringToSearch, valueToFind, caseInsensitive, multilineMatching) {
         if (caseInsensitive === void 0) { caseInsensitive = false; }
         if (multilineMatching === void 0) { multilineMatching = false; }
-        var newValue = "/" + valueToFind + "/";
-        if (caseInsensitive) {
-            newValue = newValue + "i";
-        }
-        if (multilineMatching) {
-            newValue = newValue + "m";
-        }
-        var pattern = new RegExp(valueToFind);
+        var pattern = new RegExp(valueToFind, Do.SetRegExOptions(false, caseInsensitive, multilineMatching));
         return (pattern.test(stringToSearch));
     };
     Do.prototype.ExtractFirst = function (stringToSearch, valueToFind, caseInsensitive, multilineMatching) {
         if (caseInsensitive === void 0) { caseInsensitive = false; }
         if (multilineMatching === void 0) { multilineMatching = false; }
-        var newValue = "/" + valueToFind + "/";
-        if (caseInsensitive) {
-            newValue = newValue + "i";
-        }
-        if (multilineMatching) {
-            newValue = newValue + "m";
-        }
-        var pattern = new RegExp(valueToFind);
+        var pattern = new RegExp(valueToFind, Do.SetRegExOptions(false, caseInsensitive, multilineMatching));
         var result = (pattern.exec(stringToSearch));
         if (result == null) {
             return null;
@@ -180,16 +179,9 @@ var Do = /** @class */ (function () {
         if (multilineMatching === void 0) { multilineMatching = false; }
         var matches = [];
         var match;
-        var newValue = "/" + valueToFind + "/g";
-        if (caseInsensitive) {
-            newValue = newValue + "i";
-        }
-        if (multilineMatching) {
-            newValue = newValue + "m";
-        }
-        var pattern = new RegExp(newValue);
+        var pattern = new RegExp(valueToFind, Do.SetRegExOptions(true, caseInsensitive, multilineMatching));
         while (match = pattern.exec(stringToSearch)) {
-            matches.push(match);
+            matches.push(match[0]);
         }
         return matches;
     };
@@ -205,14 +197,7 @@ var Do = /** @class */ (function () {
         groupToCapture || (groupToCapture = 1); // default to the first capturing group
         var matches = [];
         var match;
-        var newValue = "/" + valueToFind + "/g";
-        if (caseInsensitive) {
-            newValue = newValue + "i";
-        }
-        if (multilineMatching) {
-            newValue = newValue + "m";
-        }
-        var pattern = new RegExp(newValue);
+        var pattern = new RegExp(valueToFind, Do.SetRegExOptions(true, caseInsensitive, multilineMatching));
         while (match = pattern.exec(stringToSearch)) {
             matches.push(match);
         }
@@ -221,14 +206,7 @@ var Do = /** @class */ (function () {
     Do.prototype.LocateFirst = function (stringToSearch, valueToFind, caseInsensitive, multilineMatching) {
         if (caseInsensitive === void 0) { caseInsensitive = false; }
         if (multilineMatching === void 0) { multilineMatching = false; }
-        var newValue = "/" + valueToFind + "/";
-        if (caseInsensitive) {
-            newValue = newValue + "i";
-        }
-        if (multilineMatching) {
-            newValue = newValue + "m";
-        }
-        var pattern = new RegExp(newValue);
+        var pattern = new RegExp(valueToFind, Do.SetRegExOptions(false, caseInsensitive, multilineMatching));
         var result = (pattern.exec(stringToSearch));
         if (result == null) {
             return -1;
@@ -240,14 +218,7 @@ var Do = /** @class */ (function () {
         if (multilineMatching === void 0) { multilineMatching = false; }
         var matches = [];
         var match;
-        var newValue = "/" + valueToFind + "/g";
-        if (caseInsensitive) {
-            newValue = newValue + "i";
-        }
-        if (multilineMatching) {
-            newValue = newValue + "m";
-        }
-        var pattern = new RegExp(newValue);
+        var pattern = new RegExp(valueToFind, Do.SetRegExOptions(true, caseInsensitive, multilineMatching));
         while (match = pattern.exec(stringToSearch)) {
             matches.push(match.index);
         }
@@ -256,38 +227,20 @@ var Do = /** @class */ (function () {
     Do.prototype.ReplaceFirst = function (stringToSearch, valueToFind, valueToReplaceWith, caseInsensitive, multilineMatching) {
         if (caseInsensitive === void 0) { caseInsensitive = false; }
         if (multilineMatching === void 0) { multilineMatching = false; }
-        var newValue = "/" + valueToFind + "/";
-        if (caseInsensitive) {
-            newValue = newValue + "i";
-        }
-        if (multilineMatching) {
-            newValue = newValue + "m";
-        }
-        return stringToSearch.replace(valueToFind, valueToReplaceWith);
+        var pattern = new RegExp(valueToFind, Do.SetRegExOptions(false, caseInsensitive, multilineMatching));
+        return stringToSearch.replace(pattern, valueToReplaceWith);
     };
     Do.prototype.ReplaceAll = function (stringToSearch, valueToFind, valueToReplaceWith, caseInsensitive, multilineMatching) {
         if (caseInsensitive === void 0) { caseInsensitive = false; }
         if (multilineMatching === void 0) { multilineMatching = false; }
-        var newValue = "/" + valueToFind + "/g";
-        if (caseInsensitive) {
-            newValue = newValue + "i";
-        }
-        if (multilineMatching) {
-            newValue = newValue + "m";
-        }
-        return stringToSearch.split(newValue).join(valueToReplaceWith);
+        var pattern = new RegExp(valueToFind, Do.SetRegExOptions(true, caseInsensitive, multilineMatching));
+        return stringToSearch.split(pattern).join(valueToReplaceWith);
     };
     Do.prototype.SplitList = function (stringToSearch, valueToSplitWith, caseInsensitive, multilineMatching) {
         if (caseInsensitive === void 0) { caseInsensitive = false; }
         if (multilineMatching === void 0) { multilineMatching = false; }
-        var newValue = "/" + valueToSplitWith + "/";
-        if (caseInsensitive) {
-            newValue = newValue + "i";
-        }
-        if (multilineMatching) {
-            newValue = newValue + "m";
-        }
-        return stringToSearch.split(newValue);
+        var pattern = new RegExp(valueToSplitWith, Do.SetRegExOptions(false, caseInsensitive, multilineMatching));
+        return stringToSearch.split(pattern);
     };
     return Do;
 }());
@@ -313,6 +266,7 @@ var Count = /** @class */ (function () {
 // console.log(regWhy.Do().ExtractAll("Test","t"));
 console.log(RegWhy.Statement(["test", "test"]));
 console.log(RegWhy.Do().ExtractAll("test", 't'));
+console.log(RegWhy.Do().ExtractFirst("test", 't'));
 console.log(RegWhy.Literal("hello world"));
 console.log(RegWhy.Do().Dectect("test", "t"));
 console.log(RegWhy.Do().Dectect("test", "x"));

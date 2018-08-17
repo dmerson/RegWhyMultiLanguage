@@ -163,32 +163,26 @@ class Do{
     constructor() {
         
     }
+    public static SetRegExOptions(global:boolean,caseInsensitive:boolean,multilineMatching:boolean):string{
+        var returnString="";
+        if (global){
+            returnString="g";
+        }
+        if (caseInsensitive){
+            returnString =returnString + 'i';
+        }
+        if (multilineMatching){
+            returnString=returnString + "m";
+        }
+        return returnString;
+
+    }
     public Dectect(stringToSearch:string, valueToFind:string, caseInsensitive=false, multilineMatching=false){
-        var newValue ="/" + valueToFind + "/";
-        if (caseInsensitive)
-        {
-            newValue=newValue + "i"
-        }
-        if (multilineMatching)
-        {
-            newValue=newValue + "m"
-        }
-        var pattern =new RegExp(valueToFind)
-        
-        
+        var pattern =new RegExp(valueToFind,Do.SetRegExOptions(false,caseInsensitive,multilineMatching))
         return (pattern.test(stringToSearch))
     }
     public ExtractFirst(stringToSearch:string, valueToFind:string, caseInsensitive=false, multilineMatching=false){
-        var newValue ="/" + valueToFind + "/";
-        if (caseInsensitive)
-        {
-            newValue=newValue + "i"
-        }
-        if (multilineMatching)
-        {
-            newValue=newValue + "m"
-        }
-        var pattern =new RegExp(valueToFind)
+        var pattern =new RegExp(valueToFind,Do.SetRegExOptions(false,caseInsensitive,multilineMatching))
         var result= (pattern.exec(stringToSearch))
         if (result==null){return null}
         return result[0];
@@ -196,18 +190,11 @@ class Do{
     public ExtractAll(stringToSearch:string, valueToFind:string, caseInsensitive=false, multilineMatching=false){
         var matches = [];
         var match;
-        var newValue ="/" + valueToFind + "/g";
-        if (caseInsensitive)
-        {
-            newValue=newValue + "i"
-        }
-        if (multilineMatching)
-        {
-            newValue=newValue + "m"
-        }
-        var pattern =new RegExp(newValue)
+         
+        var pattern =new RegExp(valueToFind,Do.SetRegExOptions(true,caseInsensitive,multilineMatching))
         while (match = pattern.exec(stringToSearch)) {
-        matches.push(match);
+         matches.push(match[0]);
+          
         }
         return matches;
     }
@@ -221,16 +208,7 @@ class Do{
         groupToCapture || (groupToCapture = 1); // default to the first capturing group
         var matches = [];
         var match;
-        var newValue ="/" + valueToFind + "/g";
-        if (caseInsensitive)
-        {
-            newValue=newValue + "i"
-        }
-        if (multilineMatching)
-        {
-            newValue=newValue + "m"
-        }
-        var pattern =new RegExp(newValue)
+        var pattern =new RegExp(valueToFind,Do.SetRegExOptions(true,caseInsensitive,multilineMatching))
         while (match = pattern.exec(stringToSearch)) {
         matches.push(match);
         }
@@ -238,16 +216,7 @@ class Do{
          
     }
     public LocateFirst(stringToSearch:string, valueToFind:string, caseInsensitive=false, multilineMatching=false){
-        var newValue ="/" + valueToFind + "/";
-        if (caseInsensitive)
-        {
-            newValue=newValue + "i"
-        }
-        if (multilineMatching)
-        {
-            newValue=newValue + "m"
-        }
-        var pattern =new RegExp(newValue)
+        var pattern =new RegExp(valueToFind,Do.SetRegExOptions(false,caseInsensitive,multilineMatching))
         
         var result= (pattern.exec(stringToSearch))
         if (result==null){return -1}
@@ -256,16 +225,7 @@ class Do{
     public LocateAll(stringToSearch:string, valueToFind:string, caseInsensitive=false, multilineMatching=false){
         var matches = [];
         var match;
-        var newValue ="/" + valueToFind + "/g";
-        if (caseInsensitive)
-        {
-            newValue=newValue + "i"
-        }
-        if (multilineMatching)
-        {
-            newValue=newValue + "m"
-        }
-        var pattern =new RegExp(newValue)
+        var pattern =new RegExp(valueToFind,Do.SetRegExOptions(true,caseInsensitive,multilineMatching))
          
         while (match = pattern.exec(stringToSearch)) {
             matches.push(match.index);
@@ -274,40 +234,16 @@ class Do{
         return matches;
     }
     public ReplaceFirst(stringToSearch:string, valueToFind:string, valueToReplaceWith:string, caseInsensitive=false, multilineMatching=false):string{
-        var newValue ="/" + valueToFind + "/";
-        if (caseInsensitive)
-        {
-            newValue=newValue + "i"
-        }
-        if (multilineMatching)
-        {
-            newValue=newValue + "m"
-        }
-        return stringToSearch.replace(valueToFind,valueToReplaceWith);
+        var pattern =new RegExp(valueToFind,Do.SetRegExOptions(false,caseInsensitive,multilineMatching))
+        return stringToSearch.replace(pattern,valueToReplaceWith);
     }
     public ReplaceAll(stringToSearch:string, valueToFind:string,valueToReplaceWith:string, caseInsensitive=false, multilineMatching=false){
-        var newValue ="/" + valueToFind + "/g";
-        if (caseInsensitive)
-        {
-            newValue=newValue + "i"
-        }
-        if (multilineMatching)
-        {
-            newValue=newValue + "m"
-        }
-        return stringToSearch.split(newValue).join(valueToReplaceWith)
+        var pattern =new RegExp(valueToFind,Do.SetRegExOptions(true,caseInsensitive,multilineMatching))
+        return stringToSearch.split(pattern).join(valueToReplaceWith)
     }
     public SplitList(stringToSearch:string, valueToSplitWith:string, caseInsensitive=false, multilineMatching=false){
-        var newValue ="/" + valueToSplitWith + "/";
-        if (caseInsensitive)
-        {
-            newValue=newValue + "i"
-        }
-        if (multilineMatching)
-        {
-            newValue=newValue + "m"
-        }
-        return stringToSearch.split(newValue);
+        var pattern =new RegExp(valueToSplitWith,Do.SetRegExOptions(false,caseInsensitive,multilineMatching))
+        return stringToSearch.split(pattern);
     }
    
 }
@@ -334,6 +270,7 @@ class Count{
 // console.log(regWhy.Do().ExtractAll("Test","t"));
 console.log(RegWhy.Statement(["test","test"]))
 console.log(RegWhy.Do().ExtractAll("test", 't'));
+console.log(RegWhy.Do().ExtractFirst("test", 't'));
 console.log(RegWhy.Literal("hello world"));
 console.log(RegWhy.Do().Dectect("test","t"))
 console.log(RegWhy.Do().Dectect("test","x"))

@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+import re
 class RegWhy:
     period="\."
     backSlash="\\\\"
@@ -110,7 +110,7 @@ class RegWhy:
             return "(<" + nameOfGroup + ">" 
         
         @staticmethod
-        def BackReference(whichReference:int):
+        def BackReference(whichReference):
             if (whichReference > 9 or whichReference < 1):
                 raise Exception("You must have a number between 1 and 9")
             return "$" + whichReference
@@ -124,15 +124,15 @@ class RegWhy:
             return "(?|" + whatsNext
 
         @staticmethod
-        def EndExactNumbe(countOfTimes:int):
+        def EndExactNumbe(countOfTimes):
             return "){" + countOfTimes + "}"
 
         @staticmethod
-        def EndExactNumberOfAbove(countOfTimes:int):
+        def EndExactNumberOfAbove(countOfTimes):
             return "){" + countOfTimes + ",}"
 
         @staticmethod
-        def EndRangeOfTimes(bottomNumber:int,topNumber:int):
+        def EndRangeOfTimes(bottomNumber:int,topNumber):
             return "){" + bottomNumber + "," + topNumber +  "}"
 
         @staticmethod
@@ -184,7 +184,20 @@ class RegWhy:
 
         @staticmethod
         def Detect(stringToSearch, valueToFind, caseInsensitive=False, multilineMatching=False):
-            pass
+            flags = 0
+
+            if multilineMatching:
+                flags = re.MULTILINE
+            if caseInsensitive:
+                flags |= re.IGNORECASE
+                                                                                                                                                                                     
+            regEx=re.compile(valueToFind,flags)
+            match =regEx.match(stringToSearch)
+            if match:
+                return True
+            else:
+                return False
+
 
         @staticmethod
         def ExtractFirst(stringToSearch, valueToFind, caseInsensitive=False, multilineMatching=False):
@@ -237,3 +250,4 @@ if __name__ == '__main__':
         RegWhy.CharacterType.unicode("1234"),
         RegWhy.Count.exactNumber(3)
     ]))
+    print(RegWhy.Do.Detect("test","T",True))

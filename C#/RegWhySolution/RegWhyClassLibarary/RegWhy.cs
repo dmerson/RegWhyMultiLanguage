@@ -21,6 +21,7 @@ namespace RegWhyClassLibarary
         public static string questionMark = @"\?";
         public static string leftAngle = @"\<";
         public static string rightAngle = @"\>";
+		public static string plusSign=@"\+";
         public static string caret = @"\^";
         public static string tab = @"\t";
         public static string returnString = @"\r";

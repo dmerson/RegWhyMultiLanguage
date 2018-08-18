@@ -26,7 +26,10 @@ namespace RegWhyTEst
             var matches = RegWhy.Do.ExtractAll("test", ".");
             Assert.AreEqual("t", matches[0]);
             Assert.AreEqual("e", matches[1]);
-
+            var literal = RegWhy.Literal(@".");
+            //Assert.AreEqual(@"\.",literal);
+            result = RegWhy.Do.Detect("test?", @"\?", true);
+            Assert.AreEqual(true, result);
         }
     }
 }

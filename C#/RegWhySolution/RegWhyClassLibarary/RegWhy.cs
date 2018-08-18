@@ -6,6 +6,26 @@ namespace RegWhyClassLibarary
 {
     public static class RegWhy
     {
+        public static string Literal(string value)
+        {
+            value = value.Replace(@".", period);
+            value = value.Replace(@"\", backSlash);
+            value = value.Replace(@"|", bar);
+            value = value.Replace(@"(", leftParenthesis);
+            value = value.Replace(@")", rightParenthesis);
+            value = value.Replace(@"[", leftBracket);
+            value = value.Replace(@"]", rightBracket);
+            value = value.Replace(@"{", leftBrace);
+            value = value.Replace(@"}", rightBrace);
+            value = value.Replace(@"$", dollarSign);
+            value = value.Replace(@"*", asterik);
+            value = value.Replace(@"?", questionMark);
+            value = value.Replace(@"<", leftAngle);
+            value = value.Replace(@">", rightAngle);
+            value = value.Replace(@"+", plusSign);
+            value = value.Replace(@"^", caret);
+            return value;
+        }
         public static string period = @"\.";
         public static string backSlash = @"\\";
         public static string bar = @"\|";
@@ -36,10 +56,7 @@ namespace RegWhyClassLibarary
             return endResult;
         }
 
-        public static string Literal(string value)
-        {
-            return value;
-        }
+        
 
         public static class CharacterType
         {

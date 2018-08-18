@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -195,7 +194,14 @@ namespace RegWhyClassLibarary
 
         public static class Do
         {
-            public static RegexOptions? GetRegexOptions(bool caseInsensitve, bool matchInMultipleLines)
+            private static Regex SetRegExForDoFunction(string valueToFind, bool caseInsensitive, bool multiLineMode)
+            {
+                var options = GetRegexOptions(caseInsensitive, multiLineMode);
+
+                var pattern = options != null ? new Regex(valueToFind, (RegexOptions)options) : new Regex(valueToFind);
+                return pattern;
+            }
+            private static RegexOptions? GetRegexOptions(bool caseInsensitve, bool matchInMultipleLines)
             {
                 if (caseInsensitve && !matchInMultipleLines)
                 {
@@ -214,15 +220,15 @@ namespace RegWhyClassLibarary
             }
             public static bool Detect(string stringToSearch, string valueToFind, bool caseInsensitive=false, bool multiLineMode=false)
             {
-                var options = RegWhy.Do.GetRegexOptions(caseInsensitive, multiLineMode);
-
-                var pattern = options!=null? new System.Text.RegularExpressions.Regex(valueToFind, (RegexOptions)options):new Regex(valueToFind);
+                var pattern = SetRegExForDoFunction(valueToFind, caseInsensitive, multiLineMode);
                 return pattern.IsMatch(stringToSearch);
-
             }
+
+           
+
             public static bool Detect(string stringToSearch, string valueToFind, RegexOptions options)
             {
-                var pattern = new System.Text.RegularExpressions.Regex(valueToFind,options );
+                var pattern = new Regex(valueToFind,options );
                 return pattern.IsMatch(stringToSearch);
                 
             }
@@ -230,29 +236,45 @@ namespace RegWhyClassLibarary
             public static string ExtractFirst(string stringToSearch, string valueToFind, bool caseInsensitive = false,
                 bool multilineMode = false)
             {
-                return "";
+                var regexOptions = GetRegexOptions(caseInsensitive, multilineMode);
+                var match =(regexOptions==null)? 
+                    Regex.Match(stringToSearch, valueToFind):
+                    Regex.Match(stringToSearch,valueToFind,(RegexOptions)regexOptions);
+                return match.Value;
             }
             public static List<string> ExtractAll(string stringToSearch, string valueToFind, bool caseInsensitive = false,
                 bool multilineMode = false)
             {
+                
                 var resultList=new List<string>();
+                var regexOptions = GetRegexOptions(caseInsensitive, multilineMode);
+                var matchList = (regexOptions == null) ?
+                    Regex.Matches(stringToSearch, valueToFind) :
+                    Regex.Matches(stringToSearch, valueToFind, (RegexOptions)regexOptions);
+                foreach (Match match in matchList)
+                {
+                    resultList.Add(match.Value);
+                }
                 return resultList;
             }
 
             public static List<string> ExtractCapturedGroup(string stringToSearch, string valueToFind, int GroupToCapture, bool caseInsensitive = false,
                 bool multilineMode = false)
             {
+                var pattern = GetRegexOptions(caseInsensitive, multilineMode);
                 var resultList = new List<string>();
                 return resultList;
             }
             public static int LocateFirst(string stringToSearch, string valueToFind, bool caseInsensitive = false,
                 bool multilineMode = false)
             {
+                var pattern = GetRegexOptions(caseInsensitive, multilineMode);
                 return -1;
             }
             public static List<int> LocateAll(string stringToSearch, string valueToFind, bool caseInsensitive = false,
                 bool multilineMode = false)
             {
+                var pattern = GetRegexOptions(caseInsensitive, multilineMode);
                 var resultList=new List<int>();
                 return resultList ;
             }
@@ -260,17 +282,21 @@ namespace RegWhyClassLibarary
             public static string ReplaceFirst(string stringToSearch, string valueToFind, bool caseInsensitive = false,
                 bool multilineMode = false)
             {
+                var pattern = GetRegexOptions(caseInsensitive, multilineMode);
                 return "";
             }
             public static List<string> ReplaceAll(string stringToSearch, string valueToFind, bool caseInsensitive = false,
                 bool multilineMode = false)
             {
+                var pattern = GetRegexOptions(caseInsensitive, multilineMode);
                 var resultList = new List<string>();
                 return resultList;
             }
             public static string SplitList(string stringToSearch, string valueToFind, bool caseInsensitive = false,
                 bool multilineMode = false)
             {
+                var pattern = GetRegexOptions(caseInsensitive, multilineMode);
+              
                 return "";
             }
         }

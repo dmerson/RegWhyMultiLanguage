@@ -292,12 +292,20 @@ namespace RegWhyClassLibarary
                 var resultList = new List<string>();
                 return resultList;
             }
-            public static string SplitList(string stringToSearch, string valueToFind, bool caseInsensitive = false,
+            public static List<string> SplitList(string stringToSearch, string valueToFind, bool caseInsensitive = false,
                 bool multilineMode = false)
             {
-                var pattern = GetRegexOptions(caseInsensitive, multilineMode);
-              
-                return "";
+                var resultList = new List<string>();
+                var regexOptions = GetRegexOptions(caseInsensitive, multilineMode);
+                var matchList = (regexOptions == null) ?
+                    Regex.Split(stringToSearch, valueToFind) :
+                    Regex.Split(stringToSearch, valueToFind, (RegexOptions)regexOptions);
+                foreach (var match in matchList)
+                {
+                    resultList.Add(match);
+                }
+                return resultList;
+                 
             }
         }
 

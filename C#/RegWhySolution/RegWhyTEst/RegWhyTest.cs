@@ -23,9 +23,9 @@ namespace RegWhyTEst
             Assert.AreEqual("t",match);
             match = RegWhy.Do.ExtractFirst("test", "T",true);
             Assert.AreEqual("t", match);
-            var matches = RegWhy.Do.ExtractAll("test", "t");
+            var matches = RegWhy.Do.ExtractAll("test", ".");
             Assert.AreEqual("t", matches[0]);
-            Assert.AreEqual("t", matches[1]);
+            Assert.AreEqual("e", matches[1]);
 
         }
     }

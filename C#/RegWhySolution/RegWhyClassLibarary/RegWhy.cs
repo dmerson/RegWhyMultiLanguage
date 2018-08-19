@@ -73,7 +73,19 @@ namespace RegWhyClassLibarary
             public static string upperCaseASCII = @"[A-Z]";
             public static string anyASCII = "[ -~]";
             public static string endOfFile = "^Z";
+            public static string alphaCharacterRange = "[A-Za-z]";
+            public static string alphaNumericCharacterRange = "[A-Za-z0-9]";
+            public static string capitalLetterCharacterRange = "[A-Z]";
+            public static string lowerCaseLetterCharacterRange = "[a-z]";
 
+            public static string alphaNumericCharacterRangePlus(string otherCharacters)
+            {
+                return "[A-Za-z0-9" + otherCharacters + "]";
+            }
+            public static string numericCharacterRangePlus(string otherCharacters)
+            {
+                return "[0-9" + otherCharacters + "]";
+            }
             public static string unicode(string fourDigitalNumber)
             {
                 return @"\\" + fourDigitalNumber;

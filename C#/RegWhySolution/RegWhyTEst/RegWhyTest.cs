@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RegWhyClassLibarary;
@@ -13,7 +14,7 @@ namespace RegWhyTEst
         {
             var period = RegWhy.period;
             Assert.AreEqual("\\.",period);
-            var result=RegWhy.Do.Detect("test", "T", RegexOptions.IgnoreCase);
+            var result=RegWhy.Do.Detect("test", "T", true);
             Assert.AreEqual(true,result);
             result = RegWhy.Do.Detect("test", "T" );
             Assert.AreEqual(false, result);
@@ -34,7 +35,24 @@ namespace RegWhyTEst
             Assert.AreEqual("jest",replacement);
             replacement = RegWhy.Do.ReplaceAll("test", "t", "j");
             Assert.AreEqual("jesj", replacement);
+            var validEmail = RegWhy.Statement(new List<string>()
+            {
+                RegWhy.Where.startOfString,
+                //RegWhy.CharacterType.characterRange("A-Za-z0-9._%+-"),
+                RegWhy.CharacterType.alphaNumericCharacterRangePlus("._%+-"),
+                RegWhy.Count.oneOrMore,
+                RegWhy.Literal("@"),
+                //RegWhy.CharacterType.characterRange("A-Za-z0-9.-"),
+                RegWhy.CharacterType.alphaNumericCharacterRangePlus(".-"),
+                RegWhy.Count.oneOrMore,
+                RegWhy.period,
+                RegWhy.CharacterType.characterRange("A-Za-z"),
+                RegWhy.Count.rangeOfTimes(2,4),
+                RegWhy.Where.endOfString
 
+
+            });
+            Assert.AreEqual(@"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$", validEmail);
         }
     }
 }

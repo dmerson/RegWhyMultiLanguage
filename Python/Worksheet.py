@@ -144,8 +144,9 @@ class RegWhy:
             for item in listOfItems:
                 if (firstitem):
                     firstitem=False
+                    finalString=finalString + item
                 else:
-                    finalString =finalString + "|"
+                    finalString ="|" + item
                 finalString=finalString + item
             finalString =finalString + ")"
             return finalString
@@ -184,52 +185,73 @@ class RegWhy:
 
         @staticmethod
         def Detect(stringToSearch, valueToFind, caseInsensitive=False, multilineMatching=False):
-            flags = 0
-
-            if multilineMatching:
-                flags = re.MULTILINE
-            if caseInsensitive:
-                flags |= re.IGNORECASE
-                                                                                                                                                                                     
-            regEx=re.compile(valueToFind,flags)
-            match =regEx.match(stringToSearch)
+            regEx = RegWhy.Do.SetRegEx(caseInsensitive, multilineMatching, valueToFind)
+            match =regEx.search(stringToSearch)
             if match:
                 return True
             else:
                 return False
 
+        @staticmethod
+        def SetRegEx(caseInsensitive, multilineMatching, valueToFind):
+            flags = 0
+            if multilineMatching:
+                flags = re.MULTILINE
+            if caseInsensitive:
+                flags |= re.IGNORECASE
+            regEx = re.compile(valueToFind, flags)
+            return regEx
 
         @staticmethod
         def ExtractFirst(stringToSearch, valueToFind, caseInsensitive=False, multilineMatching=False):
-            pass
+            regEx = RegWhy.Do.SetRegEx(caseInsensitive, multilineMatching, valueToFind)
+            found = regEx.search(stringToSearch)
+
+            return found.group()
         
         @staticmethod
         def ExtractAll(stringToSearch, valueToFind, caseInsensitive=False, multilineMatching=False):
-            pass
+            regEx = RegWhy.Do.SetRegEx(caseInsensitive, multilineMatching, valueToFind)
+            found = regEx.findall(stringToSearch)
+
+            return found
 
         @staticmethod
         def ExtractGroup(stringToSearch, valueToFind,groupNumber:int, caseInsensitive=False, multilineMatching=False):
-            pass
+            regEx = RegWhy.Do.SetRegEx(caseInsensitive, multilineMatching, valueToFind)
+            found = regEx.search(stringToSearch)
+
+            return found.group(groupNumber)
 
         @staticmethod
         def LocateFirst(stringToSearch, valueToFind, caseInsensitive=False, multilineMatching=False):
-            pass
+            regEx = RegWhy.Do.SetRegEx(caseInsensitive, multilineMatching, valueToFind)
+            found = regEx.search(stringToSearch)
+            return found.start()
+
 
         @staticmethod
         def LocateAll(stringToSearch, valueToFind, caseInsensitive=False, multilineMatching=False):
-            pass
+            regEx = RegWhy.Do.SetRegEx(caseInsensitive, multilineMatching, valueToFind)
+            found = [m.start(0) for m in regEx.finditer(stringToSearch)]
+
+            return found
 
         @staticmethod
-        def ReplaceFirst(stringToSearch, valueToFind, caseInsensitive=False, multilineMatching=False):
-            pass
+        def ReplaceFirst(stringToSearch, valueToFind, valueToReplace, caseInsensitive=False, multilineMatching=False):
+            regEx = RegWhy.Do.SetRegEx(caseInsensitive, multilineMatching, valueToFind)
+            return regEx.sub(valueToReplace, stringToSearch,1)
+
 
         @staticmethod
-        def ReplaceAll(stringToSearch, valueToFind, caseInsensitive=False, multilineMatching=False):
-            pass
+        def ReplaceAll(stringToSearch, valueToFind,valueToReplace, caseInsensitive=False, multilineMatching=False):
+            regEx = RegWhy.Do.SetRegEx(caseInsensitive, multilineMatching, valueToFind)
+            return regEx.sub(valueToReplace,stringToSearch)
 
         @staticmethod
         def SplitList(stringToSearch, valueToSplitWith, caseInsensitive=False, multilineMatching=False):
-            pass
+            regEx = RegWhy.Do.SetRegEx(caseInsensitive, multilineMatching, valueToSplitWith)
+            return re.split(regEx,stringToSearch)
 
 
 
@@ -251,3 +273,9 @@ if __name__ == '__main__':
         RegWhy.Count.exactNumber(3)
     ]))
     print(RegWhy.Do.Detect("test","T",True))
+    print(RegWhy.Do.ExtractFirst("test","t"))
+    print(RegWhy.Do.ExtractAll("test", "t"))
+    print(RegWhy.Do.LocateAll("test", "t"))
+    print(RegWhy.Do.ReplaceFirst("test", "t", "q"))
+    print(RegWhy.Do.ReplaceAll("test", "t","q"))
+    print(RegWhy.Do.SplitList("tester", "t"))

@@ -30,6 +30,11 @@ namespace RegWhyTEst
             //Assert.AreEqual(@"\.",literal);
             result = RegWhy.Do.Detect("test?", @"\?", true);
             Assert.AreEqual(true, result);
+            var replacement = RegWhy.Do.ReplaceFirst("test", "t", "j");
+            Assert.AreEqual("jest",replacement);
+            replacement = RegWhy.Do.ReplaceAll("test", "t", "j");
+            Assert.AreEqual("jesj", replacement);
+
         }
     }
 }

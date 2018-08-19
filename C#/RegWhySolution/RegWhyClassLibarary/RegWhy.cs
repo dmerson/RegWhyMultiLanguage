@@ -244,12 +244,7 @@ namespace RegWhyClassLibarary
 
            
 
-            public static bool Detect(string stringToSearch, string valueToFind, RegexOptions options)
-            {
-                var pattern = new Regex(valueToFind,options );
-                return pattern.IsMatch(stringToSearch);
-                
-            }
+            
 
             public static string ExtractFirst(string stringToSearch, string valueToFind, bool caseInsensitive = false,
                 bool multilineMode = false)
@@ -276,39 +271,60 @@ namespace RegWhyClassLibarary
                 return resultList;
             }
 
-            public static List<string> ExtractCapturedGroup(string stringToSearch, string valueToFind, int GroupToCapture, bool caseInsensitive = false,
+            public static string ExtractCapturedGroup(string stringToSearch, string valueToFind, int GroupToCapture, bool caseInsensitive = false,
                 bool multilineMode = false)
             {
-                var pattern = GetRegexOptions(caseInsensitive, multilineMode);
-                var resultList = new List<string>();
-                return resultList;
+                var regexOptions = GetRegexOptions(caseInsensitive, multilineMode);
+                var match = (regexOptions == null) ?
+                    Regex.Match(stringToSearch, valueToFind) :
+                    Regex.Match(stringToSearch, valueToFind, (RegexOptions)regexOptions);
+                return match.Groups[GroupToCapture].Value;
             }
             public static int LocateFirst(string stringToSearch, string valueToFind, bool caseInsensitive = false,
                 bool multilineMode = false)
             {
+                var regexOptions = GetRegexOptions(caseInsensitive, multilineMode);
                 var pattern = GetRegexOptions(caseInsensitive, multilineMode);
-                return -1;
+                var match = (regexOptions == null) ?
+                    Regex.Match(stringToSearch, valueToFind) :
+                    Regex.Match(stringToSearch, valueToFind, (RegexOptions)regexOptions);
+                return match.Index;
+                 
             }
             public static List<int> LocateAll(string stringToSearch, string valueToFind, bool caseInsensitive = false,
                 bool multilineMode = false)
             {
-                var pattern = GetRegexOptions(caseInsensitive, multilineMode);
-                var resultList=new List<int>();
-                return resultList ;
+                var resultList = new List<int>();
+                var regexOptions = GetRegexOptions(caseInsensitive, multilineMode);
+                 
+                var matchList = (regexOptions == null) ?
+                    Regex.Matches(stringToSearch, valueToFind) :
+                    Regex.Matches(stringToSearch, valueToFind, (RegexOptions)regexOptions);
+                foreach (Match match in matchList)
+                {
+                    resultList.Add(match.Index);
+                }
+                return resultList;
             }
 
-            public static string ReplaceFirst(string stringToSearch, string valueToFind, bool caseInsensitive = false,
+            public static string ReplaceFirst(string stringToSearch, string valueToFind,string valueToReplace, bool caseInsensitive = false,
                 bool multilineMode = false)
             {
-                var pattern = GetRegexOptions(caseInsensitive, multilineMode);
-                return "";
+
+                var regExOptions = GetRegexOptions(caseInsensitive, multilineMode);
+                var regex = RegWhy.Do.SetRegExForDoFunction(valueToFind, caseInsensitive, multilineMode);
+                var result = regex.Replace(stringToSearch, valueToReplace,1);
+                return result;
             }
-            public static List<string> ReplaceAll(string stringToSearch, string valueToFind, bool caseInsensitive = false,
+            public static string ReplaceAll(string stringToSearch, string valueToFind, string valueToReplace, bool caseInsensitive = false,
                 bool multilineMode = false)
             {
-                var pattern = GetRegexOptions(caseInsensitive, multilineMode);
-                var resultList = new List<string>();
-                return resultList;
+                var regExOptions = GetRegexOptions(caseInsensitive, multilineMode);
+                var result = 
+                    (regExOptions==null)?
+                    Regex.Replace(stringToSearch, valueToFind, valueToReplace ):
+                            Regex.Replace(stringToSearch, valueToFind, valueToReplace, (RegexOptions)regExOptions);
+                return result;
             }
             public static List<string> SplitList(string stringToSearch, string valueToFind, bool caseInsensitive = false,
                 bool multilineMode = false)

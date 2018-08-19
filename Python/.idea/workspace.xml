@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c48a83ea-f9f7-4d8f-836a-0f19a15cba68" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Worksheet.py" afterPath="$PROJECT_DIR$/Worksheet.py" />
-    </list>
+    <list default="true" id="c48a83ea-f9f7-4d8f-836a-0f19a15cba68" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,8 +17,8 @@
       <file leaf-file-name="Worksheet.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Worksheet.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="280" column="43" lean-forward="false" selection-start-line="280" selection-start-column="43" selection-end-line="280" selection-end-column="43" />
+            <state relative-caret-position="731">
+              <caret line="277" column="43" lean-forward="true" selection-start-line="277" selection-start-column="43" selection-end-line="277" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -183,8 +181,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Worksheet.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="280" column="43" lean-forward="false" selection-start-line="280" selection-start-column="43" selection-end-line="280" selection-end-column="43" />
+        <state relative-caret-position="731">
+          <caret line="277" column="43" lean-forward="true" selection-start-line="277" selection-start-column="43" selection-end-line="277" selection-end-column="43" />
           <folding />
         </state>
       </provider>

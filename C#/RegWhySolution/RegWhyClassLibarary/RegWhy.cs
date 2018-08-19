@@ -75,8 +75,8 @@ namespace RegWhyClassLibarary
             public static string endOfFile = "^Z";
             public static string alphaCharacterRange = "[A-Za-z]";
             public static string alphaNumericCharacterRange = "[A-Za-z0-9]";
-            public static string capitalLetterCharacterRange = "[A-Z]";
-            public static string lowerCaseLetterCharacterRange = "[a-z]";
+            public static string upperCaseLetters = "[A-Z]";
+            public static string lowerCaseLetters = "[a-z]";
 
             public static string alphaNumericCharacterRangePlus(string otherCharacters)
             {
@@ -110,7 +110,7 @@ namespace RegWhyClassLibarary
 
         public static class Group
         {
-            public static string or = "|";
+             
             public static string end = ")";
             public static string endOptional = ")?";
             public static string endZeroOrMore = ")*";
@@ -134,12 +134,12 @@ namespace RegWhyClassLibarary
 
             public static string matchOnlyIfThisIsNext(string whatsNext)
             {
-                return "(?=" + whatsNext;
+                return "(?=" + whatsNext + ")";
             }
 
             public static string matchOnlyIfThisIsNotNext(string whatsNext)
             {
-                return "(?|" + whatsNext;
+                return "(?|" + whatsNext + ")";
             }
 
             public static string endExactNumber(int countOfTimes)
@@ -157,18 +157,16 @@ namespace RegWhyClassLibarary
                 return "){" + bottomNumber + "," + topNumber + "}";
             }
 
+             
+                public static string startCapturing = @"(";
+                public static string startNonCapturing = @"(?:";
 
-            public static class Start
-            {
-                public static string capturing = @"(";
-                public static string nonCapturing = @"(?:";
-
-                public static string named(string nameOfGroup)
+                public static string startNamed(string nameOfGroup)
                 {
                     return "(<" + nameOfGroup + ">";
                 }
 
-                public static string optionalCapturingList(List<string> listOfWords)
+                public static string startOptionalCapturingList(List<string> listOfWords)
                 {
                     var finalStatement = @"(";
                     foreach (var statement in listOfWords)
@@ -180,7 +178,7 @@ namespace RegWhyClassLibarary
                     return finalStatement;
                 }
 
-                public static string optionalNonCapturingList(List<string> listOfWords)
+                public static string startoptionalNonCapturingList(List<string> listOfWords)
                 {
                     var finalStatement = @"(?:";
                     foreach (var statement in listOfWords)
@@ -191,7 +189,7 @@ namespace RegWhyClassLibarary
                     }
                     return finalStatement;
                 }
-            }
+            
         }
 
         public static class Where

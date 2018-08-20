@@ -47,16 +47,19 @@ SCENE =RegWhy.Statement(c(
   RegWhy.Group.End
   
 ))
-# SCENE
+
 BLANK_LINE=""
+
 CHARACTER <- RegWhy.Statement(c(
   RegWhy.Where.StartOfString,
   RegWhy.Group.StartCapturing,
-  RegWhy.CharacterType.CharacterRange("A-Z0-9 ."),
+  RegWhy.CharacterType.CharacterRange("A-Z0-9 .'"),
   RegWhy.Count.OneOrMore,
   RegWhy.Group.End,
+  RegWhy.Group.StartNonCapturing,
   RegWhy.CharacterType.Space,
   RegWhy.Count.ZeroOrMore,
+  RegWhy.Group.End,
   RegWhy.Group.StartNonCapturing,
   RegWhy.Literal("(V.O.)"),
   RegWhy.Group.EndOptional,
@@ -98,6 +101,10 @@ CAMERADIRECTION <- RegWhy.Statement(c(
 TRANSISTION <- RegWhy.Statement(c(
   RegWhy.Where.StartOfString,
   RegWhy.Literal("TRANSISTION "),
+  RegWhy.CharacterType.AnyCharacter,
+  RegWhy.Count.OneOrMore,
+  RegWhy.OrMarker(),
+  RegWhy.Literal("MATCH "),
   RegWhy.CharacterType.AnyCharacter,
   RegWhy.Count.OneOrMore,
   RegWhy.Where.EndOfString

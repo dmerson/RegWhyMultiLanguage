@@ -8,9 +8,9 @@ namespace RegWhyClassLibarary
         {
             var statement = RegWhy.Statement(new List<string>
             {
-                RegWhy.CharacterType.anyCharacter,
+                RegWhy.CharacterType.AnyCharacter,
 
-                RegWhy.leftParenthesis
+                RegWhy.LeftParenthesis
 
             });
         }

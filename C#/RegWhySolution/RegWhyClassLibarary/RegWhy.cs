@@ -8,45 +8,45 @@ namespace RegWhyClassLibarary
     {
         public static string Literal(string value)
         {
-            value = value.Replace(@".", period);
-            value = value.Replace(@"\", backSlash);
-            value = value.Replace(@"|", bar);
-            value = value.Replace(@"(", leftParenthesis);
-            value = value.Replace(@")", rightParenthesis);
-            value = value.Replace(@"[", leftBracket);
-            value = value.Replace(@"]", rightBracket);
-            value = value.Replace(@"{", leftBrace);
-            value = value.Replace(@"}", rightBrace);
-            value = value.Replace(@"$", dollarSign);
-            value = value.Replace(@"*", asterik);
-            value = value.Replace(@"?", questionMark);
-            value = value.Replace(@"<", leftAngle);
-            value = value.Replace(@">", rightAngle);
-            value = value.Replace(@"+", plusSign);
-            value = value.Replace(@"^", caret);
+            value = value.Replace(@".", Period);
+            value = value.Replace(@"\", BackSlash);
+            value = value.Replace(@"|", Bar);
+            value = value.Replace(@"(", LeftParenthesis);
+            value = value.Replace(@")", RightParenthesis);
+            value = value.Replace(@"[", LeftBracket);
+            value = value.Replace(@"]", RightBracket);
+            value = value.Replace(@"{", LeftBrace);
+            value = value.Replace(@"}", RightBrace);
+            value = value.Replace(@"$", DollarSign);
+            value = value.Replace(@"*", Asterik);
+            value = value.Replace(@"?", QuestionMark);
+            value = value.Replace(@"<", LeftAngle);
+            value = value.Replace(@">", RightAngle);
+            value = value.Replace(@"+", PlusSign);
+            value = value.Replace(@"^", Caret);
             return value;
         }
-        public static string period = @"\.";
-        public static string backSlash = @"\\";
-        public static string bar = @"\|";
-        public static string leftParenthesis = @"\(";
-        public static string rightParenthesis = @"\)";
-        public static string nullString = @"\0";
-        public static string leftBracket = @"\[";
-        public static string rightBracket = @"\]";
-        public static string leftBrace = @"\{";
-        public static string rightBrace = @"\}";
-        public static string dollarSign = @"\$";
-        public static string asterik = @"\*";
-        public static string questionMark = @"\?";
-        public static string leftAngle = @"\<";
-        public static string rightAngle = @"\>";
-		public static string plusSign=@"\+";
-        public static string caret = @"\^";
-        public static string tab = @"\t";
-        public static string returnString = @"\r";
-        public static string newLine = @"\n";
-        public static string formFeed = @"\f";
+        public static string Period = @"\.";
+        public static string BackSlash = @"\\";
+        public static string Bar = @"\|";
+        public static string LeftParenthesis = @"\(";
+        public static string RightParenthesis = @"\)";
+        public static string NullString = @"\0";
+        public static string LeftBracket = @"\[";
+        public static string RightBracket = @"\]";
+        public static string LeftBrace = @"\{";
+        public static string RightBrace = @"\}";
+        public static string DollarSign = @"\$";
+        public static string Asterik = @"\*";
+        public static string QuestionMark = @"\?";
+        public static string LeftAngle = @"\<";
+        public static string RightAngle = @"\>";
+		public static string PlusSign=@"\+";
+        public static string Caret = @"\^";
+        public static string Tab = @"\t";
+        public static string ReturnString = @"\r";
+        public static string NewLine = @"\n";
+        public static string FormFeed = @"\f";
 
         public static string Statement(List<string> regWhyStatements)
         {
@@ -60,48 +60,48 @@ namespace RegWhyClassLibarary
 
         public static class CharacterType
         {
-            public static string anyCharacter = ".";
-            public static string digit = @"\d";
-            public static string nonDigit = @"\D";
-            public static string whiteSpace = @"\s";
-            public static string nonWhiteSpace = @"\S";
-            public static string wordCharacter = @"\w";
-            public static string nonWordCharacter = @"\W";
-            public static string wordBounday = @"\b";
-            public static string nonWordBoundary = @"\B";
-            public static string lowerCaseASCI = @"[a-z]";
-            public static string upperCaseASCII = @"[A-Z]";
-            public static string anyASCII = "[ -~]";
-            public static string endOfFile = "^Z";
-            public static string alphaCharacterRange = "[A-Za-z]";
-            public static string alphaNumericCharacterRange = "[A-Za-z0-9]";
-            public static string upperCaseLetters = "[A-Z]";
-            public static string lowerCaseLetters = "[a-z]";
+            public static string AnyCharacter = ".";
+            public static string Digit = @"\d";
+            public static string NonDigit = @"\D";
+            public static string WhiteSpace = @"\s";
+            public static string NonWhiteSpace = @"\S";
+            public static string WordCharacter = @"\w";
+            public static string NonWordCharacter = @"\W";
+            public static string WordBounday = @"\b";
+            public static string NonWordBoundary = @"\B";
+            public static string LowerCaseAsci = @"[a-z]";
+            public static string UpperCaseAscii = @"[A-Z]";
+            public static string AnyAscii = "[ -~]";
+            public static string EndOfFile = "^Z";
+            public static string AlphaCharacterRange = "[A-Za-z]";
+            public static string AlphaNumericCharacterRange = "[A-Za-z0-9]";
+            public static string UpperCaseLetters = "[A-Z]";
+            public static string LowerCaseLetters = "[a-z]";
 
-            public static string alphaNumericCharacterRangePlus(string otherCharacters)
+            public static string AlphaNumericCharacterRangePlus(string otherCharacters)
             {
                 return "[A-Za-z0-9" + otherCharacters + "]";
             }
-            public static string numericCharacterRangePlus(string otherCharacters)
+            public static string NumericCharacterRangePlus(string otherCharacters)
             {
                 return "[0-9" + otherCharacters + "]";
             }
-            public static string unicode(string fourDigitalNumber)
+            public static string Unicode(string fourDigitalNumber)
             {
                 return @"\\" + fourDigitalNumber;
             }
 
-            public static string hexidecimal(string twoDigitalCode)
+            public static string Hexidecimal(string twoDigitalCode)
             {
                 return @"\\" + "x" + twoDigitalCode;
             }
 
-            public static string characterRange(string listOfCharacters)
+            public static string CharacterRange(string listOfCharacters)
             {
                 return "[" + listOfCharacters + "]";
             }
 
-            public static string notInCharacterRange(string listOfCharacters)
+            public static string NotInCharacterRange(string listOfCharacters)
             {
                 return "[^" + listOfCharacters + "]";
             }
@@ -111,62 +111,62 @@ namespace RegWhyClassLibarary
         public static class Group
         {
              
-            public static string end = ")";
-            public static string endOptional = ")?";
-            public static string endZeroOrMore = ")*";
-            public static string endOneOfMore = ")+";
-            public static string smallestMatch = "?";
-            public static string largestMatch = "";
-            public static string endOptionSmallestMatch = ")??";
-            public static string endZeroOrMoreSmallestMatch = ")*?";
-            public static string endOneOrMoreSmallestMatch = ")+?";
-            public static string endOfNumberedSmallestMatch = "?";
-            public static string lastMatch = "$&";
-            public static string lastParen = "$+";
-            public static string precedingMatch = "%`";
+            public static string End = ")";
+            public static string EndOptional = ")?";
+            public static string EndZeroOrMore = ")*";
+            public static string EndOneOfMore = ")+";
+            public static string SmallestMatch = "?";
+            public static string LargestMatch = "";
+            public static string EndOptionSmallestMatch = ")??";
+            public static string EndZeroOrMoreSmallestMatch = ")*?";
+            public static string EndOneOrMoreSmallestMatch = ")+?";
+            public static string EndOfNumberedSmallestMatch = "?";
+            public static string LastMatch = "$&";
+            public static string LastParen = "$+";
+            public static string PrecedingMatch = "%`";
 
-            public static string backReference(int whichReference)
+            public static string BackReference(int whichReference)
             {
                 if (whichReference > 9 || whichReference < 1)
                     throw new Exception("Backreferences must be between 1 and 9");
                 return "$" + whichReference;
             }
 
-            public static string matchOnlyIfThisIsNext(string whatsNext)
+            public static string MatchOnlyIfThisIsNext(string whatsNext)
             {
                 return "(?=" + whatsNext + ")";
             }
 
-            public static string matchOnlyIfThisIsNotNext(string whatsNext)
+            public static string MatchOnlyIfThisIsNotNext(string whatsNext)
             {
                 return "(?|" + whatsNext + ")";
             }
 
-            public static string endExactNumber(int countOfTimes)
+            public static string EndExactNumber(int countOfTimes)
             {
                 return "){" + countOfTimes + "}";
             }
 
-            public static string endExactNumberOrAbove(int countOfTimes)
+            public static string EndExactNumberOrAbove(int countOfTimes)
             {
                 return "){" + countOfTimes + ",}";
             }
 
-            public static string endRange(int bottomNumber, int topNumber)
+            public static string EndRange(int bottomNumber, int topNumber)
             {
                 return "){" + bottomNumber + "," + topNumber + "}";
             }
 
              
-                public static string startCapturing = @"(";
-                public static string startNonCapturing = @"(?:";
+                public static string StartCapturing = @"(";
+                public static string StartNonCapturing = @"(?:";
 
-                public static string startNamed(string nameOfGroup)
+                public static string StartNamed(string nameOfGroup)
                 {
                     return "(<" + nameOfGroup + ">";
                 }
 
-                public static string startOptionalCapturingList(List<string> listOfWords)
+                public static string StartOptionalCapturingList(List<string> listOfWords)
                 {
                     var finalStatement = @"(";
                     foreach (var statement in listOfWords)
@@ -178,7 +178,7 @@ namespace RegWhyClassLibarary
                     return finalStatement;
                 }
 
-                public static string startoptionalNonCapturingList(List<string> listOfWords)
+                public static string StartoptionalNonCapturingList(List<string> listOfWords)
                 {
                     var finalStatement = @"(?:";
                     foreach (var statement in listOfWords)
@@ -194,27 +194,27 @@ namespace RegWhyClassLibarary
 
         public static class Where
         {
-            public static string startOfString = "^";
-            public static string endOfString = "$";
+            public static string StartOfString = "^";
+            public static string EndOfString = "$";
         }
 
         public static class Count
         {
-            public static string optional = "?";
-            public static string zeroOrMore = "*";
-            public static string oneOrMore = "+";
+            public static string Optional = "?";
+            public static string ZeroOrMore = "*";
+            public static string OneOrMore = "+";
 
-            public static string stringexactNumber(int numberOfDigits)
+            public static string StringexactNumber(int numberOfDigits)
             {
                 return @"{" + numberOfDigits + @"}";
             }
 
-            public static string stringexactNumberOrMore(int numberOfDigits)
+            public static string StringexactNumberOrMore(int numberOfDigits)
             {
                 return "{" + numberOfDigits + ",}";
             }
 
-            public static string rangeOfTimes(int bottomNumber, int topNUmber)
+            public static string RangeOfTimes(int bottomNumber, int topNUmber)
             {
                 return "{" + bottomNumber + "," + topNUmber + "}";
             }
@@ -281,14 +281,14 @@ namespace RegWhyClassLibarary
                 return resultList;
             }
 
-            public static string ExtractCapturedGroup(string stringToSearch, string valueToFind, int GroupToCapture, bool caseInsensitive = false,
+            public static string ExtractCapturedGroup(string stringToSearch, string valueToFind, int groupToCapture, bool caseInsensitive = false,
                 bool multilineMode = false)
             {
                 var regexOptions = GetRegexOptions(caseInsensitive, multilineMode);
                 var match = (regexOptions == null) ?
                     Regex.Match(stringToSearch, valueToFind) :
                     Regex.Match(stringToSearch, valueToFind, (RegexOptions)regexOptions);
-                return match.Groups[GroupToCapture].Value;
+                return match.Groups[groupToCapture].Value;
             }
             public static int LocateFirst(string stringToSearch, string valueToFind, bool caseInsensitive = false,
                 bool multilineMode = false)

@@ -17,6 +17,7 @@ abstract class RegWhy {
     public static questionMark="\?";
     public static leftAngle="\<";
     public static rightAngle="\>";
+	public static plusSign="\+"
     public static caret="\^";
     public static tab="\t";
     public static returnString="\r";
@@ -154,7 +155,7 @@ class Start{
              }
             finalStatement=finalStatement + statement;
         }
-        return finalStatement;
+        return finalStatement +")";
     }
     public optionalNonCapturingList(listOfWords:Array<string>):string{
         let finalStatement="(?:";
@@ -164,7 +165,7 @@ class Start{
              }
             finalStatement=finalStatement + statement;
         }
-        return finalStatement;
+        return finalStatement +")";
     }
     constructor(){
 

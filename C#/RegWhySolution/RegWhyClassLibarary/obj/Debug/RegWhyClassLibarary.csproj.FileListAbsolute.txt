@@ -1,6 +1,6 @@
-C:\Repos\RegWhyMultiLanguage\C#\RegWhySolution\RegWhyClassLibarary\obj\Debug\RegWhyClassLibarary.csprojAssemblyReference.cache
 C:\Repos\RegWhyMultiLanguage\C#\RegWhySolution\RegWhyClassLibarary\obj\Debug\RegWhyClassLibarary.csproj.CoreCompileInputs.cache
 C:\Repos\RegWhyMultiLanguage\C#\RegWhySolution\RegWhyClassLibarary\bin\Debug\RegWhyClassLibarary.dll
 C:\Repos\RegWhyMultiLanguage\C#\RegWhySolution\RegWhyClassLibarary\bin\Debug\RegWhyClassLibarary.pdb
 C:\Repos\RegWhyMultiLanguage\C#\RegWhySolution\RegWhyClassLibarary\obj\Debug\RegWhyClassLibarary.dll
 C:\Repos\RegWhyMultiLanguage\C#\RegWhySolution\RegWhyClassLibarary\obj\Debug\RegWhyClassLibarary.pdb
+C:\Repos\RegWhyMultiLanguage\C#\RegWhySolution\RegWhyClassLibarary\obj\Debug\RegWhyClassLibarary.csprojResolveAssemblyReference.cache

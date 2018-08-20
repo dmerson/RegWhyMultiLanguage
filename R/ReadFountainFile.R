@@ -1,5 +1,7 @@
 #install.packages("RegWhy")
 library(RegWhy)
+library(stringr)
+library(str)
 script_lines <-readLines("../Documents/Screenplays/Big-Fish.fountain.txt")     
 start_of_script=FALSE
 HAS_A_TAB =RegWhy.statement(c(
@@ -30,7 +32,7 @@ FADE_IN_SCRIPT =RegWhy.statement(c(
 )
 
 SCENE =RegWhy.statement(c(
-  Regwhy.group.startNonCapturing(),
+  RegWhy.group.startNonCapturing(),
   RegWhy.literal("INT"),
   RegWhy.orMarker(),
   RegWhy.literal("EXT"),
@@ -39,7 +41,7 @@ SCENE =RegWhy.statement(c(
   RegWhy.count.zeroOrMore(),
   RegWhy.characterType.space(),
   RegWhy.count.oneOrMore(),
-  Regwhy.group.startCapturing(),
+  RegWhy.group.startCapturing(),
   RegWhy.characterType.alphaNumeric(),
   RegWhy.count.oneOrMore(),
   RegWhy.group.end()
@@ -49,17 +51,17 @@ SCENE =RegWhy.statement(c(
 BLANK_LINE=""
 CHARACTER <- RegWhy.statement(c(
   RegWhy.Where.startOfString(),
-  Regwhy.group.startCapturing(),
+  RegWhy.group.startCapturing(),
   RegWhy.characterType.characterRange("A-Z0-9 ."),
   RegWhy.group.end(),
   RegWhy.count.oneOrMore(),
-  Regwhy.group.startNonCapturing(),
+  RegWhy.group.startNonCapturing(),
   RegWhy.literal("(V.O.)"),
   RegWhy.group.endOptional(),
-  Regwhy.group.startNonCapturing(),
+  RegWhy.group.startNonCapturing(),
   RegWhy.literal("(O.S.)"),
   RegWhy.group.endOptional(),
-  Regwhy.group.startNonCapturing(),
+  RegWhy.group.startNonCapturing(),
   RegWhy.literal("(CONT'D)"),
   RegWhy.group.endOptional(),
   RegWhy.Where.endOfString()
@@ -156,9 +158,9 @@ for (i in 1:len_of_script){
         else{
           #Look for Character
           if (RegWhy.do.detect(current_line,CHARACTER)){
-            print("CHARACTER")
-            print(RegWhy.do.extractCapturedGroup(current_line,CHARACTER,1))
-            print(current_line)
+            #print("CHARACTER")
+            #print(RegWhy.do.extractCapturedGroup(current_line,CHARACTER,1))
+            #print(current_line)
             last_line_type="CHARACTER";
 
             if (current_character != RegWhy.do.extractCapturedGroup(current_line,CHARACTER,1)){

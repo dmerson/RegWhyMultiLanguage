@@ -82,9 +82,9 @@ RegWhy.characterType.notInCharacterRange=function (listOfCharacters){return (pas
 
 RegWhy.unicode=function (unicodeNumber){return (paste("\\x{",unicodeNumber, "}",sep=""))};
 
-Regwhy.group.startCapturing=function(){return ("(")}
-Regwhy.group.startNonCapturing=function(){return ("(?:")}
-Regwhy.group.startNamed=function(nameOfGroup){return (paste("(?<",nameOfGroup,">", sep=""))};
+RegWhy.group.startCapturing=function(){return ("(")}
+RegWhy.group.startNonCapturing=function(){return ("(?:")}
+RegWhy.group.startNamed=function(nameOfGroup){return (paste("(?<",nameOfGroup,">", sep=""))};
 RegWhy.group.end=function(){return (")")}
 RegWhy.group.endOptional=function(){return (")?")}
 RegWhy.group.endZeroOrMore=function(){return (")*")}

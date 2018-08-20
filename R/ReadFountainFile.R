@@ -1,104 +1,104 @@
 #install.packages("RegWhy")
 library(RegWhy)
 library(stringr)
-library(str)
+
 script_lines <-readLines("../Documents/Screenplays/Big-Fish.fountain.txt")     
 start_of_script=FALSE
-HAS_A_TAB =RegWhy.statement(c(
-  RegWhy.Where.startOfString(),
-  RegWhy.tab(),
-  RegWhy.count.oneOrMore(),
-  RegWhy.characterType.alphaNumeric(),
-  RegWhy.count.oneOrMore(),
-  RegWhy.Where.endOfString()
+HAS_A_TAB =RegWhy.Statement(c(
+  RegWhy.Where.StartOfString,
+  RegWhy.Tab,
+  RegWhy.Count.OneOrMore,
+  RegWhy.CharacterType.AlphaNumeric,
+  RegWhy.Count.OneOrMore,
+  RegWhy.Where.EndOfString
 ))
-SIX_SPACES =RegWhy.statement(c(
-  RegWhy.Where.startOfString(),
-  RegWhy.characterType.space(),
-  RegWhy.count.exactNumber(6),
-  RegWhy.characterType.anyCharacter(),
-  RegWhy.count.oneOrMore(),
-  RegWhy.Where.endOfString()
+SIX_SPACES =RegWhy.Statement(c(
+  RegWhy.Where.StartOfString,
+  RegWhy.CharacterType.Space,
+  RegWhy.Count.ExactNumber(6),
+  RegWhy.CharacterType.AnyCharacter,
+  RegWhy.Count.OneOrMore,
+  RegWhy.Where.EndOfString
   
 ))
-#RegWhy.do.detect("      WILL",SIX_SPACES)
+#RegWhy.Do.Detect("      WILL",SIX_SPACES)
 
-FADE_IN_SCRIPT =RegWhy.statement(c(
-  RegWhy.characterType.anyCharacter(),
-  RegWhy.count.zeroOrMore(),
-  RegWhy.literal("FADE IN"),
-  RegWhy.characterType.anyCharacter(),
-  RegWhy.count.zeroOrMore())
+FADE_IN_SCRIPT =RegWhy.Statement(c(
+  RegWhy.CharacterType.AnyCharacter,
+  RegWhy.Count.ZeroOrMore,
+  RegWhy.Literal("FADE IN"),
+  RegWhy.CharacterType.AnyCharacter,
+  RegWhy.Count.ZeroOrMore)
 )
 
-SCENE =RegWhy.statement(c(
-  RegWhy.group.startNonCapturing(),
-  RegWhy.literal("INT"),
-  RegWhy.orMarker(),
-  RegWhy.literal("EXT"),
-  RegWhy.group.end(),
-  RegWhy.period(),
-  RegWhy.count.zeroOrMore(),
-  RegWhy.characterType.space(),
-  RegWhy.count.oneOrMore(),
-  RegWhy.group.startCapturing(),
-  RegWhy.characterType.alphaNumeric(),
-  RegWhy.count.oneOrMore(),
-  RegWhy.group.end()
+SCENE =RegWhy.Statement(c(
+  RegWhy.Group.StartNonCapturing,
+  RegWhy.Literal("INT"),
+  RegWhy.OrMarker,
+  RegWhy.Literal("EXT"),
+  RegWhy.Group.End,
+  RegWhy.Period,
+  RegWhy.Count.ZeroOrMore,
+  RegWhy.CharacterType.Space,
+  RegWhy.Count.OneOrMore,
+  RegWhy.Group.StartCapturing,
+  RegWhy.CharacterType.AlphaNumeric,
+  RegWhy.Count.OneOrMore,
+  RegWhy.Group.End
   
 ))
 # SCENE
 BLANK_LINE=""
-CHARACTER <- RegWhy.statement(c(
-  RegWhy.Where.startOfString(),
-  RegWhy.group.startCapturing(),
-  RegWhy.characterType.characterRange("A-Z0-9 ."),
-  RegWhy.group.end(),
-  RegWhy.count.oneOrMore(),
-  RegWhy.group.startNonCapturing(),
-  RegWhy.literal("(V.O.)"),
-  RegWhy.group.endOptional(),
-  RegWhy.group.startNonCapturing(),
-  RegWhy.literal("(O.S.)"),
-  RegWhy.group.endOptional(),
-  RegWhy.group.startNonCapturing(),
-  RegWhy.literal("(CONT'D)"),
-  RegWhy.group.endOptional(),
-  RegWhy.Where.endOfString()
+CHARACTER <- RegWhy.Statement(c(
+  RegWhy.Where.StartOfString,
+  RegWhy.Group.StartCapturing,
+  RegWhy.CharacterType.CharacterRange("A-Z0-9 ."),
+  RegWhy.Group.End,
+  RegWhy.Count.OneOrMore,
+  RegWhy.Group.StartNonCapturing,
+  RegWhy.Literal("(V.O.)"),
+  RegWhy.Group.EndOptional,
+  RegWhy.Group.StartNonCapturing,
+  RegWhy.Literal("(O.S.)"),
+  RegWhy.Group.EndOptional,
+  RegWhy.Group.StartNonCapturing,
+  RegWhy.Literal("(CONT'D)"),
+  RegWhy.Group.EndOptional,
+  RegWhy.Where.EndOfString
   
   
 ))
-PARENTHETICAL <- RegWhy.statement(c(
-  RegWhy.Where.startOfString(),
-  RegWhy.leftParenthesis(),
-  RegWhy.characterType.anyCharacter(),
-  RegWhy.count.oneOrMore(),
-  RegWhy.rightParenthesis(),
-  RegWhy.Where.endOfString()
+PARENTHETICAL <- RegWhy.Statement(c(
+  RegWhy.Where.StartOfString,
+  RegWhy.LeftParenthesis,
+  RegWhy.CharacterType.AnyCharacter,
+  RegWhy.Count.OneOrMore,
+  RegWhy.RightParenthesis,
+  RegWhy.Where.EndOfString
   
 ))
-CUTS <- RegWhy.statement(c(
-  RegWhy.Where.startOfString(),
-  RegWhy.literal("CUT TO"),
-  RegWhy.characterType.anyCharacter(),
-  RegWhy.count.oneOrMore(),
-  RegWhy.Where.endOfString()
+CUTS <- RegWhy.Statement(c(
+  RegWhy.Where.StartOfString,
+  RegWhy.Literal("CUT TO"),
+  RegWhy.CharacterType.AnyCharacter,
+  RegWhy.Count.OneOrMore,
+  RegWhy.Where.EndOfString
   
 ))
-CAMERADIRECTION <- RegWhy.statement(c(
-  RegWhy.Where.startOfString(),
-  RegWhy.literal("CROSSFADE TO"),
-  RegWhy.characterType.anyCharacter(),
-  RegWhy.count.oneOrMore(),
-  RegWhy.Where.endOfString()
+CAMERADIRECTION <- RegWhy.Statement(c(
+  RegWhy.Where.StartOfString,
+  RegWhy.Literal("CROSSFADE TO"),
+  RegWhy.CharacterType.AnyCharacter,
+  RegWhy.Count.OneOrMore,
+  RegWhy.Where.EndOfString
   
 ))
-TRANSISTION <- RegWhy.statement(c(
-  RegWhy.Where.startOfString(),
-  RegWhy.literal("TRANSISTION "),
-  RegWhy.characterType.anyCharacter(),
-  RegWhy.count.oneOrMore(),
-  RegWhy.Where.endOfString()
+TRANSISTION <- RegWhy.Statement(c(
+  RegWhy.Where.StartOfString,
+  RegWhy.Literal("TRANSISTION "),
+  RegWhy.CharacterType.AnyCharacter,
+  RegWhy.Count.OneOrMore,
+  RegWhy.Where.EndOfString
   
 ))
 last_line_type=""
@@ -117,13 +117,13 @@ script_df <- data.frame(title=character(),
 len_of_script=length(script_lines)
 for (i in 1:len_of_script){
   #print(script_lines[i])
-  if (RegWhy.do.detect(script_lines[i], FADE_IN_SCRIPT)==TRUE){
+  if (RegWhy.Do.Detect(script_lines[i], FADE_IN_SCRIPT)==TRUE){
     start_of_script=TRUE
     last_line_type="START"
     #print("Start!")
   }
   #if script is started
-  if ((start_of_script==TRUE) && (RegWhy.do.detect(script_lines[i], FADE_IN_SCRIPT) ==FALSE)){
+  if ((start_of_script==TRUE) && (RegWhy.Do.Detect(script_lines[i], FADE_IN_SCRIPT) ==FALSE)){
     current_line <-script_lines[i]
     
     #look for Blank line
@@ -133,16 +133,16 @@ for (i in 1:len_of_script){
     }
     else{
       
-      if (RegWhy.do.detect(current_line,CUTS) ||
-          RegWhy.do.detect(current_line,CAMERADIRECTION) || 
-          RegWhy.do.detect(current_line,TRANSISTION)){
+      if (RegWhy.Do.Detect(current_line,CUTS) ||
+          RegWhy.Do.Detect(current_line,CAMERADIRECTION) || 
+          RegWhy.Do.Detect(current_line,TRANSISTION)){
         last_line_type="STAGE_DIRECTION"
         #print("Camera")
         #print(current_line)
       }
       else{
         #look for SCENE
-        if (RegWhy.do.detect(current_line,SCENE)){
+        if (RegWhy.Do.Detect(current_line,SCENE)){
           #print("SCENE")
           #print(current_line)
           last_line_type="SCENE"
@@ -157,13 +157,13 @@ for (i in 1:len_of_script){
         }
         else{
           #Look for Character
-          if (RegWhy.do.detect(current_line,CHARACTER)){
+          if (RegWhy.Do.Detect(current_line,CHARACTER)){
             #print("CHARACTER")
-            #print(RegWhy.do.extractCapturedGroup(current_line,CHARACTER,1))
+            #print(RegWhy.Do.ExtractCapturedGroup(current_line,CHARACTER,1))
             #print(current_line)
             last_line_type="CHARACTER";
 
-            if (current_character != RegWhy.do.extractCapturedGroup(current_line,CHARACTER,1)){
+            if (current_character != RegWhy.Do.ExtractCapturedGroup(current_line,CHARACTER,1)){
               current_frame <- data.frame(current_title,current_scene,current_stage_direction,current_character,current_dialogue);
               script_df <- rbind(script_df,current_frame)
               current_stage_direction=""
@@ -172,11 +172,11 @@ for (i in 1:len_of_script){
             }
             
             
-            current_character=RegWhy.do.extractCapturedGroup(current_line,CHARACTER,1);
+            current_character=RegWhy.Do.ExtractCapturedGroup(current_line,CHARACTER,1);
           }
           else{
             
-            if (RegWhy.do.detect(current_line,PARENTHETICAL)==TRUE){
+            if (RegWhy.Do.Detect(current_line,PARENTHETICAL)==TRUE){
               last_line_type="PARENTHETICAL"
             }
             else{

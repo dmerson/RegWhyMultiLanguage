@@ -1,28 +1,28 @@
 #!/usr/bin/env python
 import re
 class RegWhy:
-    period="\."
-    backSlash="\\\\"
-    bar ="\|"
-    leftParenthesis="\("
-    rightParenthesis="\)"
-    nullString="\0"
-    leftBracket="\["
-    rightBracket="\]"
-    leftBrace="\{"
-    rightBrace="\}"
-    dollarSign="\$"
-    asterik="\*"
-    questionMark="\?"
-    leftAngle="\<"
-    rightAngle="\>"
-    caret="\^"
-    plusSign="+"
-    tab="\t"
-    returnString="\r"
-    newLine="\n"
-    formFeed="\f"
-    orMarker="|"
+    Period="\."
+    BackSlash="\\\\"
+    Bar ="\|"
+    LeftParenthesis="\("
+    RightParenthesis= "\)"
+    NullString="\0"
+    LeftBracket="\["
+    RightBracket="\]"
+    LeftBrace="\{"
+    RightBrace="\}"
+    DollarSign="\$"
+    Asterik="\*"
+    QuestionMark="\?"
+    LeftAngle="\<"
+    RightAngle="\>"
+    Caret="\^"
+    PlusSign="+"
+    Tab="\t"
+    ReturnString="\r"
+    NewLine="\n"
+    FormFeed="\f"
+    OrMarker="|"
     def __init__(self):
         self.CharacterType = self.CharacterType()
         self.Group = self.Group()
@@ -32,22 +32,22 @@ class RegWhy:
     @staticmethod
     def Literal(value):
         finalValue=value
-		finalValue=finalValue.replace("\\",RegWhy.backSlash)
-        finalValue=finalValue.replace("." , RegWhy.period)
-        finalValue=finalValue.replace("|",RegWhy.bar)
-        finalValue=finalValue.replace("(",RegWhy.leftParenthesis)
-        finalValue=finalValue.replace(")",RegWhy.rightParenthesis)
-        finalValue=finalValue.replace("[",RegWhy.leftBracket)
-        finalValue=finalValue.replace("]",RegWhy.rightBracket)
-        finalValue=finalValue.replace("{",RegWhy.leftBrace)
-        finalValue=finalValue.replace("}",RegWhy.rightBrace)
-        finalValue=finalValue.replace("$",RegWhy.dollarSign)
-        finalValue=finalValue.replace("*",RegWhy.asterik)
-        finalValue=finalValue.replace("?",RegWhy.questionMark)
-        finalValue=finalValue.replace("<",RegWhy.leftAngle)
-        finalValue=finalValue.replace(">",RegWhy.rightAngle)
-        finalValue=finalValue.replace("^",RegWhy.caret)
-        finalValue=finalValue.replace("+",RegWhy.plusSign)
+        finalValue=finalValue.replace("\\",RegWhy.BackSlash)
+        finalValue=finalValue.replace("." , RegWhy.Period)
+        finalValue=finalValue.replace("|",RegWhy.Bar)
+        finalValue=finalValue.replace("(",RegWhy.LeftParenthesis)
+        finalValue=finalValue.replace(")",RegWhy.RightParenthesis)
+        finalValue=finalValue.replace("[",RegWhy.LeftBracket)
+        finalValue=finalValue.replace("]",RegWhy.RightBracket)
+        finalValue=finalValue.replace("{",RegWhy.LeftBrace)
+        finalValue=finalValue.replace("}",RegWhy.RightBrace)
+        finalValue=finalValue.replace("$",RegWhy.DollarSign)
+        finalValue=finalValue.replace("*",RegWhy.Asterik)
+        finalValue=finalValue.replace("?",RegWhy.QuestionMark)
+        finalValue=finalValue.replace("<",RegWhy.LeftAngle)
+        finalValue=finalValue.replace(">",RegWhy.RightAngle)
+        finalValue=finalValue.replace("^",RegWhy.Caret)
+        finalValue=finalValue.replace("+",RegWhy.PlusSign)
         return finalValue
     @staticmethod
     def Statement(listOfRegWhy):
@@ -57,54 +57,54 @@ class RegWhy:
             return final_string
     
     class CharacterType:
-        anyCharacter="."
-        digit ="\d"
-        nonDigit="\D"
-        whiteSpace="\s"
-        nonWhiteSpace="\S"
-        wordCharacter="\w"
-        nonWordCharacter="\W"
-        wordBounday="\b"
-        nonWordBoundary="\B"
-        lowerCaseASCI="[a-z]"
-        upperCaseASCII="[A-Z]"
-        anyASCII='[ -~]'
-        endOfFile="^Z"
+        AnyCharacter="."
+        Digit ="\d"
+        NonDigit="\D"
+        WhiteSpace="\s"
+        NonWhiteSpace="\S"
+        WordCharacter="\w"
+        NonWordCharacter="\W"
+        WordBounday="\b"
+        NonWordBoundary="\B"
+        LowerCaseASCI="[a-z]"
+        UpperCaseASCII="[A-Z]"
+        AnyASCII='[ -~]'
+        EndOfFile="^Z"
         @staticmethod
-        def unicode(fourDigitUniCodeNumber):
+        def Unicode(fourDigitUniCodeNumber):
             unicodeString ="\\u" + fourDigitUniCodeNumber
             return (unicodeString)
 
         @staticmethod
-        def hexidecimal(twoDigitNumberCode):
+        def Hexidecimal(twoDigitNumberCode):
             return ("\\" +"x" + twoDigitNumberCode)
 
         @staticmethod
-        def characterRange(listOfCharacters):
+        def CharacterRange(listOfCharacters):
             return "[" + listOfCharacters + "]"
 
         @staticmethod
-        def notInCharacterRange(listOfCharacters):
+        def NotInCharacterRange(listOfCharacters):
             return "[^" + listOfCharacters + "]"
 
         def __init__(self):
             pass
     class Group:
-        startCapturing="("
-        startNonCapturing="(:"  
-        end=")"
-        endOptional=")?"
-        endZeroOrMore=")*"
-        endOneOfMore=")+"
-        smallestMatch="?"
-        largestMatch=""
-        endOptionSmallestMatch=")??"
-        endZeroOrMoreSmallestMatch=")*?"
-        endOneOrMoreSmallestMatch=")+?"
-        endOfNumberedSmallestMatch="?"
-        lastMatch="$&"
-        lastParen="$+"
-        precedingMatch ="%`"
+        StartCapturing="("
+        StartNonCapturing="(:"
+        End=")"
+        EndOptional=")?"
+        EndZeroOrMore=")*"
+        EndOneOfMore=")+"
+        SmallestMatch="?"
+        LargestMatch=""
+        EndOptionSmallestMatch=")??"
+        EndZeroOrMoreSmallestMatch=")*?"
+        EndOneOrMoreSmallestMatch=")+?"
+        EndOfNumberedSmallestMatch="?"
+        LastMatch="$&"
+        LastParen="$+"
+        PrecedingMatch ="%`"
         @staticmethod
         def StartNamedGroup(nameOfGroup):
             return "(<" + nameOfGroup + ">" 
@@ -156,25 +156,25 @@ class RegWhy:
             pass
 
     class Where:
-        startOfString="^"
-        endOfString="$"
+        StartOfString="^"
+        EndOfString="$"
         def __init__(self):
             pass
     class Count:
-        optional="?"
-        zeroOrMore="*"
-        oneOrMore="+"
+        Optional="?"
+        ZeroOrMore="*"
+        OneOrMore="+"
 
         @staticmethod
-        def exactNumber(numberOfDigits):
+        def ExactNumber(numberOfDigits):
             return "{" + str(numberOfDigits) + "}"
         
         @staticmethod
-        def exactNumberOrMore(numberOfDigits):
+        def ExactNumberOrMore(numberOfDigits):
             return "{" + str(numberOfDigits) + ",}"
 
         @staticmethod
-        def rangeOfTimes(bottomNumber,topNumber):
+        def RangeOfTimes(bottomNumber,topNumber):
             return "{" + str(bottomNumber) + "," + str(topNumber) + "}"
         
         def __init__(self):
@@ -259,18 +259,16 @@ class RegWhy:
 
 
 if __name__ == '__main__':
-    print(RegWhy.asterik)
-    print(RegWhy.CharacterType.anyCharacter)
-    print(RegWhy.Group.end)
+
     print(RegWhy.Statement([
-        RegWhy.Group.startCapturing,
+        RegWhy.Group.StartCapturing,
         RegWhy.Literal("\\?+."),
-        RegWhy.orMarker,
+        RegWhy.OrMarker,
         RegWhy.Literal("or"),
-        RegWhy.Group.end,
-        RegWhy.CharacterType.anyCharacter,
-        RegWhy.CharacterType.unicode("1234"),
-        RegWhy.Count.exactNumber(3)
+        RegWhy.Group.End,
+        RegWhy.CharacterType.AnyCharacter,
+        RegWhy.CharacterType.Unicode("1234"),
+        RegWhy.Count.ExactNumber(3)
     ]))
     print(RegWhy.Do.Detect("test","T",True))
     print(RegWhy.Do.ExtractFirst("test","t"))

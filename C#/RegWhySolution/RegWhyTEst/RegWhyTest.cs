@@ -63,9 +63,13 @@ namespace RegWhyTEst
             {
                 RegWhy.Where.StartOfString,
                 RegWhy.Group.StartCapturing,
-                RegWhy.CharacterType.CharacterRange("A-Z0-9 ."),
-                RegWhy.Group.End,
+                RegWhy.CharacterType.CharacterRange("A-Z0-9 .'"),
                 RegWhy.Count.OneOrMore,
+                RegWhy.Group.End,
+                RegWhy.Group.StartNonCapturing,
+                RegWhy.CharacterType.Whitespace,
+                RegWhy.Count.ZeroOrMore,
+                RegWhy.Group.End,
                 RegWhy.Group.StartNonCapturing,
                 RegWhy.Literal("(V.O.)"),
                 RegWhy.Group.EndOptional,
@@ -78,9 +82,8 @@ namespace RegWhyTEst
                 RegWhy.Where.EndOfString
             });
             var firstGroup = RegWhy.Do.ExtractCapturedGroup("WILL (V.O.)", CHARACTER, 1);
-            var matcher = Regex.Match("WILL (V.O.)", CHARACTER);
-            Assert.AreEqual("",firstGroup);
-            Assert.AreEqual(1,0);
+            Assert.AreEqual("WILL",firstGroup);
+            Assert.AreEqual(0,1);
         }
     }
 }

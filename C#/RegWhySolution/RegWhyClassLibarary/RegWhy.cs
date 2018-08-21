@@ -8,8 +8,8 @@ namespace RegWhyClassLibarary
     {
         public static string Literal(string value)
         {
-            value = value.Replace(@".", Period);
             value = value.Replace(@"\", BackSlash);
+            value = value.Replace(@".", Period);
             value = value.Replace(@"|", Bar);
             value = value.Replace(@"(", LeftParenthesis);
             value = value.Replace(@")", RightParenthesis);
@@ -63,8 +63,8 @@ namespace RegWhyClassLibarary
             public static string AnyCharacter = ".";
             public static string Digit = @"\d";
             public static string NonDigit = @"\D";
-            public static string WhiteSpace = @"\s";
-            public static string NonWhiteSpace = @"\S";
+            public static string Whitespace = @"\s";
+            public static string NonWhitespace = @"\S";
             public static string WordCharacter = @"\w";
             public static string NonWordCharacter = @"\W";
             public static string WordBounday = @"\b";
@@ -98,7 +98,7 @@ namespace RegWhyClassLibarary
 
             public static string CharacterRange(string listOfCharacters)
             {
-                return "[" + listOfCharacters + "]";
+                return "[" + @listOfCharacters + "]";
             }
 
             public static string NotInCharacterRange(string listOfCharacters)

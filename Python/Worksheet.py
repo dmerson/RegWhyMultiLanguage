@@ -32,8 +32,8 @@ class RegWhy:
     @staticmethod
     def Literal(value):
         finalValue=value
+		finalValue=finalValue.replace("\\",RegWhy.backSlash)
         finalValue=finalValue.replace("." , RegWhy.period)
-        finalValue=finalValue.replace("\\",RegWhy.backSlash)
         finalValue=finalValue.replace("|",RegWhy.bar)
         finalValue=finalValue.replace("(",RegWhy.leftParenthesis)
         finalValue=finalValue.replace(")",RegWhy.rightParenthesis)

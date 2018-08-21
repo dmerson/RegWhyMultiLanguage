@@ -29,8 +29,8 @@ RegWhy.OrMarker="|"
 #Section parts
 
 RegWhy.Literal <- function(valueToSearch){
-  valueToSearch =str_replace_all(valueToSearch,"\\.","\\\\.")
   valueToSearch=str_replace_all(valueToSearch,"\\\\", "\\\\\\")
+  valueToSearch =str_replace_all(valueToSearch,"\\.","\\\\.")
   valueToSearch=str_replace_all(valueToSearch,"\\|", "\\\\|")
   valueToSearch=str_replace_all(valueToSearch,"\\(", "\\\\(")
   valueToSearch=str_replace_all(valueToSearch,"\\)", "\\\\)")

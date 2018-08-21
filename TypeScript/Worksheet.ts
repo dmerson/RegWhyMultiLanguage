@@ -2,27 +2,55 @@ abstract class RegWhy {
     constructor() {
         
     }
-    public static period="\.";
-    public static backSlash="\\";
-    public static bar ="\|";
-    public static leftParenthesis="\(";
-    public static rightParenthesis="\)";
-    public static nullString="\0";
-    public static leftBracket="\[";
-    public static rightBracket="\]";
-    public static leftBrace="\{";
-    public static rightBrace="\}";
-    public static dollarSign="\$";
-    public static asterik="\*";
-    public static questionMark="\?";
-    public static leftAngle="\<";
-    public static rightAngle="\>";
-	public static plusSign="\+"
-    public static caret="\^";
-    public static tab="\t";
-    public static returnString="\r";
-    public static newLine="\n";
-    public static formFeed="\f";
+    public static Period="\.";
+    public static BackSlash="\\";
+    public static Bar ="\|";
+    public static LeftParenthesis="\(";
+    public static RightParenthesis="\)";
+    public static NullString="\0";
+    public static LeftBracket="\[";
+    public static RightBracket="\]";
+    public static LeftBrace="\{";
+    public static RightBrace="\}";
+    public static DollarSign="\$";
+    public static Asterik="\*";
+    public static QuestionMark="\?";
+    public static LeftAngle="\<";
+    public static RightAngle="\>";
+	public static PlusSign="\+"
+    public static Caret="\^";
+    public static Tab="\t";
+    public static ReturnString="\r";
+    public static NewLine="\n";
+    public static FormFeed="\f";
+    public static OrMarker="|";
+    public static AlphaNumericCharacterRangePlus(otherCharacters){
+        return "[A-Za-z0-9" + otherCharacters + "]";
+    }
+    public static  NumericCharacterRangePlus( otherCharacters)
+            {
+                return "[0-9" + otherCharacters + "]";
+            }
+
+    public static  Unicode( fourDigitalNumber)
+    {
+        return "\\\\" + fourDigitalNumber;
+    }
+
+    public static  Hexidecimal( twoDigitalCode)
+    {
+        return "\\\\" + "x" + twoDigitalCode;
+    }
+
+    public static  CharacterRange( listOfCharacters)
+    {
+        return "[" + listOfCharacters + "]";
+    }
+
+    public static  NotInCharacterRange( listOfCharacters)
+    {
+        return "[^" + listOfCharacters + "]";
+    }
 
     public static Statement(listOfStatements: Array<string>) {
         let finalStatement="";
@@ -33,9 +61,28 @@ abstract class RegWhy {
         return finalStatement;
 
     }
-    public static Literal(literalText: string) {
-        return literalText;
+    public static Literal(value: string) {
+        value = value.replace("\\", RegWhy.BackSlash);
+        value = value.replace(".", RegWhy.Period);
+        
+        value = value.replace("|", RegWhy.Bar);
+        value = value.replace("(", RegWhy.LeftParenthesis);
+        value = value.replace(")", RegWhy.RightParenthesis);
+        value = value.replace("[", RegWhy.LeftBracket);
+        value = value.replace("]", RegWhy.RightBracket);
+        value = value.replace("{", RegWhy.LeftBrace);
+        value = value.replace("}", RegWhy.RightBrace);
+        value = value.replace("$", RegWhy.DollarSign);
+        value = value.replace("*", RegWhy.Asterik);
+        value = value.replace("?", RegWhy.QuestionMark);
+        value = value.replace("<", RegWhy.LeftAngle);
+        value = value.replace(">", RegWhy.RightAngle);
+        value = value.replace("+", RegWhy.PlusSign);
+        value = value.replace("^", RegWhy.Caret);
+        return value;
     }
+
+
     public static CharacterType() {
         return new CharacterType();
     }
@@ -59,31 +106,31 @@ class CharacterType{
     constructor() {
         
     }
-    anyCharacter="."
-    digit ="\d";
-    nonDigit="\D";
-    whiteSpace="\s";
-    nonWhiteSpace="\S";
-    wordCharacter="\w";
-    nonWordCharacter="\W";
-    wordBounday="\b";
-    nonWordBoundary="\B";
-    lowerCaseASCI="[a-z]";
-    upperCaseASCII="[A-Z]";
-    anyASCII='[ -~]';
-    endOfFile="^Z";
+    AnyCharacter="."
+    Digit ="\d";
+    NonDigit="\D";
+    Whitespace="\s";
+    NonWhitespace="\S";
+    WordCharacter="\w";
+    NonWordCharacter="\W";
+    WordBounday="\b";
+    NonWordBoundary="\B";
+    LowerCaseASCI="[a-z]";
+    UpperCaseASCII="[A-Z]";
+    AnyASCII='[ -~]';
+    EndOfFile="^Z";
      
     
-    public unicode(fourDigitUniCodeNumber:string):string{
+    public Unicode(fourDigitUniCodeNumber:string):string{
         return ("\\" +"u" + fourDigitUniCodeNumber) ; 
     }
-    public hexidecimal(twoDigitalCode:string):string{
+    public Hexidecimal(twoDigitalCode:string):string{
         return ("\\" +"x" + twoDigitalCode) ; 
     }
-    public characterRange(listOfCharacters){
+    public CharacterRange(listOfCharacters){
         return "[" + listOfCharacters + "]";
     }
-    public notInCharacterRange(listOfCharacters){
+    public NotInCharacterRange(listOfCharacters){
         return "[^" + listOfCharacters + "]";
     }
     
@@ -94,60 +141,14 @@ class Group{
     constructor() {
         
     }
-    public Start(){
-        return new Start();
-    }
-    or="|";
-    end=")";
-    endOptional=")?";
-    endZeroOrMore=")*";
-    endOneOfMore=")+";
-    smallestMatch="?";
-    largestMatch="";
-    endOptionSmallestMatch=")??";
-    endZeroOrMoreSmallestMatch=")*?";
-    endOneOrMoreSmallestMatch=")+?";
-    endOfNumberedSmallestMatch="?";
-
-    public backReference(whichReference:number):string{
-        if (whichReference > 9 || whichReference < 1){
-            throw new Error("Backreferences must be between 1 and 9")
-        }
-        return "$" + whichReference;
-    }
-    public lastMatch="$&";
-    public lastParen="$+";
-    public precedingMatch ="%`";
-
-
-    public matchOnlyIfThisIsNext(whatsNext){
-        return "(?=" + whatsNext
-    }
-    public matchOnlyIfThisIsNotNext(whatsNext){
-        return "(?|" + whatsNext
-    }
-    public endExactNumber(countOfTimes){
-        return "){" + countOfTimes + "}";
-    }
-    public endExactNumberOrAbove(countOfTimes){
-        return "){" + countOfTimes + ",}";
-    }
-    public endRange(bottomNumber, topNumber){
-        return "){" + bottomNumber + "," + topNumber +  "}";
-    }
-
-
      
-}
-
-class Start{
-    capturing="("
-    nonCapturing="(?:"
+    StartCapturing="("
+    StartNonCapturing="(?:"
     
-    public named(nameOfGroup){
+    public StartNamed(nameOfGroup){
         return "(<" + nameOfGroup + ">";
     }
-    public optionalCapturingList(listOfWords:Array<string>):string{
+    public StartOptionalCapturingList(listOfWords:Array<string>):string{
         let finalStatement="(";
         for ( let statement of listOfWords){
              if (finalStatement.length > 1){
@@ -157,7 +158,7 @@ class Start{
         }
         return finalStatement +")";
     }
-    public optionalNonCapturingList(listOfWords:Array<string>):string{
+    public StartOptionalNonCapturingList(listOfWords:Array<string>):string{
         let finalStatement="(?:";
         for ( let statement of listOfWords){
              if (finalStatement.length > 2){
@@ -167,18 +168,58 @@ class Start{
         }
         return finalStatement +")";
     }
-    constructor(){
+    End=")";
+    EndOptional=")?";
+    EndZeroOrMore=")*";
+    EndOneOfMore=")+";
+    SmallestMatch="?";
+    LargestMatch="";
+    EndOptionSmallestMatch=")??";
+    EndZeroOrMoreSmallestMatch=")*?";
+    EndOneOrMoreSmallestMatch=")+?";
+    EndOfNumberedSmallestMatch="?";
 
+    public BackReference(whichReference:number):string{
+        if (whichReference > 9 || whichReference < 1){
+            throw new Error("Backreferences must be between 1 and 9")
+        }
+        return "$" + whichReference;
     }
+    public LastMatch="$&";
+    public LastParen="$+";
+    public PrecedingMatch ="%`";
+
+
+    public MatchOnlyIfThisIsNext(whatsNext){
+        return "(?=" + whatsNext
+    }
+    public MatchOnlyIfThisIsNotNext(whatsNext){
+        return "(?|" + whatsNext
+    }
+    public EndExactNumber(countOfTimes){
+        return "){" + countOfTimes + "}";
+    }
+    public EndExactNumberOrAbove(countOfTimes){
+        return "){" + countOfTimes + ",}";
+    }
+    public EndRange(bottomNumber, topNumber){
+        return "){" + bottomNumber + "," + topNumber +  "}";
+    }
+
+    
+     
 }
+
+
+
 
 class Where{
 
     constructor() {
         
     }
-    startOfString="^";
-    endOfString="$";
+    StartOfString="^";
+    EndOfString="$";
      
 }
 class Do{
@@ -221,12 +262,7 @@ class Do{
         }
         return matches;
     }
-    // public MatchFirst(stringToSearch:string, valueToFind:string, caseInsensitive=false, multilineMatching=false){
-    //     return "match first is  is not implement";
-    // }
-    // public MatchAll(stringToSearch:string, valueToFind:string, caseInsensitive=false, multilineMatching=false){
-    //     return "match all is not implemented";
-    // }
+   
     public ExtractCapturedGroup(stringToSearch:string, valueToFind:string, groupToCapture:number, caseInsensitive=false, multilineMatching=false){
         groupToCapture || (groupToCapture = 1); // default to the first capturing group
         var matches = [];
@@ -274,16 +310,16 @@ class Count{
     constructor(){
 
     }
-    optional="?";
-    zeroOrMore="*";
-    oneOrMore="+";
-    public exactNumber(numberOfDigits:number){
+    Optional="?";
+    ZeroOrMore="*";
+    OneOrMore="+";
+    public ExactNumber(numberOfDigits:number){
         return "{" + numberOfDigits + "}";
     }
-    public exactNumberOrMore(numberOfDigits:number){
+    public ExactNumberOrMore(numberOfDigits:number){
         return "{" + numberOfDigits + ",}";
     }
-    public rangeOfTimes(bottomNumber:number, topNUmber:number){
+    public RangeOfTimes(bottomNumber:number, topNUmber:number){
         return "{" + bottomNumber + "," + topNUmber + "}";
     }
 }

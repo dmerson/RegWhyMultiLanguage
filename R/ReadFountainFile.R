@@ -47,14 +47,19 @@ SCENE =RegWhy.Statement(c(
   RegWhy.Group.End
   
 ))
-# SCENE
+
 BLANK_LINE=""
+
 CHARACTER <- RegWhy.Statement(c(
   RegWhy.Where.StartOfString,
   RegWhy.Group.StartCapturing,
-  RegWhy.CharacterType.CharacterRange("A-Z0-9 ."),
-  RegWhy.Group.End,
+  RegWhy.CharacterType.CharacterRange("A-Z0-9 .'"),
   RegWhy.Count.OneOrMore,
+  RegWhy.Group.End,
+  RegWhy.Group.StartNonCapturing,
+  RegWhy.CharacterType.Whitespace,
+  RegWhy.Count.ZeroOrMore,
+  RegWhy.Group.End,
   RegWhy.Group.StartNonCapturing,
   RegWhy.Literal("(V.O.)"),
   RegWhy.Group.EndOptional,
@@ -98,6 +103,10 @@ TRANSISTION <- RegWhy.Statement(c(
   RegWhy.Literal("TRANSISTION "),
   RegWhy.CharacterType.AnyCharacter,
   RegWhy.Count.OneOrMore,
+  RegWhy.OrMarker,
+  RegWhy.Literal("MATCH "),
+  RegWhy.CharacterType.AnyCharacter,
+  RegWhy.Count.OneOrMore,
   RegWhy.Where.EndOfString
   
 ))
@@ -106,11 +115,13 @@ current_title="Big Fish"
 current_scene=""
 current_stage_direction=""
 current_character=""
+current_character_plus_direction=""
 current_dialogue=""
 script_df <- data.frame(title=character(),
                               scene=character(), 
                               stage_direction=character(), 
                               charactername=character(),
+                              characterPlusDirection=character(),
                               dialogue=character(),
                               stringsAsFactors=FALSE) 
 #script_df <-c("","","","","")
@@ -147,11 +158,12 @@ for (i in 1:len_of_script){
           #print(current_line)
           last_line_type="SCENE"
           if (current_scene != current_line && current_scene !=""){
-            current_frame <- data.frame(current_title,current_scene,current_stage_direction,current_character,current_dialogue);
+            current_frame <- data.frame(current_title,current_scene,current_stage_direction,current_character,current_character_plus_direction,current_dialogue);
             script_df <- rbind(script_df,current_frame)
             current_stage_direction=""
             current_character=""
             current_dialogue=""
+            current_character_plus_direction=""
           }
           current_scene <- current_line
         }
@@ -164,15 +176,17 @@ for (i in 1:len_of_script){
             last_line_type="CHARACTER";
 
             if (current_character != RegWhy.Do.ExtractCapturedGroup(current_line,CHARACTER,1)){
-              current_frame <- data.frame(current_title,current_scene,current_stage_direction,current_character,current_dialogue);
+              current_frame <- data.frame(current_title,current_scene,current_stage_direction,current_character,current_character_plus_direction,current_dialogue);
               script_df <- rbind(script_df,current_frame)
               current_stage_direction=""
               current_character=""
               current_dialogue=""
+              current_character_plus_direction=""
             }
             
             
             current_character=RegWhy.Do.ExtractCapturedGroup(current_line,CHARACTER,1);
+            current_character_plus_direction=current_line;
           }
           else{
             

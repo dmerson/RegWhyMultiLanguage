@@ -1,6 +1,24 @@
 var RegWhy = /** @class */ (function () {
     function RegWhy() {
     }
+    RegWhy.AlphaNumericCharacterRangePlus = function (otherCharacters) {
+        return "[A-Za-z0-9" + otherCharacters + "]";
+    };
+    RegWhy.NumericCharacterRangePlus = function (otherCharacters) {
+        return "[0-9" + otherCharacters + "]";
+    };
+    RegWhy.Unicode = function (fourDigitalNumber) {
+        return "\\\\" + fourDigitalNumber;
+    };
+    RegWhy.Hexidecimal = function (twoDigitalCode) {
+        return "\\\\" + "x" + twoDigitalCode;
+    };
+    RegWhy.CharacterRange = function (listOfCharacters) {
+        return "[" + listOfCharacters + "]";
+    };
+    RegWhy.NotInCharacterRange = function (listOfCharacters) {
+        return "[^" + listOfCharacters + "]";
+    };
     RegWhy.Statement = function (listOfStatements) {
         var finalStatement = "";
         for (var _i = 0, listOfStatements_1 = listOfStatements; _i < listOfStatements_1.length; _i++) {
@@ -9,8 +27,24 @@ var RegWhy = /** @class */ (function () {
         }
         return finalStatement;
     };
-    RegWhy.Literal = function (literalText) {
-        return literalText;
+    RegWhy.Literal = function (value) {
+        value = value.replace(".", RegWhy.Period);
+        value = value.replace("\\", RegWhy.BackSlash);
+        value = value.replace("|", RegWhy.Bar);
+        value = value.replace("(", RegWhy.LeftParenthesis);
+        value = value.replace(")", RegWhy.RightParenthesis);
+        value = value.replace("[", RegWhy.LeftBracket);
+        value = value.replace("]", RegWhy.RightBracket);
+        value = value.replace("{", RegWhy.LeftBrace);
+        value = value.replace("}", RegWhy.RightBrace);
+        value = value.replace("$", RegWhy.DollarSign);
+        value = value.replace("*", RegWhy.Asterik);
+        value = value.replace("?", RegWhy.QuestionMark);
+        value = value.replace("<", RegWhy.LeftAngle);
+        value = value.replace(">", RegWhy.RightAngle);
+        value = value.replace("+", RegWhy.PlusSign);
+        value = value.replace("^", RegWhy.Caret);
+        return value;
     };
     RegWhy.CharacterType = function () {
         return new CharacterType();
@@ -27,110 +61,82 @@ var RegWhy = /** @class */ (function () {
     RegWhy.Count = function () {
         return new Count();
     };
-    RegWhy.period = "\.";
-    RegWhy.backSlash = "\\";
-    RegWhy.bar = "\|";
-    RegWhy.leftParenthesis = "\(";
-    RegWhy.rightParenthesis = "\)";
-    RegWhy.nullString = "\0";
-    RegWhy.leftBracket = "\[";
-    RegWhy.rightBracket = "\]";
-    RegWhy.leftBrace = "\{";
-    RegWhy.rightBrace = "\}";
-    RegWhy.dollarSign = "\$";
-    RegWhy.asterik = "\*";
-    RegWhy.questionMark = "\?";
-    RegWhy.leftAngle = "\<";
-    RegWhy.rightAngle = "\>";
-    RegWhy.caret = "\^";
-    RegWhy.tab = "\t";
-    RegWhy.returnString = "\r";
-    RegWhy.newLine = "\n";
-    RegWhy.formFeed = "\f";
+    RegWhy.Period = "\.";
+    RegWhy.BackSlash = "\\";
+    RegWhy.Bar = "\|";
+    RegWhy.LeftParenthesis = "\(";
+    RegWhy.RightParenthesis = "\)";
+    RegWhy.NullString = "\0";
+    RegWhy.LeftBracket = "\[";
+    RegWhy.RightBracket = "\]";
+    RegWhy.LeftBrace = "\{";
+    RegWhy.RightBrace = "\}";
+    RegWhy.DollarSign = "\$";
+    RegWhy.Asterik = "\*";
+    RegWhy.QuestionMark = "\?";
+    RegWhy.LeftAngle = "\<";
+    RegWhy.RightAngle = "\>";
+    RegWhy.PlusSign = "\+";
+    RegWhy.Caret = "\^";
+    RegWhy.Tab = "\t";
+    RegWhy.ReturnString = "\r";
+    RegWhy.NewLine = "\n";
+    RegWhy.FormFeed = "\f";
+    RegWhy.OrMarker = "|";
     return RegWhy;
 }());
 var CharacterType = /** @class */ (function () {
     function CharacterType() {
-        this.anyCharacter = ".";
-        this.digit = "\d";
-        this.nonDigit = "\D";
-        this.whiteSpace = "\s";
-        this.nonWhiteSpace = "\S";
-        this.wordCharacter = "\w";
-        this.nonWordCharacter = "\W";
-        this.wordBounday = "\b";
-        this.nonWordBoundary = "\B";
-        this.lowerCaseASCI = "[a-z]";
-        this.upperCaseASCII = "[A-Z]";
-        this.anyASCII = '[ -~]';
-        this.endOfFile = "^Z";
+        this.AnyCharacter = ".";
+        this.Digit = "\d";
+        this.NonDigit = "\D";
+        this.WhiteSpace = "\s";
+        this.NonWhiteSpace = "\S";
+        this.WordCharacter = "\w";
+        this.NonWordCharacter = "\W";
+        this.WordBounday = "\b";
+        this.NonWordBoundary = "\B";
+        this.LowerCaseASCI = "[a-z]";
+        this.UpperCaseASCII = "[A-Z]";
+        this.AnyASCII = '[ -~]';
+        this.EndOfFile = "^Z";
     }
-    CharacterType.prototype.unicode = function (fourDigitUniCodeNumber) {
+    CharacterType.prototype.Unicode = function (fourDigitUniCodeNumber) {
         return ("\\" + "u" + fourDigitUniCodeNumber);
     };
-    CharacterType.prototype.hexidecimal = function (twoDigitalCode) {
+    CharacterType.prototype.Hexidecimal = function (twoDigitalCode) {
         return ("\\" + "x" + twoDigitalCode);
     };
-    CharacterType.prototype.characterRange = function (listOfCharacters) {
+    CharacterType.prototype.CharacterRange = function (listOfCharacters) {
         return "[" + listOfCharacters + "]";
     };
-    CharacterType.prototype.notInCharacterRange = function (listOfCharacters) {
+    CharacterType.prototype.NotInCharacterRange = function (listOfCharacters) {
         return "[^" + listOfCharacters + "]";
     };
     return CharacterType;
 }());
 var Group = /** @class */ (function () {
     function Group() {
-        this.or = "|";
-        this.end = ")";
-        this.endOptional = ")?";
-        this.endZeroOrMore = ")*";
-        this.endOneOfMore = ")+";
-        this.smallestMatch = "?";
-        this.largestMatch = "";
-        this.endOptionSmallestMatch = ")??";
-        this.endZeroOrMoreSmallestMatch = ")*?";
-        this.endOneOrMoreSmallestMatch = ")+?";
-        this.endOfNumberedSmallestMatch = "?";
-        this.lastMatch = "$&";
-        this.lastParen = "$+";
-        this.precedingMatch = "%`";
+        this.StartCapturing = "(";
+        this.StartNonCapturing = "(?:";
+        this.End = ")";
+        this.EndOptional = ")?";
+        this.EndZeroOrMore = ")*";
+        this.EndOneOfMore = ")+";
+        this.SmallestMatch = "?";
+        this.LargestMatch = "";
+        this.EndOptionSmallestMatch = ")??";
+        this.EndZeroOrMoreSmallestMatch = ")*?";
+        this.EndOneOrMoreSmallestMatch = ")+?";
+        this.EndOfNumberedSmallestMatch = "?";
+        this.LastMatch = "$&";
+        this.LastParen = "$+";
+        this.PrecedingMatch = "%`";
     }
-    Group.prototype.Start = function () {
-        return new Start();
-    };
-    Group.prototype.backReference = function (whichReference) {
-        if (whichReference > 9 || whichReference < 1) {
-            throw new Error("Backreferences must be between 1 and 9");
-        }
-        return "$" + whichReference;
-    };
-    Group.prototype.matchOnlyIfThisIsNext = function (whatsNext) {
-        return "(?=" + whatsNext;
-    };
-    Group.prototype.matchOnlyIfThisIsNotNext = function (whatsNext) {
-        return "(?|" + whatsNext;
-    };
-    Group.prototype.endExactNumber = function (countOfTimes) {
-        return "){" + countOfTimes + "}";
-    };
-    Group.prototype.endExactNumberOrAbove = function (countOfTimes) {
-        return "){" + countOfTimes + ",}";
-    };
-    Group.prototype.endRange = function (bottomNumber, topNumber) {
-        return "){" + bottomNumber + "," + topNumber + "}";
-    };
-    return Group;
-}());
-var Start = /** @class */ (function () {
-    function Start() {
-        this.capturing = "(";
-        this.nonCapturing = "(?:";
-    }
-    Start.prototype.named = function (nameOfGroup) {
+    Group.prototype.StartNamed = function (nameOfGroup) {
         return "(<" + nameOfGroup + ">";
     };
-    Start.prototype.optionalCapturingList = function (listOfWords) {
+    Group.prototype.StartOptionalCapturingList = function (listOfWords) {
         var finalStatement = "(";
         for (var _i = 0, listOfWords_1 = listOfWords; _i < listOfWords_1.length; _i++) {
             var statement = listOfWords_1[_i];
@@ -139,9 +145,9 @@ var Start = /** @class */ (function () {
             }
             finalStatement = finalStatement + statement;
         }
-        return finalStatement;
+        return finalStatement + ")";
     };
-    Start.prototype.optionalNonCapturingList = function (listOfWords) {
+    Group.prototype.StartOptionalNonCapturingList = function (listOfWords) {
         var finalStatement = "(?:";
         for (var _i = 0, listOfWords_2 = listOfWords; _i < listOfWords_2.length; _i++) {
             var statement = listOfWords_2[_i];
@@ -150,14 +156,35 @@ var Start = /** @class */ (function () {
             }
             finalStatement = finalStatement + statement;
         }
-        return finalStatement;
+        return finalStatement + ")";
     };
-    return Start;
+    Group.prototype.BackReference = function (whichReference) {
+        if (whichReference > 9 || whichReference < 1) {
+            throw new Error("Backreferences must be between 1 and 9");
+        }
+        return "$" + whichReference;
+    };
+    Group.prototype.MatchOnlyIfThisIsNext = function (whatsNext) {
+        return "(?=" + whatsNext;
+    };
+    Group.prototype.MatchOnlyIfThisIsNotNext = function (whatsNext) {
+        return "(?|" + whatsNext;
+    };
+    Group.prototype.EndExactNumber = function (countOfTimes) {
+        return "){" + countOfTimes + "}";
+    };
+    Group.prototype.EndExactNumberOrAbove = function (countOfTimes) {
+        return "){" + countOfTimes + ",}";
+    };
+    Group.prototype.EndRange = function (bottomNumber, topNumber) {
+        return "){" + bottomNumber + "," + topNumber + "}";
+    };
+    return Group;
 }());
 var Where = /** @class */ (function () {
     function Where() {
-        this.startOfString = "^";
-        this.endOfString = "$";
+        this.StartOfString = "^";
+        this.EndOfString = "$";
     }
     return Where;
 }());
@@ -204,12 +231,6 @@ var Do = /** @class */ (function () {
         }
         return matches;
     };
-    // public MatchFirst(stringToSearch:string, valueToFind:string, caseInsensitive=false, multilineMatching=false){
-    //     return "match first is  is not implement";
-    // }
-    // public MatchAll(stringToSearch:string, valueToFind:string, caseInsensitive=false, multilineMatching=false){
-    //     return "match all is not implemented";
-    // }
     Do.prototype.ExtractCapturedGroup = function (stringToSearch, valueToFind, groupToCapture, caseInsensitive, multilineMatching) {
         if (caseInsensitive === void 0) { caseInsensitive = false; }
         if (multilineMatching === void 0) { multilineMatching = false; }
@@ -265,17 +286,17 @@ var Do = /** @class */ (function () {
 }());
 var Count = /** @class */ (function () {
     function Count() {
-        this.optional = "?";
-        this.zeroOrMore = "*";
-        this.oneOrMore = "+";
+        this.Optional = "?";
+        this.ZeroOrMore = "*";
+        this.OneOrMore = "+";
     }
-    Count.prototype.exactNumber = function (numberOfDigits) {
+    Count.prototype.ExactNumber = function (numberOfDigits) {
         return "{" + numberOfDigits + "}";
     };
-    Count.prototype.exactNumberOrMore = function (numberOfDigits) {
+    Count.prototype.ExactNumberOrMore = function (numberOfDigits) {
         return "{" + numberOfDigits + ",}";
     };
-    Count.prototype.rangeOfTimes = function (bottomNumber, topNUmber) {
+    Count.prototype.RangeOfTimes = function (bottomNumber, topNUmber) {
         return "{" + bottomNumber + "," + topNUmber + "}";
     };
     return Count;

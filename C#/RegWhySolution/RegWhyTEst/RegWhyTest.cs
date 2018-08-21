@@ -82,10 +82,8 @@ namespace RegWhyTEst
                 RegWhy.Where.EndOfString
             });
             var firstGroup = RegWhy.Do.ExtractCapturedGroup("WILL (V.O.)", CHARACTER, 1);
-            var literal = RegWhy.Literal("(V.O)");
-            var matcher = Regex.Match("WILL (V.O.)", ".+");
-            Assert.AreEqual("",firstGroup);
-             
+            Assert.AreEqual("WILL",firstGroup);
+            Assert.AreEqual(0,1);
         }
     }
 }

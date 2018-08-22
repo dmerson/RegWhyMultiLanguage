@@ -23,27 +23,49 @@ Quick--what does this RegEx do?
 Let's look at the R Implmentation of this code.
 
 phone <- RegWhy.Statement(c(
+
   RegWhy.Where.StartOfString,
+  
   RegWhy.LeftParenthesis,
+  
   RegWhy.Count.Optional,
+  
   RegWhy.Group.StartCapturing,
+  
   RegWhy.CharacterType.Digit,
+  
   RegWhy.Count.ExactNumber(3),
+  
   RegWhy.Group.End,
+  
   RegWhy.Count.Optional,
+  
   RegWhy.RightParenthesis,
+  
   RegWhy.Count.Optional,
+  
   RegWhy.Group.StartCapturing,
+  
   RegWhy.CharacterType.Digit,
+  
   RegWhy.Count.ExactNumber(3),
+  
   RegWhy.Group.End,
+  
   RegWhy.CharacterType.CharacterRange("-."),
+  
   RegWhy.Count.Optional,
+  
   RegWhy.Group.StartCapturing,
+  
   RegWhy.CharacterType.Digit,
+  
   RegWhy.Count.ExactNumber(4),
+  
   RegWhy.Group.End,
+  
   RegWhy.Where.EndOfString
+  
   
 ))
 

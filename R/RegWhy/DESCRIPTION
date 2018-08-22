@@ -1,9 +1,11 @@
 Package: RegWhy
 Type: Package
 Title: A more readable wrapper about RegEx that explains "why" it should match.
-Version: 1.2
+Version: 1.2.1
 Date: 2018-08-20
 Author: don-E Merson
 Maintainer: Who to complain to <dmerson@email.arizona.edu>
 Description: This package tries to give the user a consistent and readable way to write RegEx. It is part of a multiple language framework and has compromises built into it to make it look the same as other languages. 
 License: MIT
+Imports:
+  stringr

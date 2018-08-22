@@ -94,4 +94,16 @@ SAME REGWHY
 
 ]
 
+## Design Principles
 
+RegWhy is designed with the following in mind.
+
+1. The API should be the same in every language. This means that the API doesn't conform to commmon languages standards for the various different languages. For example, in JavaScript it is common to use camelCase or in R short tense language is used. But to have the language be copy-paste importable from another language, I choose to implement the language to always use Capitals such as RegWhy.Do.ExtractAll.
+
+2. There are a few basic principals to finiding RegWhy Expressions. All special characters that need escaping are found in the RegWhy root such as RegWhy.Backslash. Grouping expressions are found in RegWhy.Group such as RegEx.Group.StartCapturingGroup. Items dealing with position are found in RegWhy.Where such as RegWhy.Where.StartOfString. Items such as how many as found in RegWhy.Count such as RegWhy.ZeroOrMore. All work is done in the RegWhy.Do namespace such as RegWhy.Do.Detect. Two of the most important functions are RegWhy.Literal which allows the user not to have to think about escaping characters if they exist and RegWhy.Statement which is basically a wrapper around RegWhy.Expressions.
+
+3. RegWhy expressions are just string and thus allow power users to implement them still within RegEx operations in the case that a RegWhy statement is not implemented. 
+
+4. RegWhy is designed to have the same API but also as a wrapper to help the user understand speical RegEx operations for a given language. These features of course are not cross compatiable but they give the user a way to sniff out special features in a language.
+
+3. 

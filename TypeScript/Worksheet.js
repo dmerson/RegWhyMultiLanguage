@@ -28,8 +28,8 @@ var RegWhy = /** @class */ (function () {
         return finalStatement;
     };
     RegWhy.Literal = function (value) {
-        value = value.replace(".", RegWhy.Period);
         value = value.replace("\\", RegWhy.BackSlash);
+        value = value.replace(".", RegWhy.Period);
         value = value.replace("|", RegWhy.Bar);
         value = value.replace("(", RegWhy.LeftParenthesis);
         value = value.replace(")", RegWhy.RightParenthesis);
@@ -90,8 +90,8 @@ var CharacterType = /** @class */ (function () {
         this.AnyCharacter = ".";
         this.Digit = "\d";
         this.NonDigit = "\D";
-        this.WhiteSpace = "\s";
-        this.NonWhiteSpace = "\S";
+        this.Whitespace = "\s";
+        this.NonWhitespace = "\S";
         this.WordCharacter = "\w";
         this.NonWordCharacter = "\W";
         this.WordBounday = "\b";

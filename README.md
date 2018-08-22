@@ -70,3 +70,28 @@ phone <- RegWhy.Statement(c(
 ))
 
 
+In C#, the only thing you need to change is:
+
+var phone =new List(){
+
+SAME REGWHY
+
+}
+
+In Python is it:
+
+phone =[
+
+SAME REGWHY
+
+]
+
+In JavaScript and TypeScript it is:
+
+var phone =[
+
+SAME REGWHY
+
+]
+
+

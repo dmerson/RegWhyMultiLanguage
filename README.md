@@ -104,6 +104,5 @@ RegWhy is designed with the following in mind.
 
 3. RegWhy expressions are just strings and thus allow power users to implement them still within RegEx operations in the case that a RegWhy statement is not implemented. 
 
-4. RegWhy is designed to have the same API but also as a wrapper to help the user understand speical RegEx operations for a given language. These features of course are not cross compatiable but they give the user a way to sniff out special features in a language.
+4. RegWhy is designed to have the same API but also as a wrapper to help the user understand specical RegEx operations for a given language. These features of course are not cross compatiable but they give the user a way to sniff out special features in a language.
 
-3. 

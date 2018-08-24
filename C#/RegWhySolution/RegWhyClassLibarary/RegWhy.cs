@@ -77,7 +77,11 @@ namespace RegWhyClassLibarary
             public static string AlphaNumericCharacterRange = "[A-Za-z0-9]";
             public static string UpperCaseLetters = "[A-Z]";
             public static string LowerCaseLetters = "[a-z]";
-
+            public static string AlphaNumeric = "[A-Za-z0-9]";
+            public static string Printable ="[A-Za-z0-9 .\\`~!@#$%^&*()_-+={[}]|;:'\"<,>?/";
+            public static string Punctuation = "[.\\`~!@#$%^&*()_-+={[}]|;:'\"<,>?/]";
+            public static string Space = "[\r\n\t \f]";
+            public static string BlankSpace = "[ \t]";
             public static string AlphaNumericCharacterRangePlus(string otherCharacters)
             {
                 return "[A-Za-z0-9" + otherCharacters + "]";

@@ -98,8 +98,10 @@ abstract class RegWhy {
     public static Count(){
         return new Count();
     }
+     
+    
 }
-
+ 
 
 class CharacterType{
     
@@ -133,7 +135,14 @@ class CharacterType{
     public NotInCharacterRange(listOfCharacters){
         return "[^" + listOfCharacters + "]";
     }
-    
+    public AlphaNumeric="[A-Za-z0-9]"
+    public Printable ="[A-Za-z0-9 .\\`~!@#$%^&*()_-+={[}]|;:'\"<,>?/";
+    public Punctuation="[.\\`~!@#$%^&*()_-+={[}]|;:'\"<,>?/]"
+    public Space="[\r\n\t \f]"
+    public BlankSpace="[ \t]"
+    public AlphaNumericCharacterRangePlus(otherValues){
+        return "[A-Za-z0-9" + otherValues + "]"
+    }
      
 }
 class Group{
@@ -335,5 +344,20 @@ console.log(RegWhy.Do().LocateAll("test", 't'));
 console.log(RegWhy.Literal("hello world"));
 console.log(RegWhy.Do().Detect("test","t"))
 console.log(RegWhy.Do().Detect("test","x"))
+console.log(RegWhy.Statement([
+    RegWhy.Group().StartNonCapturing,
+  RegWhy.Literal("INT"),
+  RegWhy.OrMarker,
+  RegWhy.Literal("EXT"),
+  RegWhy.Group().End,
+  RegWhy.Period,
+  RegWhy.Count().ZeroOrMore,
+  RegWhy.CharacterType().Whitespace,
+  RegWhy.Count().OneOrMore,
+  RegWhy.Group().StartCapturing,
+  RegWhy.CharacterType().AlphaNumeric,
+  RegWhy.Count().OneOrMore,
+  RegWhy.Group().End
+]))
  
 

@@ -100,6 +100,11 @@ var CharacterType = /** @class */ (function () {
         this.UpperCaseASCII = "[A-Z]";
         this.AnyASCII = '[ -~]';
         this.EndOfFile = "^Z";
+        this.AlphaNumeric = "[A-Za-z0-9]";
+        this.Printable = "[A-Za-z0-9 .\\`~!@#$%^&*()_-+={[}]|;:'\"<,>?/";
+        this.Punctuation = "[.\\`~!@#$%^&*()_-+={[}]|;:'\"<,>?/]";
+        this.Space = "[\r\n\t \f]";
+        this.BlankSpace = "[ \t]";
     }
     CharacterType.prototype.Unicode = function (fourDigitUniCodeNumber) {
         return ("\\" + "u" + fourDigitUniCodeNumber);
@@ -112,6 +117,9 @@ var CharacterType = /** @class */ (function () {
     };
     CharacterType.prototype.NotInCharacterRange = function (listOfCharacters) {
         return "[^" + listOfCharacters + "]";
+    };
+    CharacterType.prototype.AlphaNumericCharacterRangePlus = function (otherValues) {
+        return "[A-Za-z0-9" + otherValues + "]";
     };
     return CharacterType;
 }());
@@ -312,3 +320,18 @@ console.log(RegWhy.Do().LocateAll("test", 't'));
 console.log(RegWhy.Literal("hello world"));
 console.log(RegWhy.Do().Detect("test", "t"));
 console.log(RegWhy.Do().Detect("test", "x"));
+console.log(RegWhy.Statement([
+    RegWhy.Group().StartNonCapturing,
+    RegWhy.Literal("INT"),
+    RegWhy.OrMarker,
+    RegWhy.Literal("EXT"),
+    RegWhy.Group().End,
+    RegWhy.Period,
+    RegWhy.Count().ZeroOrMore,
+    RegWhy.CharacterType().Whitespace,
+    RegWhy.Count().OneOrMore,
+    RegWhy.Group().StartCapturing,
+    RegWhy.CharacterType().AlphaNumeric,
+    RegWhy.Count().OneOrMore,
+    RegWhy.Group().End
+]));

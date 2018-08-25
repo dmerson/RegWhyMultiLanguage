@@ -90,7 +90,7 @@ In JavaScript and TypeScript it is:
 
 var phone =[
 
-SAME REGWHY
+SAME REGWHY but add in () for second level objects
 
 ]
 

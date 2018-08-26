@@ -1,7 +1,7 @@
 Package: RegWhy
 Type: Package
 Title: A more readable wrapper about RegEx that explains "why" it should match.
-Version: 1.2.2
+Version: 1.2.3
 Date: 2018-08-20
 Author: don-E Merson
 Maintainer: Who to complain to <dmerson@email.arizona.edu>

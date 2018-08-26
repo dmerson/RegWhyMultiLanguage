@@ -1,7 +1,3 @@
-#install.packages("RegWhy")
-library(RegWhy)
-library(stringr)
-
 script_lines <-readLines("../Documents/Screenplays/Big-Fish.fountain.txt")     
 start_of_script=FALSE
 HAS_A_TAB =RegWhy.Statement(c(
@@ -118,12 +114,12 @@ current_character=""
 current_character_plus_direction=""
 current_dialogue=""
 script_df <- data.frame(title=character(),
-                              scene=character(), 
-                              stage_direction=character(), 
-                              charactername=character(),
-                              characterPlusDirection=character(),
-                              dialogue=character(),
-                              stringsAsFactors=FALSE) 
+                        scene=character(), 
+                        stage_direction=character(), 
+                        charactername=character(),
+                        characterPlusDirection=character(),
+                        dialogue=character(),
+                        stringsAsFactors=FALSE) 
 #script_df <-c("","","","","")
 len_of_script=length(script_lines)
 for (i in 1:len_of_script){
@@ -174,7 +170,7 @@ for (i in 1:len_of_script){
             #print(RegWhy.Do.ExtractCapturedGroup(current_line,CHARACTER,1))
             #print(current_line)
             last_line_type="CHARACTER";
-
+            
             if (current_character != RegWhy.Do.ExtractCapturedGroup(current_line,CHARACTER,1)){
               current_frame <- data.frame(current_title,current_scene,current_stage_direction,current_character,current_character_plus_direction,current_dialogue);
               script_df <- rbind(script_df,current_frame)

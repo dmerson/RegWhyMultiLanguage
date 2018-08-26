@@ -147,7 +147,7 @@ RegWhy.Do.LocateAll <- function ( statementToSearch,regWhyStatement){
   return (str_locate_all(statementToSearch,regWhyStatement))
   
 }
-RegWhy.Do.Replace <- function ( statementToSearch,regWhyStatement, regWhyStatementReplacement){
+RegWhy.Do.ReplaceFirst <- function ( statementToSearch,regWhyStatement, regWhyStatementReplacement){
   return (str_replace(statementToSearch,regWhyStatement))
   
 }
